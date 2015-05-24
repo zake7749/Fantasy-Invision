@@ -1,0 +1,9 @@
+E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.exe.config
+E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.exe
+E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.pdb
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.Form1.resources
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.Properties.Resources.resources
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.exe
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.pdb
+E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache

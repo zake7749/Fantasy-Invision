@@ -47,10 +47,22 @@ namespace STG
             }
         }
 
+        private void bulletBounderCheck()
+        {
+            foreach(Bullet b in playerBullet)
+            {
+                if (b.ly < 0)
+                {
+                    b.img.Dispose();
+                }
+            }
+        }
+
         private void FixedUpdate(object sender, EventArgs e)
         {
             movePlayer();
             movePlayerBullet();
+            bulletBounderCheck();
         }
 
 
@@ -75,16 +87,16 @@ namespace STG
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    player.addV(0, -1);
+                    player.addV(0, -3);
                     break;
                 case Keys.Down:
-                    player.addV(0, 1);
+                    player.addV(0, 3);
                     break;
                 case Keys.Right:
-                    player.addV(1, 0);
+                    player.addV(3, 0);
                     break;
                 case Keys.Left:
-                    player.addV(-1, 0);
+                    player.addV(-3, 0);
                     break;
                 case Keys.Space:
                     player_CreateBullet();
@@ -215,7 +227,7 @@ namespace STG
             move = 0;
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
             vx = 0;
-            vy = -3;
+            vy = -5;
             img = new System.Windows.Forms.PictureBox();
             img.Location = new Point(lx, ly);
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.png");

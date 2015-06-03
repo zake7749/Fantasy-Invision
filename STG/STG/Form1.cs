@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace STG
 {
@@ -28,7 +29,9 @@ namespace STG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            axWindowsMediaPlayer1.URL = @"TOS8.m4a";
+            axWindowsMediaPlayer1.settings.setMode("loop", true);
+            axWindowsMediaPlayer1.settings.autoStart = true;
         }
 
         private void movePlayer()

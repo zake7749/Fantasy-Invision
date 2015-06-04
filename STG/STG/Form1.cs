@@ -142,7 +142,6 @@ namespace STG
         {
 
         }
-
         private void player_CreateBullet()
         {
             if(player.canShoot())
@@ -164,6 +163,18 @@ namespace STG
                 EnemyBullet eb = new EnemyBullet(xy.X, xy.Y);
                 this.panel1.Controls.Add(eb.img);
                 enemyBullet.Add(eb);
+                String mode = e.getShootMode();
+                switch(mode)
+                {
+                    case "Line":
+                        break;
+                    case "Ray":
+                        Vector2D bulletV = e.getVelocity(Convert.ToInt32(player.lx),Convert.ToInt32(player.ly));
+                        label1.Text = bulletV.x.ToString();
+                        label2.Text = bulletV.y.ToString();
+                        eb.SetV(bulletV.x/100,bulletV.y/100);
+                        break;
+                }
             }
         }
         private void create_Enemy()
@@ -174,6 +185,15 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
+        private void create_GunTurret()
+        {
+            Random robj = new Random();
+            int x = robj.Next(20, 600);
+            GunTurret e = new GunTurret(x, 0);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+        //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -195,6 +215,9 @@ namespace STG
                     break;
                 case Keys.Z:
                     create_Enemy();
+                    break;
+                case Keys.X:
+                    create_GunTurret();
                     break;
             }
         }
@@ -220,8 +243,8 @@ namespace STG
 
     public class GameObject
     {
-        public int lx,ly;//location
-        public int vx,vy;//velocity
+        public double lx,ly;//location
+        public double vx,vy;//velocity
         public int health;
         public int vxupLimit,vyupLimit;//
         public int vxdownLimit,vydownLimit;//
@@ -247,7 +270,7 @@ namespace STG
 
         public Point getShootPlace()
         {
-            Point p = new Point(lx+20, ly);
+            Point p = new Point(Convert.ToInt32(lx + 20), Convert.ToInt32(ly));
             return p;
         }
 
@@ -266,10 +289,10 @@ namespace STG
         {
             lx += vx;
             ly += vy;
-            img.Location = new Point(lx, ly);
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         }
 
-        public void SetV(int x,int y)
+        public void SetV(double x,double y)
         {
             vx = x;
             vy = y;
@@ -289,7 +312,23 @@ namespace STG
             img.Height = img.Image.Height;
         }
     }
+    public class Vector2D
+    {
+        public double x;
+        public double y;
+        
+        public Vector2D()
+        {
+            x = 0;
+            y = 0;
+        }
 
+        public Vector2D(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
     public class Player : GameObject
     {
         public Player(int x, int y) : base(x,y)
@@ -309,8 +348,9 @@ namespace STG
             vyupLimit = 3;//y軸速度在 3~-3
             vydownLimit = -3;
             img = new System.Windows.Forms.PictureBox();
-            img.Location = new Point(lx,ly);
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+            imgAutoSize();
         }
 
         public void addV(int ax,int ay)
@@ -337,10 +377,9 @@ namespace STG
                 lx += vx;
             if(ly+vy>0&&ly+vy<600)
                 ly += vy;
-            img.Location = new Point(lx, ly);
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         }
     }
-
     public class Bullet : GameObject
     {
         public Bullet(int x, int y) : base(x, y)
@@ -353,7 +392,7 @@ namespace STG
             vx = 0;
             vy = -5;
             img = new System.Windows.Forms.PictureBox();
-            img.Location = new Point(lx, ly);
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bllet_black.png");
             imgAutoSize();
             //img.BackColor = Color.Black;
@@ -376,7 +415,7 @@ namespace STG
             vx = 0;
             vy = 5;
             img = new System.Windows.Forms.PictureBox();
-            img.Location = new Point(lx, ly);
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
 
             radius = 100;
@@ -393,19 +432,29 @@ namespace STG
     }
     public class Enemy : GameObject
     {
-        String Shootmode;
+        public String Shootmode;
 
-        int bulletNum;
+        public int bulletNum;
 
-        int bulletEachTime;
-        int bulletRestoreLimit;
-        int bulletRestoreClock;
+        public int bulletEachTime;
+        public int bulletRestoreLimit;
+        public int bulletRestoreClock;
 
         public Enemy(int x, int y) : base(x, y)
         {
             lx = x;
             ly = 0;
-            //f = frame = timer interval of FixUpdate 
+            vx = 0;
+            vy = 1;
+            setClock();
+            loadImage();
+            Shootmode = "Line";
+            health = 10;
+        }
+
+        protected void setClock()
+        {
+            //f = frame = timer interval of FixUpdate
             clock = 0;
             clockLimit = 10;//每隔 20f 發射一顆子彈
             bulletNum = 5;
@@ -414,14 +463,15 @@ namespace STG
             bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
             move = 0;
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
-            vx = 0;
-            vy = 1;
-            img = new System.Windows.Forms.PictureBox();
-            img.Location = new Point(lx, ly);
-            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
-            Shootmode = "normal";
-            health = 10;
         }
+
+        protected void loadImage()
+        {
+            img = new System.Windows.Forms.PictureBox();
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+        }
+
         public Boolean canShoot()
         {
             adjustTimeInterval();
@@ -434,7 +484,7 @@ namespace STG
             }
             return false;
         }
-        private void adjustTimeInterval()
+        protected void adjustTimeInterval()
         {
             bulletRestoreClock++;
             if(bulletRestoreClock>bulletRestoreLimit)
@@ -447,5 +497,50 @@ namespace STG
         {
             return Shootmode;
         }
+
+        public Vector2D getVelocity(int px, int py)
+        {
+            Vector2D bulletVelocity = new Vector2D(px, py);
+            return bulletVelocity;
+        }
     }
+    public class GunTurret : Enemy
+    {
+        public GunTurret(int x, int y)
+            : base(x, y)
+        {
+            lx = x;
+            ly = 0;
+            vx = 0;
+            vy = 1;
+            setClock();
+            loadImage();
+            Shootmode = "Ray";
+            health = 10;
+        }
+
+        public Vector2D getVelocity(int px, int py)
+        {
+            int dx = Convert.ToInt32(lx) - px;
+            int dy = Convert.ToInt32(ly) - py;
+            double bux = dx / 100;
+            double buy = dx / 100;
+            Vector2D bulletVelocity = new Vector2D(bux,buy);
+            return bulletVelocity;
+        }
+
+        private int getGCD(int a,int b)
+        {
+            int c;
+            while(a!= 0)
+            {
+                c = a;
+                a = b%a;
+                b = c;
+            }
+            return b;
+        }
+
+    }
+
 }

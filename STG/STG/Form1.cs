@@ -13,15 +13,21 @@ namespace STG
 {
     public partial class Form1 : Form
     {
-        List<PictureBox> enemy;
-        List<PictureBox> enemyBullet;
-        int est;
+        List<Enemy> enemies;
+        List<EnemyBullet> enemyBullet;
+        int totalEnemy = 0;
         List<Bullet> playerBullet;
         Player player;
-        Button b;
+
+        System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
+
+
         public Form1()
         {
             playerBullet = new List<Bullet>();
+            enemyBullet = new List<EnemyBullet>();
+            enemies = new List<Enemy>();
+
             InitializeComponent();
             player = new Player(100, 100);
             this.panel1.Controls.Add(player.img);
@@ -29,11 +35,10 @@ namespace STG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.URL = @"TOS8.m4a";
-            axWindowsMediaPlayer1.settings.setMode("loop", true);
-            axWindowsMediaPlayer1.settings.autoStart = true;
+
         }
 
+        //Move Object
         private void movePlayer()
         {
             if(player.canMove())
@@ -41,7 +46,17 @@ namespace STG
                 player.Move();
             }
         }
-
+        private void moveEnemy()
+        {
+            foreach(Enemy e in enemies)
+            {
+                if(e.canMove())
+                {
+                    e.Move();
+                    enemy_CreateBullet(e);
+                }
+            }
+        }
         private void movePlayerBullet()
         {
             foreach(Bullet b in playerBullet)
@@ -49,7 +64,31 @@ namespace STG
                 b.Move();
             }
         }
+        private void moveEnemyBullet()
+        {
+            foreach (EnemyBullet eb in enemyBullet)
+            {
+                eb.Move();
+            }
+        }
 
+        //Bounder check
+        private void BounderCheck()
+        {
+            enemyBounderCheck();
+            bulletBounderCheck();
+        }
+
+        private void enemyBounderCheck()
+        {
+            foreach (Enemy e in enemies)
+            {
+                if (e.ly < 0)
+                {
+                    e.img.Dispose();
+                }
+            }
+        }
         private void bulletBounderCheck()
         {
             foreach(Bullet b in playerBullet)
@@ -59,12 +98,23 @@ namespace STG
                     b.img.Dispose();
                 }
             }
+            foreach (EnemyBullet b in enemyBullet)
+            {
+                if (b.ly > 1000)
+                {
+                    b.img.Dispose();
+                }
+            }
         }
 
+        //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
             movePlayer();
+            moveEnemy();
             movePlayerBullet();
+            moveEnemyBullet();
+
             bulletBounderCheck();
         }
 
@@ -80,11 +130,31 @@ namespace STG
             {
                 Point xy = player.getShootPlace();
                 Bullet b = new Bullet(xy.X,xy.Y);
+                SFXplayerShot.Play();
                 this.panel1.Controls.Add(b.img);
                 playerBullet.Add(b);
             }
         }
 
+        //Enemy
+        private void enemy_CreateBullet(Enemy e)
+        {
+            if (e.canShoot())
+            {
+                Point xy = e.getShootPlace();
+                EnemyBullet eb = new EnemyBullet(xy.X, xy.Y);
+                this.panel1.Controls.Add(eb.img);
+                enemyBullet.Add(eb);
+            }
+        }
+        private void create_Enemy()
+        {
+            Random robj = new Random();
+            int x = robj.Next(20, 600);
+            Enemy e = new Enemy(x, 0);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -104,9 +174,11 @@ namespace STG
                 case Keys.Space:
                     player_CreateBullet();
                     break;
+                case Keys.Z:
+                    create_Enemy();
+                    break;
             }
         }
-
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -131,6 +203,7 @@ namespace STG
     {
         public int lx,ly;//location
         public int vx,vy;//velocity
+        public int health;
         public int vxupLimit,vyupLimit;//
         public int vxdownLimit,vydownLimit;//
         public int clock, clockLimit;//for update
@@ -176,17 +249,38 @@ namespace STG
             ly += vy;
             img.Location = new Point(lx, ly);
         }
+
+        public void SetV(int x,int y)
+        {
+            vx = x;
+            vy = y;
+        }
+
+        public Boolean isAlive()
+        {
+            if (health <= 0)
+                return false;
+            else
+                return true;
+        }
+
+        protected void imgAutoSize()
+        {
+            img.Width = img.Image.Width;
+            img.Height = img.Image.Height;
+        }
     }
 
     public class Player : GameObject
     {
         public Player(int x, int y) : base(x,y)
         {
+            health = 10;
             lx = x;
             ly = y;
             //f = frame = timer interval of FixUpdate 
             clock = 0;
-            clockLimit = 1;//每隔 1f 有一發子彈
+            clockLimit = 10;//每隔 10f 有一發子彈
             move = 0;
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
             vx = 0;
@@ -217,7 +311,15 @@ namespace STG
                     vy += ay;
             }
         }
-     
+
+        public void Move()
+        {
+            if(lx+vx>0&&lx+vx<500)
+                lx += vx;
+            if(ly+vy>0&&ly+vy<600)
+                ly += vy;
+            img.Location = new Point(lx, ly);
+        }
     }
 
     public class Bullet : GameObject
@@ -233,7 +335,83 @@ namespace STG
             vy = -5;
             img = new System.Windows.Forms.PictureBox();
             img.Location = new Point(lx, ly);
-            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.png");
+            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bllet_black.png");
+            imgAutoSize();
+            //img.BackColor = Color.Black;
+        }
+    }
+    public class EnemyBullet : GameObject
+    {
+        public EnemyBullet(int x, int y)
+            : base(x, y)
+        {
+            lx = x;
+            ly = y;
+            //f = frame = timer interval of FixUpdate 
+            move = 0;
+            moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
+            vx = 0;
+            vy = 5;
+            img = new System.Windows.Forms.PictureBox();
+            img.Location = new Point(lx, ly);
+            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
+        }
+    }
+    public class Enemy : GameObject
+    {
+        String Shootmode;
+
+        int bulletNum;
+
+        int bulletEachTime;
+        int bulletRestoreLimit;
+        int bulletRestoreClock;
+
+        public Enemy(int x, int y) : base(x, y)
+        {
+            lx = x;
+            ly = 0;
+            //f = frame = timer interval of FixUpdate 
+            clock = 0;
+            clockLimit = 10;//每隔 20f 發射一顆子彈
+            bulletNum = 5;
+            bulletEachTime = 5;//每次射擊都會有 5 發子彈
+            bulletRestoreClock = 0;
+            bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+            move = 0;
+            moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
+            vx = 0;
+            vy = 1;
+            img = new System.Windows.Forms.PictureBox();
+            img.Location = new Point(lx, ly);
+            img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+            Shootmode = "normal";
+            health = 10;
+        }
+        public Boolean canShoot()
+        {
+            adjustTimeInterval();
+            clock++;
+            if (clock > clockLimit && bulletNum > 0)
+            {
+                clock = 0;
+                bulletNum--;
+                return true;
+            }
+            return false;
+        }
+        private void adjustTimeInterval()
+        {
+            bulletRestoreClock++;
+            if(bulletRestoreClock>bulletRestoreLimit)
+            {
+                bulletRestoreClock = 0;
+                bulletNum = bulletEachTime;
+            }
+        }
+        public String getShootMode()
+        {
+            return Shootmode;
         }
     }
 }

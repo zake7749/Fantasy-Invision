@@ -30,3 +30,8 @@ C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll

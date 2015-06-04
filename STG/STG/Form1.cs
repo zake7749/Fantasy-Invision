@@ -427,7 +427,7 @@ namespace STG
         {
             lx = Convert.ToInt32(middleX + radius * Math.Cos(sp));
             ly = Convert.ToInt32(middleY + radius * Math.Sin(sp));
-            img.Location = new Point(lx, ly);
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         }
     }
     public class Enemy : GameObject

@@ -18,8 +18,12 @@ namespace STG
         int totalEnemy = 0;
         List<Bullet> playerBullet;
         Player player;
+        EnemyBullet circle;
+
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
+        double angle; 
+        double degree = 0.0;
 
 
         public Form1()
@@ -30,14 +34,18 @@ namespace STG
 
             InitializeComponent();
             player = new Player(100, 100);
+            circle = new EnemyBullet(300, 300);
             this.panel1.Controls.Add(player.img);
+            this.panel1.Controls.Add(circle.img);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Update.Start();
             //playing music in loop
             SFXBGM = new SoundPlayer("TOS8.wav");
             SFXBGM.PlayLooping();
+            
         }
 
         //Move Object
@@ -108,16 +116,25 @@ namespace STG
                 }
             }
         }
-
+        
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
+            
+            degree++;
+            
+            angle = Math.PI * degree/180.0;
+            
+            //X += Update.Interval;
             movePlayer();
             moveEnemy();
             movePlayerBullet();
             moveEnemyBullet();
 
             bulletBounderCheck();
+
+            circle.circleMove(angle);
+            
         }
 
 
@@ -344,6 +361,10 @@ namespace STG
     }
     public class EnemyBullet : GameObject
     {
+        //public double lx, ly;
+        public int middleX, middleY;
+        public int radius;
+
         public EnemyBullet(int x, int y)
             : base(x, y)
         {
@@ -357,6 +378,17 @@ namespace STG
             img = new System.Windows.Forms.PictureBox();
             img.Location = new Point(lx, ly);
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
+
+            radius = 100;
+            middleX = x - 100;
+            middleY = y;
+        }
+
+        public void circleMove(double sp)
+        {
+            lx = Convert.ToInt32(middleX + radius * Math.Cos(sp));
+            ly = Convert.ToInt32(middleY + radius * Math.Sin(sp));
+            img.Location = new Point(lx, ly);
         }
     }
     public class Enemy : GameObject

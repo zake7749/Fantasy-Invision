@@ -18,7 +18,7 @@ namespace STG
         int totalEnemy = 0;
         List<Bullet> playerBullet;
         Player player;
-
+        SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
 
 
@@ -35,7 +35,9 @@ namespace STG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //playing music in loop
+            SFXBGM = new SoundPlayer("TOS8.wav");
+            SFXBGM.PlayLooping();
         }
 
         //Move Object

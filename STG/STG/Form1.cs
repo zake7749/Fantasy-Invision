@@ -29,9 +29,9 @@ namespace STG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            axWindowsMediaPlayer1.URL = @"TOS8.m4a";
-            axWindowsMediaPlayer1.settings.setMode("loop", true);
-            axWindowsMediaPlayer1.settings.autoStart = true;
+            //playing music in loop
+            SoundPlayer music = new SoundPlayer("TOS8.wav");
+            music.PlayLooping();
         }
 
         private void movePlayer()

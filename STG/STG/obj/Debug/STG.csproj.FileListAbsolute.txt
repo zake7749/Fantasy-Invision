@@ -1,54 +1,13 @@
-E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.exe.config
-E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.exe
-E:\Programming\C#\Final Project\STG\STG\bin\Debug\STG.pdb
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.Form1.resources
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.Properties.Resources.resources
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.exe
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.pdb
-E:\Programming\C#\Final Project\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\STG.exe.config
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\STG.exe
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\STG.pdb
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.exe.config
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.exe
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.pdb
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
-C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
-<<<<<<< HEAD
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
 E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
-E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
-=======
-D:\CSharp-STG2D\STG\STG\bin\Debug\STG.exe.config
-D:\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
-D:\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb
-D:\CSharp-STG2D\STG\STG\bin\Debug\STG.exe
-D:\CSharp-STG2D\STG\STG\bin\Debug\STG.pdb
-D:\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
-D:\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
-D:\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
->>>>>>> origin/master
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
+E:\Programming\C#\Final Project\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb

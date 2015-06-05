@@ -132,11 +132,30 @@ namespace STG
             moveEnemyBullet();
 
             bulletBounderCheck();
-
+            Collision();
             circle.circleMove(angle);
             
         }
 
+
+        //Collision
+        private void Collision()
+        {
+            foreach (EnemyBullet eb in enemyBullet)
+            {
+                if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                {
+                    System.Threading.Thread.Sleep(100);
+                    return;
+                }
+                
+            }
+            foreach (Enemy en in enemies)
+            {
+                  if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
+                  System.Threading.Thread.Sleep(100);
+            }
+        }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {

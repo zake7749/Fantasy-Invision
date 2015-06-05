@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Diagnostics;
+using Microsoft.DirectX;
+using Microsoft.DirectX.DirectSound;
 
 namespace STG
 {
@@ -19,6 +22,11 @@ namespace STG
         List<Bullet> playerBullet;
         Player player;
         EnemyBullet circle;
+        Stopwatch gameTime = new Stopwatch();
+        //Device dv = new Device();
+        //SecondaryBuffer buf;
+        string[] context = new string[10];
+        int countContext = 0;
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
@@ -37,15 +45,30 @@ namespace STG
             circle = new EnemyBullet(300, 300);
             this.panel1.Controls.Add(player.img);
             this.panel1.Controls.Add(circle.img);
+
+            labelTime.Text = "";
+            labelContext.Text = "";
+            //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
+            //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
+            context[0] = "朕的梁氏家族是母星仙河星上最尊貴的家族，朕乃仙河人之女皇，";
+            context[1] = "統治銀河系中最強盛的帝國─銀河帝國，今天鄰近以地球人為主的星空聯邦膽大包天，竟敢擄走朕的女兒！";
+            context[2] = "朕現在命令李上校前往星空聯邦，不惜一切代價，救回朕最愛的宣懷公主。";
+            context[3] = "你現在是銀河帝國永生艦艦長，命令你盡快達成任務！";
+            context[4] = "末降遵旨！";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Update.Start();
+            Update.Stop();
+            gameTime.Reset();
+            gameTime.Start();
             //playing music in loop
             SFXBGM = new SoundPlayer("TOS8.wav");
             SFXBGM.PlayLooping();
 
+            //story mode
+            labelContext.Text = context[countContext];
+            countContext++;
         }
 
         //Move Object
@@ -135,6 +158,8 @@ namespace STG
             Collision();
             circle.circleMove(angle);
 
+            labelTime.Text = gameTime.Elapsed.Seconds.ToString();
+
         }
 
 
@@ -161,6 +186,7 @@ namespace STG
         {
 
         }
+
         private void player_CreateBullet()
         {
             if (player.canShoot())
@@ -168,6 +194,8 @@ namespace STG
                 Point xy = player.getShootPlace();
                 Bullet b = new Bullet(xy.X, xy.Y);
                 SFXplayerShot.Play();
+                //buf.Play(0, BufferPlayFlags.Default);
+                
                 this.panel1.Controls.Add(b.img);
                 playerBullet.Add(b);
             }
@@ -260,6 +288,17 @@ namespace STG
                     player.vx = 0;
                     break;
             }
+        }
+
+        private void panel1_MouseClick_1(object sender, MouseEventArgs e)
+        {
+            if (countContext == 5)
+            {
+                labelContext.Visible = false;
+                Update.Start();
+            }
+            labelContext.Text = context[countContext];
+            countContext++;
         }
     }
 

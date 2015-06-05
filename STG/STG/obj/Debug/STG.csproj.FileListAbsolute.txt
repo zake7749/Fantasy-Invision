@@ -64,3 +64,5 @@ C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.csprojResolveAssem
 C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.Form1.resources
 C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.Properties.Resources.resources
 C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
+C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Microsoft.DirectX.DirectSound.dll
+C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Microsoft.DirectX.dll

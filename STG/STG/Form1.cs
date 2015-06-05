@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +22,7 @@ namespace STG
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
-        double angle; 
+        double angle;
         double degree = 0.0;
 
 
@@ -45,22 +45,22 @@ namespace STG
             //playing music in loop
             SFXBGM = new SoundPlayer("TOS8.wav");
             SFXBGM.PlayLooping();
-            
+
         }
 
         //Move Object
         private void movePlayer()
         {
-            if(player.canMove())
+            if (player.canMove())
             {
                 player.Move();
             }
         }
         private void moveEnemy()
         {
-            foreach(Enemy e in enemies)
+            foreach (Enemy e in enemies)
             {
-                if(e.canMove())
+                if (e.canMove())
                 {
                     e.Move();
                     enemy_CreateBullet(e);
@@ -69,7 +69,7 @@ namespace STG
         }
         private void movePlayerBullet()
         {
-            foreach(Bullet b in playerBullet)
+            foreach (Bullet b in playerBullet)
             {
                 b.Move();
             }
@@ -101,7 +101,7 @@ namespace STG
         }
         private void bulletBounderCheck()
         {
-            foreach(Bullet b in playerBullet)
+            foreach (Bullet b in playerBullet)
             {
                 if (b.ly < 0)
                 {
@@ -116,15 +116,15 @@ namespace STG
                 }
             }
         }
-        
+
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
-            
+
             degree++;
-            
-            angle = Math.PI * degree/180.0;
-            
+
+            angle = Math.PI * degree / 180.0;
+
             //X += Update.Interval;
             movePlayer();
             moveEnemy();
@@ -134,7 +134,7 @@ namespace STG
             bulletBounderCheck();
             Collision();
             circle.circleMove(angle);
-            
+
         }
 
 
@@ -148,12 +148,12 @@ namespace STG
                     System.Threading.Thread.Sleep(100);
                     return;
                 }
-                
+
             }
             foreach (Enemy en in enemies)
             {
-                  if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
-                  System.Threading.Thread.Sleep(100);
+                if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
+                    System.Threading.Thread.Sleep(100);
             }
         }
 
@@ -163,10 +163,10 @@ namespace STG
         }
         private void player_CreateBullet()
         {
-            if(player.canShoot())
+            if (player.canShoot())
             {
                 Point xy = player.getShootPlace();
-                Bullet b = new Bullet(xy.X,xy.Y);
+                Bullet b = new Bullet(xy.X, xy.Y);
                 SFXplayerShot.Play();
                 this.panel1.Controls.Add(b.img);
                 playerBullet.Add(b);
@@ -183,15 +183,18 @@ namespace STG
                 this.panel1.Controls.Add(eb.img);
                 enemyBullet.Add(eb);
                 String mode = e.getShootMode();
-                switch(mode)
+                switch (mode)
                 {
                     case "Line":
                         break;
                     case "Ray":
-                        Vector2D bulletV = e.getVelocity(Convert.ToInt32(player.lx),Convert.ToInt32(player.ly));
-                        label1.Text = bulletV.x.ToString();
-                        label2.Text = bulletV.y.ToString();
-                        eb.SetV(bulletV.x/100,bulletV.y/100);
+                        /*Vector2D bulletV = e.getVelocity(Convert.ToInt32(player.lx), Convert.ToInt32(player.ly));
+
+                        label1.Text =player.lx.ToString();
+                        label2.Text =player.ly.ToString();*/
+                        double bulletX = (player.lx - e.lx) / 100;
+                        double bulletY = (player.ly - e.ly) / 100;
+                        eb.SetV(bulletX,bulletY);
                         break;
                 }
             }
@@ -199,7 +202,7 @@ namespace STG
         private void create_Enemy()
         {
             Random robj = new Random();
-            int x = robj.Next(20, 600);
+            int x = robj.Next(20, 450);
             Enemy e = new Enemy(x, 0);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
@@ -207,7 +210,7 @@ namespace STG
         private void create_GunTurret()
         {
             Random robj = new Random();
-            int x = robj.Next(20, 600);
+            int x = robj.Next(20, 450);
             GunTurret e = new GunTurret(x, 0);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
@@ -245,13 +248,13 @@ namespace STG
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    player.vy =0;
+                    player.vy = 0;
                     break;
                 case Keys.Down:
-                    player.vy =0;
+                    player.vy = 0;
                     break;
                 case Keys.Right:
-                    player.vx =0;
+                    player.vx = 0;
                     break;
                 case Keys.Left:
                     player.vx = 0;
@@ -262,16 +265,16 @@ namespace STG
 
     public class GameObject
     {
-        public double lx,ly;//location
-        public double vx,vy;//velocity
+        public double lx, ly;//location
+        public double vx, vy;//velocity
         public int health;
-        public int vxupLimit,vyupLimit;//
-        public int vxdownLimit,vydownLimit;//
+        public int vxupLimit, vyupLimit;//
+        public int vxdownLimit, vydownLimit;//
         public int clock, clockLimit;//for update
         public int move, moveLimit;//for update
         public PictureBox img;
 
-        public GameObject(int x,int y)
+        public GameObject(int x, int y)
         {
 
         }
@@ -309,9 +312,10 @@ namespace STG
             lx += vx;
             ly += vy;
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
         }
 
-        public void SetV(double x,double y)
+        public void SetV(double x, double y)
         {
             vx = x;
             vy = y;
@@ -335,7 +339,7 @@ namespace STG
     {
         public double x;
         public double y;
-        
+
         public Vector2D()
         {
             x = 0;
@@ -350,7 +354,8 @@ namespace STG
     }
     public class Player : GameObject
     {
-        public Player(int x, int y) : base(x,y)
+        public Player(int x, int y)
+            : base(x, y)
         {
             health = 10;
             lx = x;
@@ -369,12 +374,13 @@ namespace STG
             img = new System.Windows.Forms.PictureBox();
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+            img.BackColor = Color.Transparent;
             imgAutoSize();
         }
 
-        public void addV(int ax,int ay)
+        public void addV(int ax, int ay)
         {
-            if(ax!=0)
+            if (ax != 0)
             {
                 if (ax > 0 && vx < vxupLimit)
                     vx += ax;
@@ -392,16 +398,18 @@ namespace STG
 
         public void Move()
         {
-            if(lx+vx>0&&lx+vx<500)
+            if (lx + vx > 0 && lx + vx < 500)
                 lx += vx;
-            if(ly+vy>0&&ly+vy<600)
+            if (ly + vy > 0 && ly + vy < 600)
                 ly += vy;
             img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
         }
     }
     public class Bullet : GameObject
     {
-        public Bullet(int x, int y) : base(x, y)
+        public Bullet(int x, int y)
+            : base(x, y)
         {
             lx = x;
             ly = y;
@@ -413,6 +421,7 @@ namespace STG
             img = new System.Windows.Forms.PictureBox();
             img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bllet_black.png");
+            img.BackColor = Color.Transparent;
             imgAutoSize();
             //img.BackColor = Color.Black;
         }
@@ -436,6 +445,7 @@ namespace STG
             img = new System.Windows.Forms.PictureBox();
             img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
+            img.BackColor = Color.Transparent;
 
             radius = 100;
             middleX = x - 100;
@@ -447,6 +457,7 @@ namespace STG
             lx = Convert.ToInt32(middleX + radius * Math.Cos(sp));
             ly = Convert.ToInt32(middleY + radius * Math.Sin(sp));
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
         }
     }
     public class Enemy : GameObject
@@ -459,7 +470,8 @@ namespace STG
         public int bulletRestoreLimit;
         public int bulletRestoreClock;
 
-        public Enemy(int x, int y) : base(x, y)
+        public Enemy(int x, int y)
+            : base(x, y)
         {
             lx = x;
             ly = 0;
@@ -489,6 +501,7 @@ namespace STG
             img = new System.Windows.Forms.PictureBox();
             img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+            img.BackColor = Color.Transparent;
         }
 
         public Boolean canShoot()
@@ -506,7 +519,7 @@ namespace STG
         protected void adjustTimeInterval()
         {
             bulletRestoreClock++;
-            if(bulletRestoreClock>bulletRestoreLimit)
+            if (bulletRestoreClock > bulletRestoreLimit)
             {
                 bulletRestoreClock = 0;
                 bulletNum = bulletEachTime;
@@ -538,23 +551,21 @@ namespace STG
             health = 10;
         }
 
-        public Vector2D getVelocity(int px, int py)
+        /*public Vector2D getVelocity(int px, int py)
         {
-            int dx = Convert.ToInt32(lx) - px;
-            int dy = Convert.ToInt32(ly) - py;
-            double bux = dx / 100;
-            double buy = dx / 100;
-            Vector2D bulletVelocity = new Vector2D(bux,buy);
+            double bux = (px - Convert.ToInt32(lx))/100;
+            double buy = (py - Convert.ToInt32(ly))/100;
+            Vector2D bulletVelocity = new Vector2D(bux, buy);
             return bulletVelocity;
-        }
+        }*/
 
-        private int getGCD(int a,int b)
+        private int getGCD(int a, int b)
         {
             int c;
-            while(a!= 0)
+            while (a != 0)
             {
                 c = a;
-                a = b%a;
+                a = b % a;
                 b = c;
             }
             return b;

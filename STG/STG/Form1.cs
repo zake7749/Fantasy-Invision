@@ -25,7 +25,7 @@ namespace STG
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
-        string[] context = new string[10];
+        string[] context = new string[20];
         int countContext = 0;
 
         SoundPlayer SFXBGM;
@@ -50,11 +50,8 @@ namespace STG
             labelContext.Text = "";
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
-            context[0] = "朕的梁氏家族是母星仙河星上最尊貴的家族，朕乃仙河人之女皇，";
-            context[1] = "統治銀河系中最強盛的帝國─銀河帝國，今天鄰近以地球人為主的星空聯邦膽大包天，竟敢擄走朕的女兒！";
-            context[2] = "朕現在命令李上校前往星空聯邦，不惜一切代價，救回朕最愛的宣懷公主。";
-            context[3] = "你現在是銀河帝國永生艦艦長，命令你盡快達成任務！";
-            context[4] = "末降遵旨！";
+            SetStory();
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,6 +66,7 @@ namespace STG
             //story mode
             labelContext.Text = context[countContext];
             countContext++;
+            
         }
 
         //Move Object
@@ -158,10 +156,37 @@ namespace STG
             Collision();
             circle.circleMove(angle);
 
-            labelTime.Text = gameTime.Elapsed.Seconds.ToString();
-
+            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
+            if ((int)(gameTime.Elapsed.TotalSeconds) == 40)
+            {
+                Update.Stop();
+                //gameTime.Stop();
+                countContext = 6;
+                labelContext.Visible = true;
+                labelContext.Text = context[countContext];
+            }
         }
 
+        //Set story
+        private void SetStory()
+        {
+            context[0] = "武則天：居然有人敢擄走朕的女兒，而且還是先前一向對我們友好的巴比倫銀河帝國";
+            context[1] = "武則天：現在是仗著母星離地球很遠就可以藐視朕的權威";
+            context[2] = "武則天：王將軍聽令，朕任你為大周星際帝國神都艦艦長";
+            context[3] = "武則天：立刻前往銀河救回太平公主！";
+            context[4] = "王孝傑：末將遵旨";
+            context[5] = "";
+            context[6] = "(敵方戰艦的殘骸中有一台播放器)";
+            context[7] = "王孝傑：啟稟陛下，有一台敵軍遺留下來的撥放器";
+            context[8] = "武則天：速速撥放";
+            context[9] = "王孝傑：諾";
+            context[10] = "...：哈哈哈哈哈！武媚娘，還記得我是誰嗎？";
+            context[11] = "武則天：(究竟是誰，這聲音好耳熟...，該不會是徐慧？)";
+            context[12] = "徐慧：沒錯，武媚娘！就是我，你的女兒就在我手上，哈哈哈哈哈...";
+            context[13] = "武則天：你不是已經死了？現在怎麼還活著？你竟然擄走我的女兒，你這個賤人！王將軍，快救回公主！";
+            context[14] = "王孝傑：遵旨";
+            context[15] = "";
+        }
 
         //Collision
         private void Collision()
@@ -292,10 +317,11 @@ namespace STG
 
         private void panel1_MouseClick_1(object sender, MouseEventArgs e)
         {
-            if (countContext == 5)
+            if (countContext == 5 || countContext == 15)
             {
                 labelContext.Visible = false;
                 Update.Start();
+                //gameTime.Start();
             }
             labelContext.Text = context[countContext];
             countContext++;

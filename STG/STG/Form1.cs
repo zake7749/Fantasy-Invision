@@ -271,6 +271,7 @@ namespace STG
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            e.Handled = true;
             switch (e.KeyCode)
             {
                 case Keys.Up:

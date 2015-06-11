@@ -21,7 +21,6 @@ namespace STG
         int totalEnemy = 0;
         List<Bullet> playerBullet;
         Player player;
-        EnemyBullet circle;
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
@@ -30,8 +29,6 @@ namespace STG
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
-        double angle;
-        double degree = 0.0;
 
 
         public Form1()
@@ -42,23 +39,20 @@ namespace STG
 
             InitializeComponent();
             player = new Player(100, 100);
-            circle = new EnemyBullet(300, 300);
             this.panel1.Controls.Add(player.img);
-            this.panel1.Controls.Add(circle.img);
 
             labelTime.Text = "";
             labelContext.Text = "";
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
-            SetStory();
-           
+            SetStory();        
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             Update.Stop();
             gameTime.Reset();
-            gameTime.Start();
+            //gameTime.Start();
             //playing music in loop
             SFXBGM = new SoundPlayer("TOS8.wav");
             SFXBGM.PlayLooping();
@@ -99,6 +93,9 @@ namespace STG
         {
             foreach (EnemyBullet eb in enemyBullet)
             {
+                if (eb.getMoveMode() == "Circle")
+                    eb.circleMove();
+                
                 eb.Move();
             }
         }
@@ -141,10 +138,9 @@ namespace STG
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
-
-            degree++;
-
-            angle = Math.PI * degree / 180.0;
+            
+            //degree++;
+            //angle = Math.PI * degree / 180.0;
 
             //X += Update.Interval;
             movePlayer();
@@ -154,13 +150,16 @@ namespace STG
 
             bulletBounderCheck();
             Collision();
-            circle.circleMove(angle);
+            //circle.circleMove(200.0, 200.0, angle);
 
             labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
             if ((int)(gameTime.Elapsed.TotalSeconds) == 40)
             {
+                if ((gameTime.Elapsed.TotalSeconds) == 41.0000000)
+ 
+                    gameTime.Stop();
+
                 Update.Stop();
-                //gameTime.Stop();
                 countContext = 6;
                 labelContext.Visible = true;
                 labelContext.Text = context[countContext];
@@ -249,6 +248,10 @@ namespace STG
                         double bulletY = (player.ly - e.ly) / 100;
                         eb.SetV(bulletX,bulletY);
                         break;
+                    case "Circle":
+                        eb.setMoveMode("Circle");
+                        eb.setXY(e.lx, e.ly);
+                        break;
                 }
             }
         }
@@ -268,6 +271,16 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
+
+        private void create_CircleShootEnemy()
+        {
+            Random robj = new Random();
+            int x = robj.Next(20, 450);
+            CircleShootEnemy e = new CircleShootEnemy(x, 0);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -295,6 +308,9 @@ namespace STG
                 case Keys.X:
                     create_GunTurret();
                     break;
+                case Keys.C:
+                    create_CircleShootEnemy();
+                    break;
             }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -318,14 +334,17 @@ namespace STG
 
         private void panel1_MouseClick_1(object sender, MouseEventArgs e)
         {
-            if (countContext == 5 || countContext == 15)
+            if (labelContext.Visible == true)
             {
-                labelContext.Visible = false;
-                Update.Start();
-                //gameTime.Start();
-            }
-            labelContext.Text = context[countContext];
-            countContext++;
+                if (countContext == 5 || countContext == 15)
+                {
+                    labelContext.Visible = false;
+                    Update.Start();
+                    gameTime.Start();
+                }
+                labelContext.Text = context[countContext];
+                countContext++;
+            }         
         }
     }
 
@@ -497,9 +516,11 @@ namespace STG
         //public double lx, ly;
         public int middleX, middleY;
         public int radius;
+        private string MoveMode;
+        public double angle;
 
         public EnemyBullet(int x, int y)
-            : base(x, y)
+            : base(x, y)           
         {
             lx = x;
             ly = y;
@@ -513,17 +534,34 @@ namespace STG
             img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
             img.BackColor = Color.Transparent;
 
+            MoveMode = "";
             radius = 100;
-            middleX = x - 100;
-            middleY = y;
+            angle = 0;
         }
 
-        public void circleMove(double sp)
+        public void circleMove()
         {
-            lx = Convert.ToInt32(middleX + radius * Math.Cos(sp));
-            ly = Convert.ToInt32(middleY + radius * Math.Sin(sp));
+            middleY++;
+            lx = Convert.ToInt32(middleX + radius * Math.Cos(angle += 0.05));
+            ly = Convert.ToInt32(middleY + radius * Math.Sin(angle += 0.05));
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.BackColor = Color.Transparent;
+        }
+        
+        public void setXY(double ox, double oy)
+        {
+            middleX = (int)ox + 20;
+            middleY = (int)oy + 20;
+        }
+
+        public void setMoveMode(string outstr)
+        {
+            MoveMode = outstr;
+        }
+
+        public string getMoveMode()
+        {
+            return MoveMode;
         }
     }
     public class Enemy : GameObject
@@ -639,4 +677,31 @@ namespace STG
 
     }
 
+    public class CircleShootEnemy : Enemy
+    {
+        public CircleShootEnemy(int x, int y)
+            : base(x, y)
+        {
+            lx = x;
+            ly = 0;
+            vx = 0;
+            vy = 1;
+            newsetClock();
+            loadImage();
+            Shootmode = "Circle";
+            health = 10;
+        }
+
+        private void newsetClock()
+        {
+            clock = 0;
+            clockLimit = 10;//每隔 20f 發射一顆子彈
+            bulletNum = 5;
+            bulletEachTime = 5;//每次射擊都會有 5 發子彈
+            bulletRestoreClock = 0;
+            bulletRestoreLimit = 100000000;//每隔 bulletRestoreLimit f 進行一次射擊
+            move = 0;
+            moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.      
+        }
+    }
 }

@@ -78,6 +78,8 @@
             // 
             // labelContext
             // 
+            this.labelContext.BackColor = System.Drawing.Color.Teal;
+            this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 527);
             this.labelContext.Name = "labelContext";

@@ -63,49 +63,47 @@ namespace STG
         }
 
         //Move Object
-        private void movePlayer()
+        private void updatePlayer()
         {
+            //insert any change by time on player
             if (player.canMove())
             {
                 player.Move();
             }
         }
-        private void moveEnemy()
+        private void updateEnemy()
         {
+            //insert any change by time on enemy
             foreach (Enemy e in enemies)
             {
                 if (e.canMove())
                 {
                     e.Move();
-                    enemy_CreateBullet(e);
                 }
+                enemy_CreateBullet(e);
             }
+            
         }
-        private void movePlayerBullet()
+        private void updatePlayerBullet()
         {
+            //insert any change by time on bullet
             foreach (Bullet b in playerBullet)
             {
                 b.Move();
             }
         }
-        private void moveEnemyBullet()
+        private void updateEnemyBullet()
         {
+            //insert any change by time on enemyBullet
             foreach (EnemyBullet eb in enemyBullet)
             {
                 if (eb.getMoveMode() == "Circle")
                     eb.circleMove();
-                
                 eb.Move();
             }
         }
 
         //Bounder check
-        private void BounderCheck()
-        {
-            enemyBounderCheck();
-            bulletBounderCheck();
-        }
-
         private void enemyBounderCheck()
         {
             foreach (Enemy e in enemies)
@@ -113,6 +111,7 @@ namespace STG
                 if (e.ly < 0)
                 {
                     e.img.Dispose();
+                    enemies.Remove(e);
                 }
             }
         }
@@ -133,6 +132,12 @@ namespace STG
                 }
             }
         }
+        private void BounderCheck()
+        {
+            enemyBounderCheck();
+            bulletBounderCheck();
+        }
+
 
         //Update
         private void FixedUpdate(object sender, EventArgs e)
@@ -142,16 +147,21 @@ namespace STG
             //angle = Math.PI * degree / 180.0;
 
             //X += Update.Interval;
-            movePlayer();
-            moveEnemy();
-            movePlayerBullet();
-            moveEnemyBullet();
+            updatePlayer();
+            updateEnemy();
+            updatePlayerBullet();
+            updateEnemyBullet();
 
             bulletBounderCheck();
             Collision();
             //circle.circleMove(200.0, 200.0, angle);
 
-            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
+
+            /*
+             * Please write comment for each code block added.
+             * In addition, DO NOT add anything except FUNCTIONs in FixedUpdate.
+             * 
+             * labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
             if ((int)(gameTime.Elapsed.TotalSeconds) == 40)
             {
                 if ((gameTime.Elapsed.TotalSeconds) == 41.0000000)
@@ -162,13 +172,12 @@ namespace STG
                 countContext = 6;
                 labelContext.Visible = true;
                 labelContext.Text = context[countContext];
-            }
+            }*/
         }
 
         //Set story
         private void SetStory()
         {
-            
             context[0] = "武則天：居然有人敢擄走朕的女兒，而且還是先前一向對我們友好的巴比倫銀河帝國";
             context[1] = "武則天：現在是仗著母星離地球很遠就可以藐視朕的權威";
             context[2] = "武則天：王將軍聽令，朕任你為大周星際帝國神都艦艦長";
@@ -240,13 +249,13 @@ namespace STG
                     case "Line":
                         break;
                     case "Ray":
-                        /*Vector2D bulletV = e.getVelocity(Convert.ToInt32(player.lx), Convert.ToInt32(player.ly));
-
+                        Vector2D bulletV = e.getVelocity(player.lx, player.ly);
                         label1.Text =player.lx.ToString();
-                        label2.Text =player.ly.ToString();*/
-                        double bulletX = (player.lx - e.lx) / 100;
-                        double bulletY = (player.ly - e.ly) / 100;
-                        eb.SetV(bulletX,bulletY);
+                        label2.Text =player.ly.ToString();
+                        label4.Text = bulletV.x.ToString();
+                        label5.Text = bulletV.y.ToString();
+
+                        eb.SetV(bulletV.x,bulletV.y);
                         break;
                     case "Circle":
                         eb.setMoveMode("Circle");
@@ -271,7 +280,6 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-
         private void create_CircleShootEnemy()
         {
             Random robj = new Random();

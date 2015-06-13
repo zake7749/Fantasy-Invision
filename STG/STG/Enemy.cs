@@ -84,7 +84,7 @@ public class Enemy : GameObject
         return Shootmode;
     }
 
-    public Vector2D getVelocity(int px, int py)
+    public virtual Vector2D getVelocity(double px, double py)
     {
         Vector2D bulletVelocity = new Vector2D(px, py);
         return bulletVelocity;

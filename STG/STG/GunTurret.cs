@@ -21,7 +21,7 @@ public class GunTurret : Enemy
         lx = x;
         ly = y;
         vx = 0;
-        vy = 3;
+        vy = 2;
         setClock();
         loadImage();
         imgAutoSize();
@@ -34,12 +34,22 @@ public class GunTurret : Enemy
         //f = frame = timer interval of FixUpdate
         clock = 0;
         clockLimit = 15;//每隔 30f 發射一顆子彈
-        bulletNum = 2;
-        bulletEachTime = 2;//每次射擊都會有 2 發子彈
+        bulletNum = 5;
+        bulletEachTime = 5;//每次射擊都會有 2 發子彈
         bulletRestoreClock = 0;
         bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
+    }
+
+    public override void Move()
+    {
+        lx += vx;
+        ly += vy;
+        if(vy>0.3)
+            vy -= 0.005;
+        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+        img.BackColor = Color.Transparent;
     }
 
     public override Vector2D getVelocity(double px, double py)

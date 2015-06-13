@@ -17,12 +17,12 @@ using Microsoft.DirectX.DirectSound;
 public class Enemy : GameObject
 {
     public String Shootmode;
+    public String Movemode;
 
-    public int bulletNum;
-
-    public int bulletEachTime;
-    public int bulletRestoreLimit;
-    public int bulletRestoreClock;
+    protected int bulletNum;
+    protected int bulletEachTime;
+    protected int bulletRestoreLimit;
+    protected int bulletRestoreClock;
 
     public Enemy(int x, int y)
         : base(x, y)
@@ -35,6 +35,7 @@ public class Enemy : GameObject
         loadImage();
         imgAutoSize();
         Shootmode = "Line";
+        Movemode = "Line";
         health = 10;
     }
 
@@ -80,6 +81,7 @@ public class Enemy : GameObject
             bulletNum = bulletEachTime;
         }
     }
+
     public String getShootMode()
     {
         return Shootmode;

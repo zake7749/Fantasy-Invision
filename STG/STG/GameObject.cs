@@ -56,7 +56,7 @@ public class GameObject
         return false;
     }
 
-    public void Move()
+    public virtual void Move()
     {
         lx += vx;
         ly += vy;

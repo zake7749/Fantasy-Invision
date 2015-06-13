@@ -24,7 +24,7 @@ public class EnemyBullet : GameObject
         : base(x, y)
     {
         lx = x;
-        ly = y;
+        ly = y+50;
         //f = frame = timer interval of FixUpdate 
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
@@ -53,6 +53,14 @@ public class EnemyBullet : GameObject
     {
         ly += vy;
         lx += 10 * Math.Cos(angle+=0.5);
+        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+        img.BackColor = Color.Transparent;
+    }
+
+    public void SinMove()
+    {
+        ly += vy;
+        lx -= 10 * Math.Sin(angle+=0.5);
         img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.BackColor = Color.Transparent;
     }

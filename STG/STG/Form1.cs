@@ -101,7 +101,12 @@ namespace STG
                     eb.circleMove();
                 if (eb.getMoveMode() == "Cos")
                     eb.CosMove();
-                eb.Move();
+                if (eb.getMoveMode() == "Sin")
+                    eb.SinMove();
+                else
+                {
+                    eb.Move();
+                }
             }
         }
 
@@ -246,14 +251,10 @@ namespace STG
                 switch (mode)
                 {
                     case "Line":
+
                         break;
                     case "Ray":
                         Vector2D bulletV = e.getVelocity(player.lx, player.ly);
-                        label1.Text =player.lx.ToString();
-                        label2.Text =player.ly.ToString();
-                        label4.Text = bulletV.x.ToString();
-                        label5.Text = bulletV.y.ToString();
-
                         eb.SetV(bulletV.x,bulletV.y);
                         break;
                     case "Circle":
@@ -303,7 +304,7 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-<<<<<<< HEAD
+
         private void create_CircleShootEnemy(int x,int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
@@ -317,7 +318,6 @@ namespace STG
             enemies.Add(e);
         }
 
-=======
         private void create_CosWayEnemy()
         {
             Random robj = new Random();
@@ -326,7 +326,6 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
->>>>>>> origin/master
 
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -370,7 +369,7 @@ namespace STG
                 case Keys.M:
                     EnemyCreateFactory("Simple");
                     break;
-                case Keys.V:
+                case Keys.A:
                     create_CosWayEnemy();
                     break;
             }

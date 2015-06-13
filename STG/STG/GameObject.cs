@@ -12,7 +12,7 @@ using System.Diagnostics;
 using Microsoft.DirectX;
 using Microsoft.DirectX.DirectSound;
 
-public class GameObject
+public class GameObject : IDisposable
 {
     public double lx, ly;//location
     public double vx, vy;//velocity
@@ -22,6 +22,9 @@ public class GameObject
     public int clock, clockLimit;//for update
     public int move, moveLimit;//for update
     public PictureBox img;
+
+    //Variable for dispose method
+    bool disposed = false;
 
     public GameObject(int x, int y)
     {
@@ -83,6 +86,32 @@ public class GameObject
         img.Width = img.Image.Width;
         img.Height = img.Image.Height;
     }
+
+    //Dispose Method
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    protected virtual void Dispose(bool disposing)
+   {
+      if (disposed)
+         return; 
+
+      if (disposing) {
+         // Free any other managed objects here.
+         //
+      }
+
+      // Free any unmanaged objects here.
+      //
+      disposed = true;
+   }
+
+   ~GameObject()
+   {
+      Dispose(false);
+   }
 }
 
 public class Vector2D

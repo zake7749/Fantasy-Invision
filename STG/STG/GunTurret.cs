@@ -15,6 +15,8 @@ using Microsoft.DirectX.DirectSound;
 
 public class GunTurret : Enemy
 {
+    bool disposed = false;
+
     public GunTurret(int x, int y)
         : base(x, y)
     {
@@ -69,5 +71,24 @@ public class GunTurret : Enemy
         Vector2D bulletVelocity = new Vector2D(bux, buy);
         return bulletVelocity;
     }
+    //Dispose method
+/*    protected override void Dispose(bool disposing)
+   {
+      if (disposed)
+         return; 
 
+      if (disposing) {
+         // Free any other managed objects here.
+         //
+      }
+
+      // Free any unmanaged objects here.
+      //
+      disposed = true;
+   }
+
+   ~GunTurret()
+   {
+      Dispose(false);
+   }*/
 }

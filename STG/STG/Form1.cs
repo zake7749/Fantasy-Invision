@@ -124,9 +124,10 @@ namespace STG
             }
             foreach (EnemyBullet b in enemyBullet)
             {
-                if (b.ly > 1000)
+                if (b.ly > 640)
                 {
                     b.img.Dispose();
+                    b.Dispose();
                 }
             }
         }

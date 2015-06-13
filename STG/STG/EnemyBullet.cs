@@ -14,6 +14,7 @@ using Microsoft.DirectX.DirectSound;
 
 public class EnemyBullet : GameObject
 {
+    bool disposed = false;
     //public double lx, ly;
     public int middleX, middleY;
     public int radius;
@@ -94,4 +95,24 @@ public class EnemyBullet : GameObject
     {
         return MoveMode;
     }
+    //Dispose method
+    protected override void Dispose(bool disposing)
+   {
+      if (disposed)
+         return; 
+
+      if (disposing) {
+         // Free any other managed objects here.
+         //
+      }
+
+      // Free any unmanaged objects here.
+      //
+      disposed = true;
+   }
+
+   ~EnemyBullet()
+   {
+      Dispose(false);
+   }
 }

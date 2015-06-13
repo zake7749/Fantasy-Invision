@@ -99,6 +99,8 @@ namespace STG
             {
                 if (eb.getMoveMode() == "Circle")
                     eb.circleMove();
+                if (eb.getMoveMode() == "Cos")
+                    eb.CosMove();
                 eb.Move();
             }
         }
@@ -258,6 +260,10 @@ namespace STG
                         eb.setMoveMode("Circle");
                         eb.setXY(e.lx, e.ly);
                         break;
+                    case "Cos":
+                        eb.setMoveMode("Cos");
+                        eb.useGreenRay();
+                        break;
                 }
             }
         }
@@ -297,6 +303,7 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
+<<<<<<< HEAD
         private void create_CircleShootEnemy(int x,int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
@@ -310,6 +317,16 @@ namespace STG
             enemies.Add(e);
         }
 
+=======
+        private void create_CosWayEnemy()
+        {
+            Random robj = new Random();
+            int x = robj.Next(20, 450);
+            CosWayEnemy e = new CosWayEnemy(x, 0);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+>>>>>>> origin/master
 
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -352,6 +369,9 @@ namespace STG
                     break;
                 case Keys.M:
                     EnemyCreateFactory("Simple");
+                    break;
+                case Keys.V:
+                    create_CosWayEnemy();
                     break;
             }
         }

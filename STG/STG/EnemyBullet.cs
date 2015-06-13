@@ -24,7 +24,7 @@ public class EnemyBullet : GameObject
         : base(x, y)
     {
         lx = x;
-        ly = y+50;
+        ly = y;
         //f = frame = timer interval of FixUpdate 
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.

@@ -54,8 +54,8 @@ namespace STG
             //gameTime.Reset();
             //gameTime.Start();
             //playing music in loop
-            SFXBGM = new SoundPlayer("TOS8.wav");
-            SFXBGM.PlayLooping();
+            //SFXBGM = new SoundPlayer("TOS8.wav");
+            //SFXBGM.PlayLooping();
 
             //story mode
             labelContext.Text = context[countContext];
@@ -171,6 +171,20 @@ namespace STG
                 labelContext.Visible = true;
                 labelContext.Text = context[countContext];
             }*/
+            DebugMessage();
+
+        }
+
+        private void DebugMessage()
+        {
+            if (test != null)
+            {
+
+                label1.Text = test.lx.ToString();
+                label2.Text = test.ly.ToString();
+                label4.Text = test.vx.ToString();
+                label5.Text = test.vy.ToString();
+            }
         }
 
         //Set story
@@ -234,31 +248,84 @@ namespace STG
         {
             if (e.canShoot()&&e.Shootmode!="None")
             {
-                Point xy = e.getShootPlace();
-                EnemyBullet eb = new EnemyBullet(xy.X, xy.Y);
-                this.panel1.Controls.Add(eb.img);
-                enemyBullet.Add(eb);
                 String mode = e.getShootMode();
+                Point xy = e.getShootPlace();
                 switch (mode)
                 {
                     case "Line":
-
+                        EnemyBullet ebLine = new EnemyBullet(xy.X, xy.Y);
+                        enemyBullet.Add(ebLine);
+                        this.panel1.Controls.Add(ebLine.img);
                         break;
                     case "Ray":
+                        EnemyBullet ebRay = new EnemyBullet(xy.X, xy.Y);
                         Vector2D bulletV = e.getVelocity(player.lx, player.ly);
-                        eb.SetV(bulletV.x,bulletV.y);
+                        ebRay.SetV(bulletV.x,bulletV.y);
+                        enemyBullet.Add(ebRay);
+                        this.panel1.Controls.Add(ebRay.img);
                         break;
                     case "Circle":
-                        eb.setMoveMode("Circle");
-                        eb.setXY(e.lx, e.ly);
+                        EnemyBullet ebCircle = new EnemyBullet(xy.X, xy.Y);
+                        ebCircle.setMoveMode("Circle");
+                        ebCircle.setXY(e.lx, e.ly);
+                        enemyBullet.Add(ebCircle);
+                        this.panel1.Controls.Add(ebCircle.img);
                         break;
                     case "Cos":
-                        eb.setMoveMode("Cos");
-                        eb.useGreenRay();
+                        EnemyBullet ebCosine = new EnemyBullet(xy.X,xy.Y);
+                        ebCosine.setMoveMode("Cos");
+                        ebCosine.useGreenRay();
+                        enemyBullet.Add(ebCosine);
+                        this.panel1.Controls.Add(ebCosine.img);
+                        break;
+                    case "Split-5":
+                        createBulletCurtain(e, 5);
                         break;
                 }
             }
         }
+
+        EnemyBullet test;
+        private void createBulletCurtain(Enemy e,int scale)
+        {
+            Point xy = e.getShootPlace();
+            int velocity = 5,i = 0;
+            double interval = 100/(scale-1);
+            double start = -1*(scale-1)/2*interval;
+            double vX = 0, vY = 0;
+            double normal = 0;
+            label7.Text = interval.ToString();
+            for(i=0;i<scale;i++)
+            {
+                EnemyBullet eb = new EnemyBullet(xy.X,xy.Y);
+
+                normal = Normalizer(start,100);
+
+                vX = start / normal;
+                vY = 100 / normal;
+                vX *= velocity;
+                vY *= velocity;
+                eb.SetV(vX, vY);
+                start += interval;
+                enemyBullet.Add(eb);
+                if (i == 2)
+                {
+                    label6.Text = start.ToString();
+                    test = eb;
+                }
+
+                this.panel1.Controls.Add(eb.img);
+            }
+
+        }
+
+        private double Normalizer(double x,double y)
+        {
+            return Math.Sqrt(Math.Pow(x,2) + Math.Pow(y,2));
+        }
+
+
+        //Create enemy object
         private void create_Enemy()
         {
             Random robj = new Random();
@@ -295,7 +362,6 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-
         private void create_CircleShootEnemy(int x,int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
@@ -308,14 +374,12 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-
         private void create_Fighter(int x,int y)
         {
             Fighter e = new Fighter(x, y);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-
         private void create_CosWayEnemy()
         {
             Random robj = new Random();
@@ -394,6 +458,7 @@ namespace STG
             }
         }
 
+
         private void panel1_MouseClick_1(object sender, MouseEventArgs e)
         {
             if (labelContext.Visible == true)
@@ -408,6 +473,7 @@ namespace STG
                 countContext++;
             }         
         }
+
 
         private void EnemyCreateFactory(String way)
         {

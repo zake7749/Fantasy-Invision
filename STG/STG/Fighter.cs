@@ -28,8 +28,21 @@ namespace STG
             setClock();
             loadImage();
             imgAutoSize();
-            Shootmode = "Split-3";
+            Shootmode = "Split-5";
             health = 10;
+        }
+
+        protected void setClock()
+        {
+            //f = frame = timer interval of FixUpdate
+            clock = 0;
+            clockLimit = 7;//每隔 14f 發射一顆子彈
+            bulletNum = 3;
+            bulletEachTime = 3;//每次射擊都會有 3 發子彈
+            bulletRestoreClock = 0;
+            bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+            move = 0;
+            moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         }
 
         public override void Move()

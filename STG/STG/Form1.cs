@@ -45,13 +45,13 @@ namespace STG
             labelContext.Text = "";
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
-            SetStory();        
+            //SetStory();        
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Update.Stop();
-            gameTime.Reset();
+            //Update.Stop();
+            //gameTime.Reset();
             //gameTime.Start();
             //playing music in loop
             SFXBGM = new SoundPlayer("TOS8.wav");

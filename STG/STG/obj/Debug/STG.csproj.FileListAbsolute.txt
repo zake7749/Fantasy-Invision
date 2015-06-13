@@ -66,3 +66,17 @@ C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.Properties.Resourc
 C:\Users\bb\Desktop\CSharp-STG2D-master\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Microsoft.DirectX.DirectSound.dll
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Microsoft.DirectX.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\STG.exe.config
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\STG.exe
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\STG.pdb
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache

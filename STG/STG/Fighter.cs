@@ -16,6 +16,7 @@ namespace STG
 {
     class Fighter : Enemy
     {
+        bool disposed = false;
         Boolean flip;
 
         public Fighter(int x,int y):base(x,y)
@@ -83,5 +84,26 @@ namespace STG
             else if (lx < 20)
                 vx = 1;
         }
+
+       //Dispose method
+       protected override void Dispose(bool disposing)
+       {
+          if (disposed)
+             return; 
+
+          if (disposing) {
+             // Free any other managed objects here.
+             //
+          }
+
+          // Free any unmanaged objects here.
+          //
+          disposed = true;
+       }
+
+       ~Fighter()
+       {
+          Dispose(false);
+       }
     }
 }

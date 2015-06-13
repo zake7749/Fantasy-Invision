@@ -16,6 +16,8 @@ using Microsoft.DirectX.DirectSound;
 
 public class Enemy : GameObject
 {
+    bool disposed = false;
+
     public String Shootmode;
     public String Movemode;
 
@@ -92,4 +94,25 @@ public class Enemy : GameObject
         Vector2D bulletVelocity = new Vector2D(px, py);
         return bulletVelocity;
     }
+
+    //Dispose method
+        protected override void Dispose(bool disposing)
+       {
+          if (disposed)
+             return; 
+
+          if (disposing) {
+             // Free any other managed objects here.
+             //
+          }
+
+          // Free any unmanaged objects here.
+          //
+          disposed = true;
+       }
+
+       ~Enemy()
+       {
+          Dispose(false);
+       }
 }

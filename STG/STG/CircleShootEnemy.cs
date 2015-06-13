@@ -2,6 +2,8 @@
 
 public class CircleShootEnemy : Enemy
 {
+    bool disposed = false;
+
     public CircleShootEnemy(int x, int y)
         : base(x, y)
     {
@@ -27,4 +29,25 @@ public class CircleShootEnemy : Enemy
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.      
     }
+
+       //Dispose method
+       protected override void Dispose(bool disposing)
+       {
+          if (disposed)
+             return; 
+
+          if (disposing) {
+             // Free any other managed objects here.
+             //
+          }
+
+          // Free any unmanaged objects here.
+          //
+          disposed = true;
+       }
+
+       ~CircleShootEnemy()
+       {
+          Dispose(false);
+       }
 }

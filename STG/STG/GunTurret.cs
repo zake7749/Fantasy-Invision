@@ -72,7 +72,7 @@ public class GunTurret : Enemy
         return bulletVelocity;
     }
     //Dispose method
-/*    protected override void Dispose(bool disposing)
+    protected override void Dispose(bool disposing)
    {
       if (disposed)
          return; 
@@ -90,5 +90,5 @@ public class GunTurret : Enemy
    ~GunTurret()
    {
       Dispose(false);
-   }*/
+   }
 }

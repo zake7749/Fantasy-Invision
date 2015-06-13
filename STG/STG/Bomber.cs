@@ -8,6 +8,8 @@ namespace STG
 {
     class Bomber : Enemy
     {
+        bool disposed = false;
+
         public Bomber(int x,int y) : base(x,y)
         {
             lx = x;
@@ -20,5 +22,26 @@ namespace STG
             Shootmode = "None";
             health = 5;
         }
+
+       //Dispose method
+       protected override void Dispose(bool disposing)
+       {
+          if (disposed)
+             return; 
+
+          if (disposing) {
+             // Free any other managed objects here.
+             //
+          }
+
+          // Free any unmanaged objects here.
+          //
+          disposed = true;
+       }
+
+       ~Bomber()
+       {
+          Dispose(false);
+       }
     }
 }

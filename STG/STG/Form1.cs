@@ -104,32 +104,80 @@ namespace STG
         //Bounder check
         private void enemyBounderCheck()
         {
-            foreach (Enemy e in enemies)
+            //foreach 迴圈無法使用List.Remove，所以改用for迴圈
+            for (var i = 0; i < enemies.Count;i++ )
             {
-                if (e.ly < 0)
+                if (enemies[i].ly < 0)
                 {
-                    e.img.Dispose();
-                    e.clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
+                    enemies[i].img.Dispose();
+                    enemies[i].clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
+                    enemies[i].Dispose();
+                    enemies.Remove(enemies[i]);
+                }
+                if (enemies[i].ly > 635)
+                {
+                    enemies[i].img.Dispose();
+                    enemies[i].Dispose();
+                    enemies.Remove(enemies[i]);
                 }
             }
+/*                foreach (Enemy e in enemies)
+                {
+                    if (e.ly < 0)
+                    {
+                        e.img.Dispose();
+                        e.clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
+                        e.Dispose();
+                        enemies.Remove(e);
+                    }
+                    if (e.ly > 635)
+                    {
+                        e.img.Dispose();
+                        e.Dispose();
+                        enemies.Remove(e);
+                    }
+                }*/
         }
         private void bulletBounderCheck()
         {
-            foreach (Bullet b in playerBullet)
+            //foreach 迴圈無法使用List.Remove，所以改用for迴圈
+            for (var i = 0; i < playerBullet.Count;i++ )
             {
-                if (b.ly < 0)
+                if (playerBullet[i].ly < 0)
                 {
-                    b.img.Dispose();
+                    playerBullet[i].img.Dispose();
+                    playerBullet[i].Dispose();
+                    playerBullet.Remove(playerBullet[i]);
                 }
             }
-            foreach (EnemyBullet b in enemyBullet)
+/*               foreach (Bullet b in playerBullet)
+                {
+                    if (b.ly < 0)
+                    {
+                        b.img.Dispose();
+                        b.Dispose();
+                        playerBullet.Remove(b);
+                    }
+                }*/
+            for (var i = 0; i < enemyBullet.Count; i++)
             {
-                if (b.ly > 640)
+                if (enemyBullet[i].ly < 0)
+                {
+                    enemyBullet[i].img.Dispose();
+                    enemyBullet[i].Dispose();
+                    enemyBullet.Remove(enemyBullet[i]);
+                }
+            }
+/*            foreach (EnemyBullet b in enemyBullet)
+            {
+                if (b.ly > 635)
                 {
                     b.img.Dispose();
+                    enemyBullet.Remove(b);
                     b.Dispose();
+                    
                 }
-            }
+            }*/
         }
         private void BounderCheck()
         {
@@ -201,7 +249,7 @@ namespace STG
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
-                    System.Threading.Thread.Sleep(100);
+                    //System.Threading.Thread.Sleep(100);
                     return;
                 }
 
@@ -209,7 +257,8 @@ namespace STG
             foreach (Enemy en in enemies)
             {
                 if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
-                    System.Threading.Thread.Sleep(100);
+                    //System.Threading.Thread.Sleep(100);
+                    return;
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)

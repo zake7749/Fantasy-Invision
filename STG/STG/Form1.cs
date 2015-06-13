@@ -309,6 +309,13 @@ namespace STG
             enemies.Add(e);
         }
 
+        private void create_Fighter(int x,int y)
+        {
+            Fighter e = new Fighter(x, y);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+
         private void create_CosWayEnemy()
         {
             Random robj = new Random();
@@ -362,6 +369,9 @@ namespace STG
                     break;
                 case Keys.A:
                     create_CosWayEnemy();
+                    break;
+                case Keys.S:
+                    create_Fighter(10,10);
                     break;
             }
         }

@@ -34,7 +34,7 @@ public class EnemyBullet : GameObject
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bullet_black.BMP");
         img.BackColor = Color.Transparent;
-
+        imgAutoSize();
         MoveMode = "";
         radius = 100;
         angle = 0;

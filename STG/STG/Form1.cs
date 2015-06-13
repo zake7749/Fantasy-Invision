@@ -111,7 +111,7 @@ namespace STG
                 if (e.ly < 0)
                 {
                     e.img.Dispose();
-                    enemies.Remove(e);
+                    e.clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
                 }
             }
         }
@@ -195,7 +195,6 @@ namespace STG
             context[14] = "王孝傑：遵旨";
             context[15] = "";
         }
-
         //Collision
         private void Collision()
         {
@@ -214,12 +213,10 @@ namespace STG
                     System.Threading.Thread.Sleep(100);
             }
         }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
-
         private void player_CreateBullet()
         {
             if (player.canShoot())
@@ -237,7 +234,7 @@ namespace STG
         //Enemy
         private void enemy_CreateBullet(Enemy e)
         {
-            if (e.canShoot())
+            if (e.canShoot()&&e.Shootmode!="None")
             {
                 Point xy = e.getShootPlace();
                 EnemyBullet eb = new EnemyBullet(xy.X, xy.Y);
@@ -272,11 +269,23 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
+        private void create_Enemy(int x,int y)
+        {
+            Enemy e = new Enemy(x, y);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
         private void create_GunTurret()
         {
             Random robj = new Random();
             int x = robj.Next(20, 450);
             GunTurret e = new GunTurret(x, 0);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+        private void create_GunTurret(int x,int y)
+        {
+            GunTurret e = new GunTurret(x, y);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
@@ -288,6 +297,19 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
+        private void create_CircleShootEnemy(int x,int y)
+        {
+            CircleShootEnemy e = new CircleShootEnemy(x, y);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+        private void create_Bomber(int x, int y)
+        {
+            Bomber e = new Bomber(x, y);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+        }
+
 
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -311,13 +333,25 @@ namespace STG
                     player_CreateBullet();
                     break;
                 case Keys.Z:
-                    create_Enemy();
+                    EnemyCreateFactory("Line-Left-Side");
                     break;
                 case Keys.X:
-                    create_GunTurret();
+                    EnemyCreateFactory("Line-Right-Side");
                     break;
                 case Keys.C:
-                    create_CircleShootEnemy();
+                    EnemyCreateFactory("V-formation-Small");
+                    break;
+                case Keys.V:
+                    EnemyCreateFactory("V-formation-Small");
+                    break;
+                case Keys.B:
+                    EnemyCreateFactory("V-formation-Normal");
+                    break;
+                case Keys.N:
+                    EnemyCreateFactory("V-formation-Large");
+                    break;
+                case Keys.M:
+                    EnemyCreateFactory("Simple");
                     break;
             }
         }
@@ -354,5 +388,67 @@ namespace STG
                 countContext++;
             }         
         }
+
+        private void EnemyCreateFactory(String way)
+        {
+            int i,j,k;
+
+            Random robj = new Random();
+            int[] yDeviation = { 0, -60, -120, -180, -240,-300 };
+            int[] VFormation = {-90,-60,-30,0,-30,-60,-90};
+            int FormationRange = 40;
+            int x;
+            switch(way)
+            {
+                case "Line-Left-Side" :
+                    x = robj.Next(25, 100);
+                    for (i = 0; i < 3; i++)
+                    {
+                        create_GunTurret(x, yDeviation[i]);
+                    }
+                    break;
+
+                case "Line-Right-Side":
+                    x = robj.Next(400, 475);
+                    for (i = 0; i < 3; i++)
+                    {
+                        create_GunTurret(x,yDeviation[i]);
+                    }
+                    break;
+
+                case "V-formation-Small":
+                    x = robj.Next(75, 425);
+                    for (i = 2; i < 5; i++)
+                    {
+                        create_Enemy(x,VFormation[i]);
+                        x += FormationRange;
+                    }
+                    break;
+
+                case "V-formation-Normal":
+                    x = robj.Next(75, 425);
+                    for (i = 1; i < 6; i++)
+                    {
+                        create_Bomber(x,VFormation[i]);
+                        x += FormationRange;
+                    }
+                    break;
+
+                case "V-formation-Large":
+                    x = robj.Next(75, 425);
+                    for (i = 0; i < 7; i++)
+                    {
+                        create_Bomber(x,VFormation[i]);
+                        x += FormationRange;
+                    }
+                    break;
+                
+                case "Simple":
+                    x = robj.Next(25, 475);
+                    create_CircleShootEnemy(x,0);
+                    break;
+            }
+        }
+
     }
 }

@@ -28,11 +28,12 @@ public class Enemy : GameObject
         : base(x, y)
     {
         lx = x;
-        ly = 0;
+        ly = y;
         vx = 0;
         vy = 1;
         setClock();
         loadImage();
+        imgAutoSize();
         Shootmode = "Line";
         health = 10;
     }
@@ -42,8 +43,8 @@ public class Enemy : GameObject
         //f = frame = timer interval of FixUpdate
         clock = 0;
         clockLimit = 10;//每隔 20f 發射一顆子彈
-        bulletNum = 5;
-        bulletEachTime = 5;//每次射擊都會有 5 發子彈
+        bulletNum = 3;
+        bulletEachTime = 3;//每次射擊都會有 3 發子彈
         bulletRestoreClock = 0;
         bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
         move = 0;

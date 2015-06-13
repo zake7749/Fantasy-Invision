@@ -19,15 +19,28 @@ public class GunTurret : Enemy
         : base(x, y)
     {
         lx = x;
-        ly = 0;
+        ly = y;
         vx = 0;
-        vy = 1;
+        vy = 3;
         setClock();
         loadImage();
+        imgAutoSize();
         Shootmode = "Ray";
         health = 10;
     }
 
+    protected void setClock()
+    {
+        //f = frame = timer interval of FixUpdate
+        clock = 0;
+        clockLimit = 15;//每隔 30f 發射一顆子彈
+        bulletNum = 2;
+        bulletEachTime = 2;//每次射擊都會有 2 發子彈
+        bulletRestoreClock = 0;
+        bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+        move = 0;
+        moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
+    }
 
     public override Vector2D getVelocity(double px, double py)
     {

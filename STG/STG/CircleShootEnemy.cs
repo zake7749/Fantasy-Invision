@@ -6,11 +6,12 @@ public class CircleShootEnemy : Enemy
         : base(x, y)
     {
         lx = x;
-        ly = 0;
+        ly = y;
         vx = 0;
         vy = 1;
         newsetClock();
         loadImage();
+        imgAutoSize();
         Shootmode = "Circle";
         health = 10;
     }

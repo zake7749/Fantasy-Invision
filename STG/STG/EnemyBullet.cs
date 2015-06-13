@@ -49,6 +49,20 @@ public class EnemyBullet : GameObject
         img.BackColor = Color.Transparent;
     }
 
+    public void CosMove()
+    {
+        ly += vy;
+        lx += 10 * Math.Cos(angle+=0.5);
+        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+        img.BackColor = Color.Transparent;
+    }
+
+    public void useGreenRay()
+    {
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Green_Ray.png");
+        img.BackColor = Color.Transparent;
+    }
+
     public void setXY(double ox, double oy)
     {
         middleX = (int)ox + 20;

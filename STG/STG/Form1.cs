@@ -97,16 +97,7 @@ namespace STG
             //insert any change by time on enemyBullet
             foreach (EnemyBullet eb in enemyBullet)
             {
-                if (eb.getMoveMode() == "Circle")
-                    eb.circleMove();
-                if (eb.getMoveMode() == "Cos")
-                    eb.CosMove();
-                if (eb.getMoveMode() == "Sin")
-                    eb.SinMove();
-                else
-                {
-                    eb.Move();
-                }
+                eb.Move();
             }
         }
 

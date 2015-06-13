@@ -40,29 +40,37 @@ public class EnemyBullet : GameObject
         angle = 0;
     }
 
-    public void circleMove()
+    public override void Move()
     {
-        middleY++;
-        lx = Convert.ToInt32(middleX + radius * Math.Cos(angle += 0.05));
-        ly = Convert.ToInt32(middleY + radius * Math.Sin(angle += 0.05));
-        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.BackColor = Color.Transparent;
-    }
-
-    public void CosMove()
-    {
-        ly += vy;
-        lx += 10 * Math.Cos(angle+=0.5);
-        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.BackColor = Color.Transparent;
-    }
-
-    public void SinMove()
-    {
-        ly += vy;
-        lx -= 10 * Math.Sin(angle+=0.5);
-        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.BackColor = Color.Transparent;
+        if(MoveMode=="Cos")
+        {
+            ly += vy;
+            lx += 10 * Math.Cos(angle += 0.5);
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
+        }
+        else if(MoveMode=="Sin")
+        {
+            ly += vy;
+            lx -= 10 * Math.Sin(angle += 0.5);
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
+        }
+        else if(MoveMode=="Circle")
+        {
+            middleY++;
+            lx = Convert.ToInt32(middleX + radius * Math.Cos(angle += 0.05));
+            ly = Convert.ToInt32(middleY + radius * Math.Sin(angle += 0.05));
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
+        }
+        else
+        {
+            lx += vx;
+            ly += vy;
+            img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            img.BackColor = Color.Transparent;
+        }
     }
 
     public void useGreenRay()

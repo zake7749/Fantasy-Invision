@@ -16,11 +16,18 @@ namespace STG
 {
     class Fighter : Enemy
     {
-        bool disposed = false;
-        Boolean flip;
+        Boolean disposed = false;//for destructor.
+
+        private Boolean flip;//used in function FixY();
+        private Boolean StallLock;//used in function Stall();
+        private Boolean RestoreLock;//used in function RestoreVelocity();
+        private double RestoreVx;//used in function RestoreVelocity();
+        private double RestoreVy;//used in function RestoreVelocity();
 
         public Fighter(int x,int y):base(x,y)
         {
+            RestoreLock = false;
+            StallLock = true;
             flip = true;
             lx = x;
             ly = y;
@@ -85,6 +92,48 @@ namespace STG
                 vx = 1;
         }
 
+        public override Boolean canShoot()
+        {
+            adjustTimeInterval();
+            clock++;
+            if (clock > clockLimit && bulletNum > 0)
+            {
+                Stall();
+                clock = 0;
+                bulletNum--;
+                if (bulletNum == 0)
+                {
+                    RestoreVelocity();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        private void Stall()
+        {
+            if (StallLock)
+            {
+                RestoreLock = true;
+                StallLock = false;
+                RestoreVx = vx;
+                RestoreVy = vy;
+                vx = 0;
+                vy = 0;
+            }
+        }
+
+        private void RestoreVelocity()
+        {
+            if(RestoreLock)
+            {
+                StallLock = true;
+                RestoreLock = false;
+                vx = RestoreVx;
+                vy = RestoreVy;
+            }
+        }
+
        //Dispose method
        protected override void Dispose(bool disposing)
        {
@@ -100,6 +149,7 @@ namespace STG
           //
           disposed = true;
        }
+
 
        ~Fighter()
        {

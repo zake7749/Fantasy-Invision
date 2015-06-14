@@ -62,7 +62,7 @@ public class Enemy : GameObject
         img.BackColor = Color.Transparent;
     }
 
-    public Boolean canShoot()
+    public virtual Boolean canShoot()
     {
         adjustTimeInterval();
         clock++;
@@ -74,7 +74,8 @@ public class Enemy : GameObject
         }
         return false;
     }
-    protected void adjustTimeInterval()
+
+    protected virtual void adjustTimeInterval()
     {
         bulletRestoreClock++;
         if (bulletRestoreClock > bulletRestoreLimit)
@@ -93,6 +94,11 @@ public class Enemy : GameObject
     {
         Vector2D bulletVelocity = new Vector2D(px, py);
         return bulletVelocity;
+    }
+
+    public virtual void Stall()
+    {
+
     }
 
     //Dispose method

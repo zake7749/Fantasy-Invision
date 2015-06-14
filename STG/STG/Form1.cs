@@ -28,6 +28,11 @@ namespace STG
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
+        
+        //background code
+        public PictureBox background1;
+        public PictureBox background2;
+        public PictureBox background3;
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
@@ -47,7 +52,35 @@ namespace STG
             labelContext.Text = "";
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
-            //SetStory();        
+            //SetStory();    
+            
+            //background code
+            background1 = new System.Windows.Forms.PictureBox();
+            background1.Location = new Point(0, 290);
+            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
+            this.panel1.Controls.Add(background1);
+            background1.Width = background1.Image.Width;
+            background1.Height = background1.Image.Height;
+
+            background2 = new System.Windows.Forms.PictureBox();
+            background2.Location = new Point(0, -58);
+            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
+            this.panel1.Controls.Add(background2);
+            background2.Width = background1.Image.Width;
+            background2.Height = background1.Image.Height;
+
+            background3 = new System.Windows.Forms.PictureBox();
+            background2.Location = new Point(0, -406);
+            background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
+            this.panel1.Controls.Add(background3);
+            background3.Width = background1.Image.Width;
+            background3.Height = background1.Image.Height;
+
+            b1y = 290;
+            b2y = -58;
+            b3y = -406;
+
+            //background code
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,6 +96,21 @@ namespace STG
             labelContext.Text = context[countContext];
             countContext++;
         }
+        
+         //background code
+        private void updateBackground()
+        {
+            b1y++;
+            b2y++;
+            b3y++;
+            if (b1y >= 638) b1y = -406;
+            if (b2y >= 638) b2y = -406;
+            if (b3y >= 638) b3y = -406;
+            background1.Location = new Point(0, b1y);
+            background2.Location = new Point(0, b2y);
+            background3.Location = new Point(0, b3y);
+        }
+        //background code
 
         //Move Object
         private void updatePlayer()
@@ -193,6 +241,9 @@ namespace STG
             updateEnemy();
             updatePlayerBullet();
             updateEnemyBullet();
+            
+            //background code
+            updateBackground();
 
             bulletBounderCheck();
             Collision();

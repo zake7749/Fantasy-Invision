@@ -26,6 +26,8 @@ namespace STG
         //SecondaryBuffer buf;
         string[] context = new string[20];
         int countContext = 0;
+        private Double LockLx;//Used for Split-shootmode.
+        private Double LockLy;//Used for Split-shootmode.
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
@@ -107,13 +109,7 @@ namespace STG
             //foreach迴圈無法使用List.Remove()，所以改用for迴圈
             for (var i = 0; i < enemies.Count;i++ )
             {
-                if (enemies[i].ly < 0)
-                {
-                    enemies[i].img.Dispose();
-                    enemies[i].clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
-                    enemies[i].Dispose();
-                    enemies.Remove(enemies[i]);
-                }
+               
                 if (enemies[i].ly > this.Height)
                 {
                     enemies[i].img.Dispose();
@@ -185,7 +181,6 @@ namespace STG
             bulletBounderCheck();
         }
 
-
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
@@ -226,14 +221,7 @@ namespace STG
 
         private void DebugMessage()
         {
-            if (test != null)
-            {
-
-                label1.Text = test.lx.ToString();
-                label2.Text = test.ly.ToString();
-                label4.Text = test.vx.ToString();
-                label5.Text = test.vy.ToString();
-            }
+            label1.Text = enemies.Count.ToString();
         }
 
         //Set story
@@ -328,14 +316,22 @@ namespace STG
                         enemyBullet.Add(ebCosine);
                         this.panel1.Controls.Add(ebCosine.img);
                         break;
+                    case "Split-3":
+                        createBulletCurtain(e, 5);
+                        break;
                     case "Split-5":
                         createBulletCurtain(e, 5);
+                        break;
+                    case "Berserk":
+                        EnemyBullet ebBerserk = new EnemyBullet(xy.X, xy.Y);
+                        Vector2D bulletBV = e.getVelocity(player.lx, player.ly);
+                        ebBerserk.SetV(bulletBV.x, bulletBV.y);
+                        enemyBullet.Add(ebBerserk);
+                        this.panel1.Controls.Add(ebBerserk.img);
                         break;
                 }
             }
         }
-
-        EnemyBullet test;
         private void createBulletCurtain(Enemy e,int scale)
         {
             Point xy = e.getShootPlace();
@@ -358,22 +354,15 @@ namespace STG
                 eb.SetV(vX, vY);
                 start += interval;
                 enemyBullet.Add(eb);
-                if (i == 2)
-                {
-                    label6.Text = start.ToString();
-                    test = eb;
-                }
 
                 this.panel1.Controls.Add(eb.img);
             }
 
         }
-
         private double Normalizer(double x,double y)
         {
             return Math.Sqrt(Math.Pow(x,2) + Math.Pow(y,2));
         }
-
 
         //Create enemy object
         private void create_Enemy()
@@ -384,11 +373,12 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-        private void create_Enemy(int x,int y)
+        private Enemy create_Enemy(int x, int y)
         {
             Enemy e = new Enemy(x, y);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
         }
         private void create_GunTurret()
         {
@@ -398,11 +388,14 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-        private void create_GunTurret(int x,int y)
+        private GunTurret create_GunTurret(int x, int y)
         {
             GunTurret e = new GunTurret(x, y);
+            Random robj = new Random();
+            e.SetV(0, robj.NextDouble() * 2);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
         }
         private void create_CircleShootEnemy()
         {
@@ -412,31 +405,44 @@ namespace STG
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
         }
-        private void create_CircleShootEnemy(int x,int y)
+        private CircleShootEnemy create_CircleShootEnemy(int x, int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
         }
-        private void create_Bomber(int x, int y)
+        private Bomber create_Bomber(int x, int y,Boolean ShiftMode)
         {
             Bomber e = new Bomber(x, y);
+            if (ShiftMode)
+                e.OpenShiftMode();
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
         }
-        private void create_Fighter(int x,int y)
+        private Fighter create_Fighter(int x, int y)
         {
             Fighter e = new Fighter(x, y);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
         }
-        private void create_CosWayEnemy()
+        private CosWayEnemy create_CosWayEnemy()
         {
             Random robj = new Random();
             int x = robj.Next(20, 450);
             CosWayEnemy e = new CosWayEnemy(x, 0);
             this.panel1.Controls.Add(e.img);
             enemies.Add(e);
+            return e;
+        }
+        private Berserker create_Berserker(int x, int y)
+        {
+            Berserker e = new Berserker(x, y);
+            this.panel1.Controls.Add(e.img);
+            enemies.Add(e);
+            return e;
         }
 
         //Player key detect
@@ -487,6 +493,12 @@ namespace STG
                 case Keys.S:
                     create_Fighter(10,10);
                     break;
+                case Keys.D:
+                    create_Berserker(10, 10);
+                    break;
+                case Keys.F:
+                    EnemyCreateFactory("Bomber-Collision");
+                    break;
             }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -531,7 +543,7 @@ namespace STG
 
             Random robj = new Random();
             int[] yDeviation = { 0, -60, -120, -180, -240,-300 };
-            int[] VFormation = {-90,-60,-30,0,-30,-60,-90};
+            int[] VFormation = {-120,-90,-60,-30,0,-30,-60,-90,-120};
             int FormationRange = 40;
             int x;
             switch(way)
@@ -554,31 +566,41 @@ namespace STG
 
                 case "V-formation-Small":
                     x = robj.Next(75, 425);
-                    for (i = 2; i < 5; i++)
+                    for (i = 3; i < 6; i++)
                     {
-                        create_Enemy(x,VFormation[i]);
+                        Enemy e;
+                        e = create_Enemy(x,VFormation[i]);
+                        e.Shootmode = "Split-3";
                         x += FormationRange;
                     }
                     break;
 
                 case "V-formation-Normal":
-                    x = robj.Next(75, 425);
-                    for (i = 1; i < 6; i++)
+                    x = robj.Next(75, 125);
+                    for (i = 1; i < 8; i++)
                     {
-                        create_Bomber(x,VFormation[i]);
+                        create_Bomber(x,VFormation[i],false);
                         x += FormationRange;
                     }
                     break;
 
                 case "V-formation-Large":
-                    x = robj.Next(75, 425);
-                    for (i = 0; i < 7; i++)
+                    x = robj.Next(75, 100);
+                    for (i = 0; i < 9; i++)
                     {
-                        create_Bomber(x,VFormation[i]);
+                        create_Bomber(x,VFormation[i],false);
                         x += FormationRange;
                     }
                     break;
-                
+
+                case "Bomber-Collision":
+                    int divX = 50;
+                    int divY = -30;
+                    for (i = 1; i < 12; i++)
+                    {
+                        create_Bomber(i * divX,i * divY,true);
+                    }
+                    break;
                 case "Simple":
                     x = robj.Next(25, 475);
                     create_CircleShootEnemy(x,0);

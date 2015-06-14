@@ -157,7 +157,7 @@ namespace STG
                 }*/
             for (var i = 0; i < enemyBullet.Count; i++)
             {
-                if (enemyBullet[i].ly < 0 || enemyBullet[i].ly > this.Height)
+                if (enemyBullet[i].ly < -150 || enemyBullet[i].ly > this.Height+150 || enemyBullet[i].lx < -100 || enemyBullet[i].lx > 600)
                 {
                     enemyBullet[i].img.Dispose();
                     enemyBullet[i].Dispose();
@@ -277,6 +277,7 @@ namespace STG
                 //buf.Play(0, BufferPlayFlags.Default);
                 
                 this.panel1.Controls.Add(b.img);
+
                 playerBullet.Add(b);
             }
         }
@@ -292,28 +293,41 @@ namespace STG
                 {
                     case "Line":
                         EnemyBullet ebLine = new EnemyBullet(xy.X, xy.Y);
-                        enemyBullet.Add(ebLine);
+                        if(enemyBullet.LastIndexOf(null) != -1)
+                            enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebLine);
+                        else
+                            enemyBullet.Add(ebLine);
                         this.panel1.Controls.Add(ebLine.img);
                         break;
                     case "Ray":
                         EnemyBullet ebRay = new EnemyBullet(xy.X, xy.Y);
                         Vector2D bulletV = e.getVelocity(player.lx, player.ly);
                         ebRay.SetV(bulletV.x,bulletV.y);
-                        enemyBullet.Add(ebRay);
+                        if (enemyBullet.LastIndexOf(null) != -1)
+                            enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRay);
+                        else
+                            enemyBullet.Add(ebRay);
                         this.panel1.Controls.Add(ebRay.img);
                         break;
                     case "Circle":
                         EnemyBullet ebCircle = new EnemyBullet(xy.X, xy.Y);
                         ebCircle.setMoveMode("Circle");
                         ebCircle.setXY(e.lx, e.ly);
-                        enemyBullet.Add(ebCircle);
+                        if (enemyBullet.LastIndexOf(null) != -1)
+                        
+                            enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCircle);
+                        else
+                            enemyBullet.Add(ebCircle);
                         this.panel1.Controls.Add(ebCircle.img);
                         break;
                     case "Cos":
                         EnemyBullet ebCosine = new EnemyBullet(xy.X,xy.Y);
                         ebCosine.setMoveMode("Cos");
                         ebCosine.useGreenRay();
-                        enemyBullet.Add(ebCosine);
+                        if (enemyBullet.LastIndexOf(null) != -1)
+                            enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCosine);
+                        else 
+                            enemyBullet.Add(ebCosine);
                         this.panel1.Controls.Add(ebCosine.img);
                         break;
                     case "Split-3":
@@ -326,7 +340,10 @@ namespace STG
                         EnemyBullet ebBerserk = new EnemyBullet(xy.X, xy.Y);
                         Vector2D bulletBV = e.getVelocity(player.lx, player.ly);
                         ebBerserk.SetV(bulletBV.x, bulletBV.y);
-                        enemyBullet.Add(ebBerserk);
+                        if (enemyBullet.LastIndexOf(null) != -1)
+                            enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebBerserk);
+                        else
+                            enemyBullet.Add(ebBerserk);
                         this.panel1.Controls.Add(ebBerserk.img);
                         break;
                 }
@@ -353,7 +370,10 @@ namespace STG
                 vY *= velocity;
                 eb.SetV(vX, vY);
                 start += interval;
-                enemyBullet.Add(eb);
+                if (enemyBullet.LastIndexOf(null) != -1)
+                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), eb);
+                else 
+                    enemyBullet.Add(eb);
 
                 this.panel1.Controls.Add(eb.img);
             }
@@ -371,13 +391,19 @@ namespace STG
             int x = robj.Next(20, 450);
             Enemy e = new Enemy(x, 0);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
         }
         private Enemy create_Enemy(int x, int y)
         {
             Enemy e = new Enemy(x, y);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private void create_GunTurret()
@@ -386,7 +412,10 @@ namespace STG
             int x = robj.Next(20, 450);
             GunTurret e = new GunTurret(x, 0);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
         }
         private GunTurret create_GunTurret(int x, int y)
         {
@@ -394,7 +423,10 @@ namespace STG
             Random robj = new Random();
             e.SetV(0, robj.NextDouble() * 2);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private void create_CircleShootEnemy()
@@ -403,13 +435,19 @@ namespace STG
             int x = robj.Next(20, 450);
             CircleShootEnemy e = new CircleShootEnemy(x, 0);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
         }
         private CircleShootEnemy create_CircleShootEnemy(int x, int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private Bomber create_Bomber(int x, int y,Boolean ShiftMode)
@@ -418,14 +456,20 @@ namespace STG
             if (ShiftMode)
                 e.OpenShiftMode();
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private Fighter create_Fighter(int x, int y)
         {
             Fighter e = new Fighter(x, y);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private CosWayEnemy create_CosWayEnemy()
@@ -434,14 +478,20 @@ namespace STG
             int x = robj.Next(20, 450);
             CosWayEnemy e = new CosWayEnemy(x, 0);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
         private Berserker create_Berserker(int x, int y)
         {
             Berserker e = new Berserker(x, y);
             this.panel1.Controls.Add(e.img);
-            enemies.Add(e);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
             return e;
         }
 

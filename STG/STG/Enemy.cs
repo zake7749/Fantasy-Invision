@@ -46,8 +46,8 @@ public class Enemy : GameObject
         //f = frame = timer interval of FixUpdate
         clock = 0;
         clockLimit = 10;//每隔 20f 發射一顆子彈
-        bulletNum = 3;
-        bulletEachTime = 3;//每次射擊都會有 3 發子彈
+        bulletNum = 1;
+        bulletEachTime = 1;//每次射擊都會有 1 發子彈
         bulletRestoreClock = 0;
         bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
         move = 0;

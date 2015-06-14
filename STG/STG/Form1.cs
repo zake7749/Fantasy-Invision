@@ -33,6 +33,9 @@ namespace STG
         public PictureBox background1;
         public PictureBox background2;
         public PictureBox background3;
+        int b1y;
+        int b2y;
+        int b3y;
 
         SoundPlayer SFXBGM;
         System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");

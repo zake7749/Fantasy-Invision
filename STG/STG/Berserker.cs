@@ -13,41 +13,38 @@ using Microsoft.DirectX;
 using Microsoft.DirectX.DirectSound;
 namespace STG
 {
-    class Fighter : Enemy
+    class Berserker : Enemy
     {
-        Boolean disposed = false;//for destructor.
-
+        bool disposed = false;
         private Boolean flip;//used in function FixY();
-        private Boolean StallLock;//used in function Stall();
-        private Boolean RestoreLock;//used in function RestoreVelocity();
-        private double RestoreVx;//used in function RestoreVelocity();
-        private double RestoreVy;//used in function RestoreVelocity();
+        private Double LockLx;
+        private Double LockLy;
+        private Boolean LockPlace;
 
-        public Fighter(int x,int y):base(x,y)
+        public Berserker(int x,int y) : base(x,y)
         {
-            RestoreLock = false;
-            StallLock = true;
             flip = true;
             lx = x;
             ly = y;
             vx = 0;
-            vy = 1.8;
+            vy = 2;
             setClock();
             loadImage();
             imgAutoSize();
-            Shootmode = "Split-5";
-            health = 10;
+            Shootmode = "Berserk";
+            health = 5;
         }
 
         protected override void setClock()
         {
             //f = frame = timer interval of FixUpdate
+            LockPlace = true;
             clock = 0;
-            clockLimit = 7;//每隔 14f 發射一顆子彈
-            bulletNum = 3;
-            bulletEachTime = 3;//每次射擊都會有 3 發子彈
+            clockLimit = 8;//每隔 20f 發射一顆子彈
+            bulletNum = 20;
+            bulletEachTime = 20;//每次射擊都會有 20 發子彈
             bulletRestoreClock = 0;
-            bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+            bulletRestoreLimit = 500;//每隔 bulletRestoreLimit f 進行一次射擊
             move = 0;
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         }
@@ -64,7 +61,7 @@ namespace STG
 
         private void FixY()
         {
-            if(flip)
+            if (flip)
             {
                 vy += 0.01;
                 if (vy > 1)
@@ -91,48 +88,6 @@ namespace STG
                 vx = 1;
         }
 
-        public override Boolean canShoot()
-        {
-            adjustTimeInterval();
-            clock++;
-            if (clock > clockLimit && bulletNum > 0)
-            {
-                Stall();
-                clock = 0;
-                bulletNum--;
-                if (bulletNum == 0)
-                {
-                    RestoreVelocity();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        private void Stall()
-        {
-            if (StallLock)
-            {
-                RestoreLock = true;
-                StallLock = false;
-                RestoreVx = vx;
-                RestoreVy = vy;
-                vx = 0;
-                vy = 0;
-            }
-        }
-
-        private void RestoreVelocity()
-        {
-            if(RestoreLock)
-            {
-                StallLock = true;
-                RestoreLock = false;
-                vx = RestoreVx;
-                vy = RestoreVy;
-            }
-        }
-
        //Dispose method
        protected override void Dispose(bool disposing)
        {
@@ -149,8 +104,48 @@ namespace STG
           disposed = true;
        }
 
+       public override Vector2D getVelocity(double px, double py)
+       {
+           Random robj = new Random();
+           if(bulletNum>=0)
+           {
+               LockLocation(px, py);
+           }
+           else
+           {
+               LockPlace = true;
+           }
+           double bux = (LockLx - lx);
+           double buy = (LockLy - ly);
 
-       ~Fighter()
+           //speed normaliziation.
+           double normal = Math.Sqrt(Math.Pow(bux, 2) + Math.Pow(buy, 2));
+           bux /= normal;
+           buy /= normal;
+
+           //set Velocity as 4 pixel/fs;
+           bux *= 4;
+           buy *= 4;
+
+           //Randomize.
+           bux += 1.5*(robj.NextDouble());
+           buy += 1.5*(robj.NextDouble());
+
+           Vector2D bulletVelocity = new Vector2D(bux, buy);
+           return bulletVelocity;
+       }
+
+       private void LockLocation(Double px,Double py) 
+       {
+           if(LockPlace)
+           {
+               LockPlace = false;
+               LockLx = px;
+               LockLy = py;
+           }
+       }
+
+       ~Berserker()
        {
           Dispose(false);
        }

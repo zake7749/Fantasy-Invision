@@ -31,7 +31,7 @@ public class GunTurret : Enemy
         health = 10;
     }
 
-    protected void setClock()
+    protected override void setClock()
     {
         //f = frame = timer interval of FixUpdate
         clock = 0;
@@ -48,8 +48,10 @@ public class GunTurret : Enemy
     {
         lx += vx;
         ly += vy;
-        if(vy>0.3)
+        if (vy > 0.15)
             vy -= 0.005;
+        else
+            vy = 0;
         img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.BackColor = Color.Transparent;
     }

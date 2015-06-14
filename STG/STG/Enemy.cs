@@ -41,7 +41,7 @@ public class Enemy : GameObject
         health = 10;
     }
 
-    protected void setClock()
+    protected virtual void setClock()
     {
         //f = frame = timer interval of FixUpdate
         clock = 0;

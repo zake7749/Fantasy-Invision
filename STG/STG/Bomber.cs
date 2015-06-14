@@ -15,7 +15,7 @@ namespace STG
             lx = x;
             ly = y;
             vx = 0;
-            vy = 4;
+            vy = 5;
             setClock();
             loadImage();
             imgAutoSize();

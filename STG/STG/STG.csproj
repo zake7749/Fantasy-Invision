@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Berserker.cs" />
     <Compile Include="Bomber.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="CircleShootEnemy.cs" />

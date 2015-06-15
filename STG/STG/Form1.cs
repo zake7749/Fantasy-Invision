@@ -92,13 +92,17 @@ namespace STG
             //background code
         }
 
-        private void TEST_Paint()
+        private void RePaint()
         {
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
             Graphics g = Graphics.FromImage(bmpPic1); 
             foreach(EnemyBullet eb in enemyBullet)
             {
                 g.DrawImage(eb.img.Image, new Point((int)eb.lx, (int)eb.ly)); 
+            }
+            foreach(Bullet b in playerBullet)
+            {
+                g.DrawImage(b.img.Image, new Point((int)b.lx, (int)b.ly)); 
             }
             foreach (Enemy e in enemies)
             {
@@ -262,7 +266,7 @@ namespace STG
             
             //degree++;
             //angle = Math.PI * degree / 180.0;
-            TEST_Paint();
+            RePaint();
             //X += Update.Interval;
             updatePlayer();
             updateEnemy();

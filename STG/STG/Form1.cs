@@ -28,7 +28,7 @@ namespace STG
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
-
+   
         //Painter
         Graphics gp;
         Bitmap bp;
@@ -42,7 +42,7 @@ namespace STG
         int b3y;
 
         SoundPlayer SFXBGM;
-        System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
+        //System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
 
 
         public Form1()
@@ -57,6 +57,8 @@ namespace STG
 
             labelTime.Text = "";
             labelContext.Text = "";
+
+            PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
             //SetStory();    
@@ -121,7 +123,9 @@ namespace STG
             //playing music in loop
             //SFXBGM = new SoundPlayer("TOS8.wav");
             //SFXBGM.PlayLooping();
-
+            BGMPlayer.URL = @"TOS8.wav";
+            BGMPlayer.settings.setMode("loop", true);
+            BGMPlayer.settings.autoStart = true;
             //story mode
             labelContext.Text = context[countContext];
             countContext++;
@@ -144,7 +148,7 @@ namespace STG
         }*/
         //background code
 
-        //Move Object
+        //Update Object
         private void updatePlayer()
         {
             //insert any change by time on player
@@ -355,7 +359,8 @@ namespace STG
             {
                 Point xy = player.getShootPlace();
                 Bullet b = new Bullet(xy.X, xy.Y);
-                SFXplayerShot.Play();
+                PlayBulletPlayer.Ctlcontrols.play();
+                //SFXplayerShot.Play();
                 //buf.Play(1, BufferPlayFlags.Default);
                 
                 //this.panel1.Controls.Add(b.img);
@@ -733,6 +738,7 @@ namespace STG
                         create_Bomber(i * divX,i * divY,true);
                     }
                     break;
+
                 case "Simple":
                     x = robj.Next(25, 475);
                     create_CircleShootEnemy(x,0);

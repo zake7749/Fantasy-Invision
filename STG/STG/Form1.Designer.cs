@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -41,10 +43,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // Update
@@ -83,6 +88,14 @@
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick_1);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(615, 603);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // labelContext
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
@@ -98,6 +111,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.Controls.Add(this.BGMPlayer);
+            this.panel2.Controls.Add(this.PlayBulletPlayer);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
@@ -167,13 +182,25 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Time:";
             // 
-            // pictureBox1
+            // PlayBulletPlayer
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(615, 603);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.PlayBulletPlayer.Enabled = true;
+            this.PlayBulletPlayer.Location = new System.Drawing.Point(27, 244);
+            this.PlayBulletPlayer.Name = "PlayBulletPlayer";
+            this.PlayBulletPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("PlayBulletPlayer.OcxState")));
+            this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
+            this.PlayBulletPlayer.TabIndex = 8;
+            this.PlayBulletPlayer.Visible = false;
+            // 
+            // BGMPlayer
+            // 
+            this.BGMPlayer.Enabled = true;
+            this.BGMPlayer.Location = new System.Drawing.Point(27, 204);
+            this.BGMPlayer.Name = "BGMPlayer";
+            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
+            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
+            this.BGMPlayer.TabIndex = 9;
+            this.BGMPlayer.Visible = false;
             // 
             // Form1
             // 
@@ -187,9 +214,11 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -209,6 +238,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private AxWMPLib.AxWindowsMediaPlayer PlayBulletPlayer;
+        private AxWMPLib.AxWindowsMediaPlayer BGMPlayer;
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

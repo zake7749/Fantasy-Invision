@@ -22,12 +22,16 @@ namespace STG
         List<Bullet> playerBullet;
         Player player;
         Stopwatch gameTime = new Stopwatch();
-        Device dv = new Device();
-        SecondaryBuffer buf;
+        //Device dv = new Device();
+        //SecondaryBuffer buf;
         string[] context = new string[20];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
+
+        //Painter
+        Graphics gp;
+        Bitmap bp;
         
         //background code
         public PictureBox background1;
@@ -58,6 +62,7 @@ namespace STG
             //SetStory();    
             
             //background code
+            /*
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
             background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
@@ -82,9 +87,27 @@ namespace STG
             b1y = 290;
             b2y = -58;
             b3y = -406;
+            */
 
             //background code
         }
+
+        private void TEST_Paint()
+        {
+            Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
+            Graphics g = Graphics.FromImage(bmpPic1); 
+            foreach(EnemyBullet eb in enemyBullet)
+            {
+                g.DrawImage(eb.img.Image, new Point((int)eb.lx, (int)eb.ly)); 
+            }
+            foreach (Enemy e in enemies)
+            {
+                g.DrawImage(e.img.Image, new Point((int)e.lx, (int)e.ly));
+            }
+            g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
+            pictureBox1.Image = (Image)bmpPic1; 
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -100,7 +123,9 @@ namespace STG
             countContext++;
         }
         
-         //background code
+        
+        //background code
+        /*
         private void updateBackground()
         {
             b1y++;
@@ -112,7 +137,7 @@ namespace STG
             background1.Location = new Point(0, b1y);
             background2.Location = new Point(0, b2y);
             background3.Location = new Point(0, b3y);
-        }
+        }*/
         //background code
 
         //Move Object
@@ -135,7 +160,6 @@ namespace STG
                 }
                 enemy_CreateBullet(e);
             }
-            
         }
         private void updatePlayerBullet()
         {
@@ -238,7 +262,7 @@ namespace STG
             
             //degree++;
             //angle = Math.PI * degree / 180.0;
-
+            TEST_Paint();
             //X += Update.Interval;
             updatePlayer();
             updateEnemy();
@@ -246,7 +270,7 @@ namespace STG
             updateEnemyBullet();
             
             //background code
-            updateBackground();
+            //updateBackground();
 
             bulletBounderCheck();
             Collision();
@@ -330,7 +354,7 @@ namespace STG
                 SFXplayerShot.Play();
                 //buf.Play(1, BufferPlayFlags.Default);
                 
-                this.panel1.Controls.Add(b.img);
+                //this.panel1.Controls.Add(b.img);
 
                 playerBullet.Add(b);
             }
@@ -351,7 +375,7 @@ namespace STG
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebLine);
                         else
                             enemyBullet.Add(ebLine);
-                        this.panel1.Controls.Add(ebLine.img);
+                        //this.panel1.Controls.Add(ebLine.img);
                         break;
                     case "Ray":
                         EnemyBullet ebRay = new EnemyBullet(xy.X, xy.Y);
@@ -361,7 +385,7 @@ namespace STG
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRay);
                         else
                             enemyBullet.Add(ebRay);
-                        this.panel1.Controls.Add(ebRay.img);
+                        //this.panel1.Controls.Add(ebRay.img);
                         break;
                     case "Circle":
                         EnemyBullet ebCircle = new EnemyBullet(xy.X, xy.Y);
@@ -372,7 +396,7 @@ namespace STG
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCircle);
                         else
                             enemyBullet.Add(ebCircle);
-                        this.panel1.Controls.Add(ebCircle.img);
+                        //this.panel1.Controls.Add(ebCircle.img);
                         break;
                     case "Cos":
                         EnemyBullet ebCosine = new EnemyBullet(xy.X,xy.Y);
@@ -382,7 +406,7 @@ namespace STG
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCosine);
                         else 
                             enemyBullet.Add(ebCosine);
-                        this.panel1.Controls.Add(ebCosine.img);
+                        //this.panel1.Controls.Add(ebCosine.img);
                         break;
                     case "Split-3":
                         createBulletCurtain(e, 5);
@@ -398,7 +422,7 @@ namespace STG
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebBerserk);
                         else
                             enemyBullet.Add(ebBerserk);
-                        this.panel1.Controls.Add(ebBerserk.img);
+                        //this.panel1.Controls.Add(ebBerserk.img);
                         break;
                 }
             }
@@ -429,7 +453,7 @@ namespace STG
                 else 
                     enemyBullet.Add(eb);
 
-                this.panel1.Controls.Add(eb.img);
+                //this.panel1.Controls.Add(eb.img);
             }
 
         }
@@ -444,7 +468,7 @@ namespace STG
             Random robj = new Random();
             int x = robj.Next(20, 450);
             Enemy e = new Enemy(x, 0);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -453,7 +477,7 @@ namespace STG
         private Enemy create_Enemy(int x, int y)
         {
             Enemy e = new Enemy(x, y);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -465,7 +489,7 @@ namespace STG
             Random robj = new Random();
             int x = robj.Next(20, 450);
             GunTurret e = new GunTurret(x, 0);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -476,7 +500,7 @@ namespace STG
             GunTurret e = new GunTurret(x, y);
             Random robj = new Random();
             e.SetV(0, robj.NextDouble() * 2);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -488,7 +512,7 @@ namespace STG
             Random robj = new Random();
             int x = robj.Next(20, 450);
             CircleShootEnemy e = new CircleShootEnemy(x, 0);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -497,7 +521,7 @@ namespace STG
         private CircleShootEnemy create_CircleShootEnemy(int x, int y)
         {
             CircleShootEnemy e = new CircleShootEnemy(x, y);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -509,7 +533,7 @@ namespace STG
             Bomber e = new Bomber(x, y);
             if (ShiftMode)
                 e.OpenShiftMode();
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -519,7 +543,7 @@ namespace STG
         private Fighter create_Fighter(int x, int y)
         {
             Fighter e = new Fighter(x, y);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -531,7 +555,7 @@ namespace STG
             Random robj = new Random();
             int x = robj.Next(20, 450);
             CosWayEnemy e = new CosWayEnemy(x, 0);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else
@@ -541,7 +565,7 @@ namespace STG
         private Berserker create_Berserker(int x, int y)
         {
             Berserker e = new Berserker(x, y);
-            this.panel1.Controls.Add(e.img);
+            //this.panel1.Controls.Add(e.img);
             if (enemies.LastIndexOf(null) != -1)
                 enemies.Insert(enemies.LastIndexOf(null), e);
             else

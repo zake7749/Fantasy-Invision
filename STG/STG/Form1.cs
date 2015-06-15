@@ -22,8 +22,8 @@ namespace STG
         List<Bullet> playerBullet;
         Player player;
         Stopwatch gameTime = new Stopwatch();
-        //Device dv = new Device();
-        //SecondaryBuffer buf;
+        Device dv = new Device();
+        SecondaryBuffer buf;
         string[] context = new string[20];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
@@ -274,7 +274,7 @@ namespace STG
                 Point xy = player.getShootPlace();
                 Bullet b = new Bullet(xy.X, xy.Y);
                 SFXplayerShot.Play();
-                //buf.Play(0, BufferPlayFlags.Default);
+                //buf.Play(1, BufferPlayFlags.Default);
                 
                 this.panel1.Controls.Add(b.img);
                 playerBullet.Add(b);

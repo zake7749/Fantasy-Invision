@@ -84,10 +84,10 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 527);
             this.labelContext.Name = "labelContext";
-            this.labelContext.Size = new System.Drawing.Size(594, 103);
+            this.labelContext.Size = new System.Drawing.Size(597, 103);
             this.labelContext.TabIndex = 4;
             this.labelContext.Text = "label4";
             this.labelContext.Visible = false;
@@ -147,7 +147,7 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelTime.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelTime.Location = new System.Drawing.Point(68, 544);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(54, 20);
@@ -157,7 +157,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label3.Location = new System.Drawing.Point(3, 544);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 20);

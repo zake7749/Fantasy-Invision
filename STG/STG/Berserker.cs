@@ -11,6 +11,8 @@ using System.Media;
 using System.Diagnostics;
 using Microsoft.DirectX;
 using Microsoft.DirectX.DirectSound;
+
+
 namespace STG
 {
     class Berserker : Enemy

@@ -52,7 +52,7 @@ namespace STG
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
 
-            player = new Player(100, 100);
+            player = new Player(300, 500);
             this.panel1.Controls.Add(player.img);
             
             
@@ -786,13 +786,5 @@ namespace STG
                     break;
             }
         }
-
-        private void btnLeave_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        
-
     }
 }

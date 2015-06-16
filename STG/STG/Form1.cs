@@ -42,22 +42,26 @@ namespace STG
         int b3y;
 
         SoundPlayer SFXBGM;
-
+        bool IsNewGame = false;
 
         public Form1()
         {
+            InitializeComponent();
+
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
 
-            InitializeComponent();
             player = new Player(100, 100);
             this.panel1.Controls.Add(player.img);
-
+            
+            
             labelTime.Text = "";
             labelContext.Text = "";
 
             PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
+            //PlayBulletPlayer.Ctlcontrols.play();
+
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
             //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
             //SetStory();    
@@ -93,6 +97,21 @@ namespace STG
             //background code
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Update.Stop();
+            //gameTime.Reset();
+            //gameTime.Start();
+            //playing music in loop
+
+            //BGMPlayer.URL = @"TOS8.wav";
+            //BGMPlayer.settings.setMode("loop", true);
+            //BGMPlayer.settings.autoStart = true;
+            //story mode
+            labelContext.Text = context[countContext];
+            countContext++;
+        }
+
         private void RePaint()
         {
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
@@ -114,20 +133,7 @@ namespace STG
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //Update.Stop();
-            //gameTime.Reset();
-            //gameTime.Start();
-            //playing music in loop
-
-            //BGMPlayer.URL = @"TOS8.wav";
-            //BGMPlayer.settings.setMode("loop", true);
-            //BGMPlayer.settings.autoStart = true;
-            //story mode
-            labelContext.Text = context[countContext];
-            countContext++;
-        }
+        
         
         
         //background code
@@ -172,15 +178,17 @@ namespace STG
         private void updatePlayerBullet()
         {
             //insert any change by time on bullet
-            foreach (Bullet b in playerBullet)
+            for (var i = 0; i < playerBullet.Count ; i++ )
             {
-                if (b.Explode())
+                if (playerBullet[i].Explode())
                 {
-                    
+                    playerBullet[i].img.Dispose();
+                    playerBullet[i].Dispose();
+                    playerBullet.Remove(playerBullet[i]);
                 }
                 else
                 {
-                    b.Move();
+                    playerBullet[i].Move();
                 }
             }
         }
@@ -768,6 +776,8 @@ namespace STG
                     break;
             }
         }
+
+        
 
     }
 }

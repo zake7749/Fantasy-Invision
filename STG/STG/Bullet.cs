@@ -14,9 +14,14 @@ using Microsoft.DirectX.DirectSound;
 
 public class Bullet : GameObject
 {
+    private Boolean timetoExplode;
+    int ExplodeClock;
+    int ExplodeClockLimit;
     public Bullet(int x, int y)
         : base(x, y)
     {
+        int ExplodeClock = 0;
+        int ExplodeClockLimit = 10;
         lx = x;
         ly = y;
         //f = frame = timer interval of FixUpdate 
@@ -31,5 +36,30 @@ public class Bullet : GameObject
         img.BackColor = Color.Transparent;
         imgAutoSize();
         //img.BackColor = Color.Black;
+    }
+
+    public void setTimetoExplode(Boolean explode)
+    {
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\PlayerBulletExplode.png");
+        img.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+        Random robj = new Random();
+        timetoExplode = explode;
+        ly -= 5;
+        vx = 0;
+        vy = 0;
+    }
+
+    public Boolean Explode()
+    {
+        if (timetoExplode)
+        {
+            ExplodeClock++;
+            if (ExplodeClock > ExplodeClockLimit)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

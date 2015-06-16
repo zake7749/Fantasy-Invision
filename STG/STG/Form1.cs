@@ -174,7 +174,14 @@ namespace STG
             //insert any change by time on bullet
             foreach (Bullet b in playerBullet)
             {
-                b.Move();
+                if (b.Explode())
+                {
+                    
+                }
+                else
+                {
+                    b.Move();
+                }
             }
         }
         private void updateEnemyBullet()
@@ -333,12 +340,24 @@ namespace STG
         //Collision
         private void Collision()
         {
+
+            foreach(Bullet b in playerBullet)
+            {
+                foreach(Enemy en in enemies)
+                {
+                    if(Math.Abs(b.ly - en.ly)<en.img.Height&&Math.Abs(b.lx-en.lx)<en.img.Width)
+                    {
+                        en.health--;
+                        b.setTimetoExplode(true);
+                    }
+                }
+            }
+
             foreach (EnemyBullet eb in enemyBullet)
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
-                    return;
                 }
 
             }

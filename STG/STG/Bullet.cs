@@ -26,7 +26,8 @@ public class Bullet : GameObject
         vy = -5;
         img = new System.Windows.Forms.PictureBox();
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Bllet_black.png");
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\PlayerBulletMid.png");
+        img.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
         img.BackColor = Color.Transparent;
         imgAutoSize();
         //img.BackColor = Color.Black;

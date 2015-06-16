@@ -23,23 +23,23 @@ public class GunTurret : Enemy
         lx = x;
         ly = y;
         vx = 0;
-        vy = 2;
+        vy = 3;
         setClock();
         loadImage();
         imgAutoSize();
         Shootmode = "Ray";
-        health = 10;
+        health = 3;
     }
 
     protected override void setClock()
     {
         //f = frame = timer interval of FixUpdate
         clock = 0;
-        clockLimit = 15;//每隔 30f 發射一顆子彈
-        bulletNum = 5;
-        bulletEachTime = 5;//每次射擊都會有 2 發子彈
+        clockLimit = 30;//每隔 30f 發射一顆子彈
+        bulletNum = 2;
+        bulletEachTime = 2;//每次射擊都會有 2 發子彈
         bulletRestoreClock = 0;
-        bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+        bulletRestoreLimit = 200;//每隔 bulletRestoreLimit f 進行一次射擊
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
     }

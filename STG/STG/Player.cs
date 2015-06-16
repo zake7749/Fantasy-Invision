@@ -16,6 +16,10 @@ using Microsoft.DirectX.DirectSound;
 
 public class Player : GameObject
 {
+    private int SLR;//S for stand,L for Left,R for Right.
+    private int ImageClock, ImageClockLimit;
+    private Image[] S, L, R;
+    private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
     public Player(int x, int y)
         : base(x, y)
     {
@@ -24,7 +28,9 @@ public class Player : GameObject
         ly = y;
         //f = frame = timer interval of FixUpdate 
         clock = 0;
-        clockLimit = 10;//每隔 10f 有一發子彈
+        clockLimit = 7;//每隔 10f 有一發子彈
+        ImageClock = 0;
+        ImageClockLimit = 10;
         move = 0;
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         vx = 0;
@@ -33,11 +39,37 @@ public class Player : GameObject
         vy = 0;
         vyupLimit = 3;//y軸速度在 3~-3
         vydownLimit = -3;
+        setPlayerImage();
         img = new System.Windows.Forms.PictureBox();
         img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+        img.Image = S[1];
         img.BackColor = Color.Transparent;
         imgAutoSize();
+        ResetImageOrder();
+    }
+
+    private void setPlayerImage()
+    {
+        S = new Image[9];
+        L = new Image[3];
+        R = new Image[3];
+        String s;
+        int i;
+        for(i=1;i<9;i++)
+        {
+            s = "\\assest\\playerS"+i+".png";
+            S[i] = Image.FromFile(Application.StartupPath + s);
+        }
+        for(i=1;i<3;i++)
+        {
+            s = "\\assest\\playerL" + i + ".png";
+            L[i] = Image.FromFile(Application.StartupPath + s);
+        }
+        for (i=1;i<3;i++)
+        {
+            s = "\\assest\\playerR" + i + ".png";
+            R[i] = Image.FromFile(Application.StartupPath + s);
+        }
     }
 
     public void addV(int ax, int ay)
@@ -55,6 +87,52 @@ public class Player : GameObject
                 vy += ay;
             if (ay < 0 && vy > vydownLimit)
                 vy += ay;
+        }
+    }
+
+    public void setSLR(int mode)
+    {
+        SLR = mode;
+        ResetImageOrder();
+    }
+
+    private void ResetImageOrder()
+    {
+        ImageClock = ImageClockLimit;
+        So = 1;
+        Lo = 1;
+        Ro = 1;
+    }
+
+    public void ChangeImage()
+    {
+        ImageClock++;
+        if (ImageClock > ImageClockLimit)
+        {
+            ImageClock = 0;
+            switch (SLR)
+            {
+                case 0:
+
+                    if (So > 8)
+                        So = 1;
+                    img.Image = S[So];
+                    So++;
+                    break;
+                case 1:
+                    if (Lo > 2)
+                        Lo = 1;
+                    img.Image = L[Lo];
+                    Lo++;
+
+                    break;
+                case 2:
+                    if (Ro > 2)
+                        Ro = 1;
+                    img.Image = R[Ro];
+                    Ro++;
+                    break;
+            }
         }
     }
 

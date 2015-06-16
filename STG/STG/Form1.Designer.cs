@@ -37,19 +37,19 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // Update
@@ -90,6 +90,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox1.Location = new System.Drawing.Point(3, 27);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(615, 603);
@@ -125,6 +126,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(125, 603);
             this.panel2.TabIndex = 2;
+            // 
+            // BGMPlayer
+            // 
+            this.BGMPlayer.Enabled = true;
+            this.BGMPlayer.Location = new System.Drawing.Point(27, 204);
+            this.BGMPlayer.Name = "BGMPlayer";
+            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
+            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
+            this.BGMPlayer.TabIndex = 9;
+            this.BGMPlayer.Visible = false;
+            // 
+            // PlayBulletPlayer
+            // 
+            this.PlayBulletPlayer.Enabled = true;
+            this.PlayBulletPlayer.Location = new System.Drawing.Point(27, 244);
+            this.PlayBulletPlayer.Name = "PlayBulletPlayer";
+            this.PlayBulletPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("PlayBulletPlayer.OcxState")));
+            this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
+            this.PlayBulletPlayer.TabIndex = 8;
+            this.PlayBulletPlayer.Visible = false;
             // 
             // label7
             // 
@@ -182,26 +203,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Time:";
             // 
-            // PlayBulletPlayer
-            // 
-            this.PlayBulletPlayer.Enabled = true;
-            this.PlayBulletPlayer.Location = new System.Drawing.Point(27, 244);
-            this.PlayBulletPlayer.Name = "PlayBulletPlayer";
-            this.PlayBulletPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("PlayBulletPlayer.OcxState")));
-            this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
-            this.PlayBulletPlayer.TabIndex = 8;
-            this.PlayBulletPlayer.Visible = false;
-            // 
-            // BGMPlayer
-            // 
-            this.BGMPlayer.Enabled = true;
-            this.BGMPlayer.Location = new System.Drawing.Point(27, 204);
-            this.BGMPlayer.Name = "BGMPlayer";
-            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
-            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
-            this.BGMPlayer.TabIndex = 9;
-            this.BGMPlayer.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -217,8 +218,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }

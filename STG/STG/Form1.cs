@@ -42,7 +42,6 @@ namespace STG
         int b3y;
 
         SoundPlayer SFXBGM;
-        //System.Media.SoundPlayer SFXplayerShot = new System.Media.SoundPlayer(Application.StartupPath + "\\SFX\\DAMAGE.WAV");
 
 
         public Form1()
@@ -121,11 +120,10 @@ namespace STG
             //gameTime.Reset();
             //gameTime.Start();
             //playing music in loop
-            //SFXBGM = new SoundPlayer("TOS8.wav");
-            //SFXBGM.PlayLooping();
-            BGMPlayer.URL = @"TOS8.wav";
-            BGMPlayer.settings.setMode("loop", true);
-            BGMPlayer.settings.autoStart = true;
+
+            //BGMPlayer.URL = @"TOS8.wav";
+            //BGMPlayer.settings.setMode("loop", true);
+            //BGMPlayer.settings.autoStart = true;
             //story mode
             labelContext.Text = context[countContext];
             countContext++;
@@ -154,6 +152,8 @@ namespace STG
             //insert any change by time on player
             if (player.canMove())
             {
+                player.ChangeImage();
+                player_CreateBullet();
                 player.Move();
             }
         }
@@ -337,7 +337,7 @@ namespace STG
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
-                    System.Threading.Thread.Sleep(100);
+                    //System.Threading.Thread.Sleep(100);
                     return;
                 }
 
@@ -346,7 +346,6 @@ namespace STG
             {
                 if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
                     System.Threading.Thread.Sleep(100);
-                    return;
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -357,15 +356,15 @@ namespace STG
         {
             if (player.canShoot())
             {
-                Point xy = player.getShootPlace();
-                Bullet b = new Bullet(xy.X, xy.Y);
-                PlayBulletPlayer.Ctlcontrols.play();
+                Bullet b1 = new Bullet((int)player.lx-5, (int)player.ly-20);
+                Bullet b2 = new Bullet((int)player.lx+22, (int)player.ly-20);
+                //PlayBulletPlayer.Ctlcontrols.play();
                 //SFXplayerShot.Play();
                 //buf.Play(1, BufferPlayFlags.Default);
                 
                 //this.panel1.Controls.Add(b.img);
-
-                playerBullet.Add(b);
+                playerBullet.Add(b1);
+                playerBullet.Add(b2);
             }
         }
 
@@ -589,15 +588,19 @@ namespace STG
             switch (e.KeyCode)
             {
                 case Keys.Up:
+                    player.setSLR(0);
                     player.addV(0, -3);
                     break;
                 case Keys.Down:
+                    player.setSLR(0);
                     player.addV(0, 3);
                     break;
                 case Keys.Right:
+                    player.setSLR(2);
                     player.addV(3, 0);
                     break;
                 case Keys.Left:
+                    player.setSLR(1);
                     player.addV(-3, 0);
                     break;
                 case Keys.Space:
@@ -640,6 +643,7 @@ namespace STG
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            player.setSLR(0);
             switch (e.KeyCode)
             {
                 case Keys.Up:

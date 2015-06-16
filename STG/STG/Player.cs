@@ -57,17 +57,17 @@ public class Player : GameObject
         int i;
         for(i=1;i<9;i++)
         {
-            s = "\\assest\\playerS"+i+".png";
+            s = "\\assest\\Player\\playerS" + i + ".png";
             S[i] = Image.FromFile(Application.StartupPath + s);
         }
         for(i=1;i<3;i++)
         {
-            s = "\\assest\\playerL" + i + ".png";
+            s = "\\assest\\Player\\playerL" + i + ".png";
             L[i] = Image.FromFile(Application.StartupPath + s);
         }
         for (i=1;i<3;i++)
         {
-            s = "\\assest\\playerR" + i + ".png";
+            s = "\\assest\\Player\\playerR" + i + ".png";
             R[i] = Image.FromFile(Application.StartupPath + s);
         }
     }

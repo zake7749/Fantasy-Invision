@@ -353,6 +353,10 @@ namespace STG
                     if(Math.Abs(b.ly - en.ly)<en.img.Height&&Math.Abs(b.lx-en.lx)<en.img.Width)
                     {
                         en.health--;
+                        if(!en.isAlive())
+                        {
+                            //Remove the enemy.
+                        }
                         b.setTimetoExplode(true);
                     }
                 }

@@ -33,7 +33,7 @@ public class EnemyBullet : GameObject
         vy = 5;
         img = new System.Windows.Forms.PictureBox();
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\EnemyGreenBullet.png");
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\EnemyBullet\\EnemyGreenBullet.png");
         img.BackColor = Color.Transparent;
         imgAutoSize();
         MoveMode = "";

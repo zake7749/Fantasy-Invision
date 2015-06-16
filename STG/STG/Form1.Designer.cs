@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -45,15 +46,13 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnLeave = new System.Windows.Forms.Button();
             this.labelGameOver = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // Update
@@ -83,15 +82,25 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.labelContext);
             this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(-7, -29);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(776, 633);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick_1);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Controls.Add(this.labelGameOver);
+            this.panel3.Location = new System.Drawing.Point(92, 213);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(423, 203);
+            this.panel3.TabIndex = 8;
+            this.panel3.Visible = false;
             // 
             // pictureBox1
             // 
@@ -106,10 +115,10 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 527);
             this.labelContext.Name = "labelContext";
-            this.labelContext.Size = new System.Drawing.Size(597, 103);
+            this.labelContext.Size = new System.Drawing.Size(593, 103);
             this.labelContext.TabIndex = 4;
             this.labelContext.Text = "label4";
             this.labelContext.Visible = false;
@@ -126,9 +135,9 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(617, 27);
+            this.panel2.Location = new System.Drawing.Point(603, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(158, 603);
+            this.panel2.Size = new System.Drawing.Size(172, 603);
             this.panel2.TabIndex = 2;
             // 
             // BGMPlayer
@@ -180,7 +189,7 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelTime.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelTime.Location = new System.Drawing.Point(80, 544);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(54, 20);
@@ -190,7 +199,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label3.Location = new System.Drawing.Point(7, 544);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 20);
@@ -207,39 +216,17 @@
             this.PlayBulletPlayer.TabIndex = 8;
             this.PlayBulletPlayer.Visible = false;
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Controls.Add(this.labelGameOver);
-            this.panel3.Controls.Add(this.btnLeave);
-            this.panel3.Location = new System.Drawing.Point(92, 213);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(423, 203);
-            this.panel3.TabIndex = 8;
-            this.panel3.Visible = false;
-            // 
-            // btnLeave
-            // 
-            this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnLeave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnLeave.Location = new System.Drawing.Point(59, 111);
-            this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(290, 51);
-            this.btnLeave.TabIndex = 9;
-            this.btnLeave.Text = "Leave Game";
-            this.btnLeave.UseVisualStyleBackColor = true;
-            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
-            // 
             // labelGameOver
             // 
-            this.labelGameOver.Font = new System.Drawing.Font("微軟正黑體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelGameOver.ForeColor = System.Drawing.Color.Red;
-            this.labelGameOver.Location = new System.Drawing.Point(60, 41);
+            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
+            this.labelGameOver.Location = new System.Drawing.Point(60, 16);
             this.labelGameOver.Name = "labelGameOver";
-            this.labelGameOver.Size = new System.Drawing.Size(289, 49);
+            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
             this.labelGameOver.TabIndex = 10;
-            this.labelGameOver.Text = "Game Over!";
+            this.labelGameOver.Text = "Game  Over";
             this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelGameOver.Visible = false;
             // 
             // Form1
             // 
@@ -253,12 +240,12 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -281,7 +268,6 @@
         private AxWMPLib.AxWindowsMediaPlayer PlayBulletPlayer;
         private AxWMPLib.AxWindowsMediaPlayer BGMPlayer;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnLeave;
         private System.Windows.Forms.Label labelGameOver;
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }

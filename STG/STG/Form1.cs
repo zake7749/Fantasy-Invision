@@ -16,6 +16,7 @@ namespace STG
 {
     public partial class Form1 : Form
     {
+        //AxWMPLib.AxWindowsMediaPlayer PlayBulletPlayer;
         List<Enemy> enemies;
         List<EnemyBullet> enemyBullet;
         int totalEnemy = 0;
@@ -42,7 +43,6 @@ namespace STG
         int b3y;
 
         SoundPlayer SFXBGM;
-        bool IsNewGame = false;
 
         public Form1()
         {
@@ -58,8 +58,8 @@ namespace STG
             
             labelTime.Text = "";
             labelContext.Text = "";
-
-            PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
+            label2.Text = "";
+            //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
@@ -110,6 +110,8 @@ namespace STG
             //story mode
             labelContext.Text = context[countContext];
             countContext++;
+
+            
         }
 
         private void RePaint()
@@ -130,11 +132,7 @@ namespace STG
             }
             g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
             pictureBox1.Image = (Image)bmpPic1; 
-        }
-
-
-        
-        
+        }  
         
         //background code
         /*
@@ -299,6 +297,13 @@ namespace STG
             Collision();
             //circle.circleMove(200.0, 200.0, angle);
 
+            label5.Text = player.getHP().ToString();
+            //Game Over Condition
+            if (player.getHP() <= 0)
+            {
+                panel3.Visible = true;
+                Update.Stop();
+            }
 
             /*
              * Please write comment for each code block added.
@@ -366,13 +371,17 @@ namespace STG
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
+                    player.setHP(-1);
                 }
 
             }
             foreach (Enemy en in enemies)
             {
                 if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
+                {
                     System.Threading.Thread.Sleep(100);
+                    player.setHP(-1);
+                }                  
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -775,6 +784,11 @@ namespace STG
                     create_CircleShootEnemy(x,0);
                     break;
             }
+        }
+
+        private void btnLeave_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         

@@ -23,7 +23,7 @@ public class Player : GameObject
     public Player(int x, int y)
         : base(x, y)
     {
-        health = 10;
+        health = 100;
         lx = x;
         ly = y;
         //f = frame = timer interval of FixUpdate 
@@ -144,5 +144,15 @@ public class Player : GameObject
             ly += vy;
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.BackColor = Color.Transparent;
+    }
+
+    public void setHP(int blood)
+    {
+        health += blood;
+    }
+
+    public int getHP()
+    {
+        return health;
     }
 }

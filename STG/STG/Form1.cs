@@ -180,15 +180,12 @@ namespace STG
             //insert any change by time on bullet
             for (var i = 0; i < playerBullet.Count ; i++ )
             {
+                playerBullet[i].Move();
                 if (playerBullet[i].Explode())
                 {
                     playerBullet[i].img.Dispose();
                     playerBullet[i].Dispose();
                     playerBullet.Remove(playerBullet[i]);
-                }
-                else
-                {
-                    playerBullet[i].Move();
                 }
             }
         }

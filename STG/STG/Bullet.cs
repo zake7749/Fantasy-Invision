@@ -20,8 +20,9 @@ public class Bullet : GameObject
     public Bullet(int x, int y)
         : base(x, y)
     {
-        int ExplodeClock = 0;
-        int ExplodeClockLimit = 10;
+        timetoExplode = false;
+        ExplodeClock = 0;
+        ExplodeClockLimit = 5;
         lx = x;
         ly = y;
         //f = frame = timer interval of FixUpdate 
@@ -44,7 +45,7 @@ public class Bullet : GameObject
         img.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
         Random robj = new Random();
         timetoExplode = explode;
-        ly -= 5;
+        ly -= robj.Next(5,15);
         vx = 0;
         vy = 0;
     }
@@ -59,7 +60,6 @@ public class Bullet : GameObject
                 return true;
             }
         }
-
         return false;
     }
 }

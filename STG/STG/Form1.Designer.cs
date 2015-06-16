@@ -61,7 +61,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 11);
+            this.label1.Location = new System.Drawing.Point(36, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 0;
@@ -122,9 +122,9 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(611, 27);
+            this.panel2.Location = new System.Drawing.Point(578, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(125, 603);
+            this.panel2.Size = new System.Drawing.Size(158, 603);
             this.panel2.TabIndex = 2;
             // 
             // BGMPlayer
@@ -159,7 +159,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 175);
+            this.label6.Location = new System.Drawing.Point(31, 175);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(33, 12);
             this.label6.TabIndex = 6;
@@ -177,7 +177,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 97);
+            this.label4.Location = new System.Drawing.Point(33, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 12);
             this.label4.TabIndex = 4;

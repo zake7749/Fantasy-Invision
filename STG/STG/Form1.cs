@@ -589,19 +589,19 @@ namespace STG
             {
                 case Keys.Up:
                     player.setSLR(0);
-                    player.addV(0, -3);
+                    player.addV(0, -4);
                     break;
                 case Keys.Down:
                     player.setSLR(0);
-                    player.addV(0, 3);
+                    player.addV(0, 4);
                     break;
                 case Keys.Right:
                     player.setSLR(2);
-                    player.addV(3, 0);
+                    player.addV(4, 0);
                     break;
                 case Keys.Left:
                     player.setSLR(1);
-                    player.addV(-3, 0);
+                    player.addV(-4, 0);
                     break;
                 case Keys.Space:
                     player_CreateBullet();

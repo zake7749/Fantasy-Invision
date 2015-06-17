@@ -298,7 +298,7 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-                panel3.Visible = true;
+                labelGameOver.Visible = true;
                 Update.Stop();
             }
 

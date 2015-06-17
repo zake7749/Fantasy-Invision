@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -298,7 +298,7 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-                labelGameOver.Visible = true;
+                panel3.Visible = true;
                 Update.Stop();
             }
 
@@ -350,7 +350,6 @@ namespace STG
         //Collision
         private void Collision()
         {
-
             foreach(Bullet b in playerBullet)
             {
                 foreach(Enemy en in enemies)
@@ -369,12 +368,16 @@ namespace STG
 
             foreach (EnemyBullet eb in enemyBullet)
             {
-                if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                if (Math.Abs((int)(eb.lx) - 18 - eb.range - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
                 }
-
+                else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
+                    && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
+                {
+                    //擦彈動作
+                }
             }
             foreach (Enemy en in enemies)
             {

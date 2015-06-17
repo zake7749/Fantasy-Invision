@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -94,6 +94,40 @@ public class EnemyBullet : GameObject
     public string getMoveMode()
     {
         return MoveMode;
+    }
+
+    //擦彈判定 回傳為距離邊框之pixle長度 例如:16*16的圖 回傳2代表距離邊框2pixle為擦彈範圍
+    public int setImage(string outstr)
+    {
+        if (outstr.ToCharArray(outstr.Length - 6, 6).ToString() == "Circle")
+        {
+            if (outstr.ToCharArray(outstr.Length - 9, 3).ToString() == "Big")
+            {
+                return 3;
+            }
+            else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Round")
+            {
+                return 4;
+            }
+            else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Black")
+            {
+                return 6;
+            }
+            else return 2;
+        }
+        else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
+        {
+            if (outstr.ToCharArray(outstr.Length - 7, 3).ToString() == "Big")
+            {
+                return 3;
+            }
+            else return 2;
+        }
+        else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
+        {
+            return 4;
+        }
+        else return 1;
     }
     //Dispose method
     protected override void Dispose(bool disposing)

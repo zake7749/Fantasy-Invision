@@ -97,38 +97,39 @@ public class EnemyBullet : GameObject
     }
 
     //擦彈判定 回傳為距離邊框之pixle長度 例如:16*16的圖 回傳2代表距離邊框2pixle為擦彈範圍
-     public int setImage(string outstr)
+     public void setImage(string outstr)
     {
+        int range;
         img.Image = Image.FromFile(Application.StartupPath + "\\assest\\EnemyBullet" + outstr + ".png");
         if (outstr.ToCharArray(outstr.Length - 6, 6).ToString() == "Circle")
         {
             if (outstr.ToCharArray(outstr.Length - 9, 3).ToString() == "Big")
             {
-                return 3;
+                range = 3;
             }
             else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Round")
             {
-                return 4;
+                range = 4;
             }
             else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Black")
             {
-                return 6;
+                range = 6;
             }
-            else return 2;
+            else range = 2;
         }
         else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
         {
             if (outstr.ToCharArray(outstr.Length - 7, 3).ToString() == "Big")
             {
-                return 3;
+                range = 3;
             }
-            else return 2;
+            else range = 2;
         }
         else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
         {
-            return 4;
+            range = 4;
         }
-        else return 1;
+        else range = 1;
     }
     //Dispose method
     protected override void Dispose(bool disposing)

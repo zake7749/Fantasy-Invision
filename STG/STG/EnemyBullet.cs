@@ -20,6 +20,7 @@ public class EnemyBullet : GameObject
     public int radius;
     private string MoveMode;
     public double angle;
+    public int range;
 
     public EnemyBullet(int x, int y)
         : base(x, y)
@@ -43,21 +44,21 @@ public class EnemyBullet : GameObject
 
     public override void Move()
     {
-        if(MoveMode=="Cos")
+        if (MoveMode == "Cos")
         {
             ly += vy;
             lx += 10 * Math.Cos(angle += 0.5);
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.BackColor = Color.Transparent;
         }
-        else if(MoveMode=="Sin")
+        else if (MoveMode == "Sin")
         {
             ly += vy;
             lx -= 10 * Math.Sin(angle += 0.5);
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.BackColor = Color.Transparent;
         }
-        else if(MoveMode=="Circle")
+        else if (MoveMode == "Circle")
         {
             middleY++;
             lx = Convert.ToInt32(middleX + radius * Math.Cos(angle += 0.05));
@@ -97,9 +98,8 @@ public class EnemyBullet : GameObject
     }
 
     //擦彈判定 回傳為距離邊框之pixle長度 例如:16*16的圖 回傳2代表距離邊框2pixle為擦彈範圍
-     public void setImage(string outstr)
+    public void setImage(string outstr)
     {
-        int range;
         img.Image = Image.FromFile(Application.StartupPath + "\\assest\\EnemyBullet" + outstr + ".png");
         if (outstr.ToCharArray(outstr.Length - 6, 6).ToString() == "Circle")
         {
@@ -133,22 +133,23 @@ public class EnemyBullet : GameObject
     }
     //Dispose method
     protected override void Dispose(bool disposing)
-   {
-      if (disposed)
-         return; 
+    {
+        if (disposed)
+            return;
 
-      if (disposing) {
-         // Free any other managed objects here.
-         //
-      }
+        if (disposing)
+        {
+            // Free any other managed objects here.
+            //
+        }
 
-      // Free any unmanaged objects here.
-      //
-      disposed = true;
-   }
+        // Free any unmanaged objects here.
+        //
+        disposed = true;
+    }
 
-   ~EnemyBullet()
-   {
-      Dispose(false);
-   }
+    ~EnemyBullet()
+    {
+        Dispose(false);
+    }
 }

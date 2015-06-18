@@ -67,33 +67,31 @@ namespace STG
             //SetStory();    
             
             //background code
-            /*
+            
             background1 = new System.Windows.Forms.PictureBox();
-            background1.Location = new Point(0, 290);
-            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background1);
+            background1.Location = new Point(0, 10);
+            background1.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
+            //this.panel1.Controls.Add(background1);
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
-            background2.Location = new Point(0, -58);
-            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background2);
+            background2.Location = new Point(0, -592);
+            background2.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
+            //this.panel1.Controls.Add(background2);
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
             background3 = new System.Windows.Forms.PictureBox();
-            background2.Location = new Point(0, -406);
-            background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background3);
+            background2.Location = new Point(0, -1194);
+            background3.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
+            //this.panel1.Controls.Add(background3);
             background3.Width = background1.Image.Width;
             background3.Height = background1.Image.Height;
 
             b1y = 290;
             b2y = -58;
             b3y = -406;
-            */
-
             //background code
         }
 
@@ -109,15 +107,16 @@ namespace STG
             //BGMPlayer.settings.autoStart = true;
             //story mode
             labelContext.Text = context[countContext];
-            countContext++;
-
-            
+            countContext++;         
         }
 
         private void RePaint()
         {
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
-            Graphics g = Graphics.FromImage(bmpPic1); 
+            Graphics g = Graphics.FromImage(bmpPic1);
+            g.DrawImage(background1.Image, background1.Location);
+            g.DrawImage(background2.Image, background2.Location);
+            g.DrawImage(background3.Image, background3.Location);
             foreach(EnemyBullet eb in enemyBullet)
             {
                 g.DrawImage(eb.img.Image, new Point((int)eb.lx, (int)eb.ly)); 
@@ -135,19 +134,19 @@ namespace STG
         }  
         
         //background code
-        /*
+        
         private void updateBackground()
         {
-            b1y++;
-            b2y++;
-            b3y++;
-            if (b1y >= 638) b1y = -406;
-            if (b2y >= 638) b2y = -406;
-            if (b3y >= 638) b3y = -406;
+            b1y+=2;
+            b2y+=2;
+            b3y+=2;
+            if (b1y >= 613) b1y = -592;
+            if (b2y >= 613) b2y = -592;
+            if (b3y >= 613) b3y = -592;
             background1.Location = new Point(0, b1y);
             background2.Location = new Point(0, b2y);
             background3.Location = new Point(0, b3y);
-        }*/
+        }
         //background code
 
         //Update Object
@@ -210,22 +209,6 @@ namespace STG
                     enemies.Remove(enemies[i]);
                 }
             }
-/*                foreach (Enemy e in enemies)
-                {
-                    if (e.ly < 0)
-                    {
-                        e.img.Dispose();
-                        e.clockLimit = 5000000;//Temp method, if you hava any idea,just modify it.
-                        e.Dispose();
-                        enemies.Remove(e);
-                    }
-                    if (e.ly > 635)
-                    {
-                        e.img.Dispose();
-                        e.Dispose();
-                        enemies.Remove(e);
-                    }
-                }*/
         }
         private void bulletBounderCheck()
         {
@@ -239,15 +222,7 @@ namespace STG
                     playerBullet.Remove(playerBullet[i]);
                 }
             }
-/*               foreach (Bullet b in playerBullet)
-                {
-                    if (b.ly < 0)
-                    {
-                        b.img.Dispose();
-                        b.Dispose();
-                        playerBullet.Remove(b);
-                    }
-                }*/
+
             for (var i = 0; i < enemyBullet.Count; i++)
             {
                 if (enemyBullet[i].ly < -150 || enemyBullet[i].ly > this.Height+150 || enemyBullet[i].lx < -100 || enemyBullet[i].lx > 600)
@@ -257,16 +232,7 @@ namespace STG
                     enemyBullet.Remove(enemyBullet[i]);
                 }
             }
-/*            foreach (EnemyBullet b in enemyBullet)
-            {
-                if (b.ly > 635)
-                {
-                    b.img.Dispose();
-                    enemyBullet.Remove(b);
-                    b.Dispose();
-                    
-                }
-            }*/
+
         }
         private void BounderCheck()
         {
@@ -288,7 +254,7 @@ namespace STG
             updateEnemyBullet();
             
             //background code
-            //updateBackground();
+            updateBackground();
 
             bulletBounderCheck();
             Collision();
@@ -298,7 +264,7 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-                panel3.Visible = true;
+                //panel3.Visible = true;
                 Update.Stop();
             }
 

@@ -29,60 +29,54 @@
         private void InitializeComponent()
         {
             this.btnStart = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Label_HighScore = new System.Windows.Forms.Label();
+            this.btnLeave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStart
             // 
+            this.btnStart.BackColor = System.Drawing.Color.Transparent;
+            this.btnStart.BackgroundImage = global::STG.Properties.Resources.start;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnStart.Location = new System.Drawing.Point(195, 78);
+            this.btnStart.Location = new System.Drawing.Point(39, 170);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(228, 116);
+            this.btnStart.Size = new System.Drawing.Size(225, 70);
             this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // label1
+            // btnLeave
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(210, 253);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 24);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "High Score:";
-            // 
-            // Label_HighScore
-            // 
-            this.Label_HighScore.AutoSize = true;
-            this.Label_HighScore.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Label_HighScore.Location = new System.Drawing.Point(325, 253);
-            this.Label_HighScore.Name = "Label_HighScore";
-            this.Label_HighScore.Size = new System.Drawing.Size(64, 24);
-            this.Label_HighScore.TabIndex = 2;
-            this.Label_HighScore.Text = "label2";
+            this.btnLeave.BackColor = System.Drawing.Color.Transparent;
+            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.leave;
+            this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnLeave.Location = new System.Drawing.Point(39, 298);
+            this.btnLeave.Name = "btnLeave";
+            this.btnLeave.Size = new System.Drawing.Size(225, 70);
+            this.btnLeave.TabIndex = 1;
+            this.btnLeave.UseVisualStyleBackColor = false;
+            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 350);
-            this.Controls.Add(this.Label_HighScore);
-            this.Controls.Add(this.label1);
+            this.BackgroundImage = global::STG.Properties.Resources.enterbackground;
+            this.ClientSize = new System.Drawing.Size(984, 586);
+            this.Controls.Add(this.btnLeave);
             this.Controls.Add(this.btnStart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnStart;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label Label_HighScore;
+        private System.Windows.Forms.Button btnLeave;
     }
 }

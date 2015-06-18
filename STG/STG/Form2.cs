@@ -17,13 +17,18 @@ namespace STG
         public Form2()
         {
             InitializeComponent();
-            Label_HighScore.Text = "";
+            //Label_HighScore.Text = "";
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             NewGame = new Form1();
             NewGame.Show();
+        }
+
+        private void btnLeave_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

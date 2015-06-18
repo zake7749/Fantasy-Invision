@@ -144,6 +144,21 @@
   <ItemGroup>
     <None Include="bin\Debug\UI\leave.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\UI\checkgrade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\UI\storegrade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\UI\leave2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\UI\leave3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\UI\clock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

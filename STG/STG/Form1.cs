@@ -69,37 +69,23 @@ namespace STG
             //background code
             
             background1 = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
             background1.Location = new Point(0, 290);
             background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-=======
-            background1.Location = new Point(0, 10);
-            background1.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
->>>>>>> origin/master
             //this.panel1.Controls.Add(background1);
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
             background2.Location = new Point(0, -58);
             background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-=======
-            background2.Location = new Point(0, -592);
-            background2.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
->>>>>>> origin/master
             //this.panel1.Controls.Add(background2);
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
             background3 = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
             background2.Location = new Point(0, -406);
             background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-=======
-            background2.Location = new Point(0, -1194);
-            background3.Image = Image.FromFile(Application.StartupPath + "\\UI\\gamebackground.png");
->>>>>>> origin/master
+
             //this.panel1.Controls.Add(background3);
             background3.Width = background1.Image.Width;
             background3.Height = background1.Image.Height;
@@ -107,11 +93,9 @@ namespace STG
             b1y = 290;
             b2y = -58;
             b3y = -406;
-<<<<<<< HEAD
-            
 
-=======
->>>>>>> origin/master
+
+
             //background code
         }
 
@@ -134,7 +118,6 @@ namespace STG
         {
 
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
-<<<<<<< HEAD
 
             Graphics g = Graphics.FromImage(bmpPic1);
             
@@ -144,12 +127,6 @@ namespace STG
             g.DrawImage(background3.Image, -10, b3y);
 
             //Bullet
-=======
-            Graphics g = Graphics.FromImage(bmpPic1);
-            g.DrawImage(background1.Image, background1.Location);
-            g.DrawImage(background2.Image, background2.Location);
-            g.DrawImage(background3.Image, background3.Location);
->>>>>>> origin/master
             foreach(EnemyBullet eb in enemyBullet)
             {
                 g.DrawImage(eb.img.Image, new Point((int)eb.lx, (int)eb.ly)); 
@@ -172,7 +149,6 @@ namespace STG
         
         private void updateBackground()
         {
-<<<<<<< HEAD
             b1y+=7;
             b2y+=7;
             b3y+=7;
@@ -182,17 +158,6 @@ namespace STG
             background1.Location = new Point(-10, b1y);
             background2.Location = new Point(-10, b2y);
             background3.Location = new Point(-10, b3y);
-=======
-            b1y+=2;
-            b2y+=2;
-            b3y+=2;
-            if (b1y >= 613) b1y = -592;
-            if (b2y >= 613) b2y = -592;
-            if (b3y >= 613) b3y = -592;
-            background1.Location = new Point(0, b1y);
-            background2.Location = new Point(0, b2y);
-            background3.Location = new Point(0, b3y);
->>>>>>> origin/master
         }
         //background code
 
@@ -386,14 +351,13 @@ namespace STG
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
                 }
-<<<<<<< HEAD
-=======
+
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
                     && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
                 {
                     //擦彈動作
                 }
->>>>>>> origin/master
+
             }
             foreach (Enemy en in enemies)
             {

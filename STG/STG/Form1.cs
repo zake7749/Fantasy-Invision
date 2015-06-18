@@ -775,6 +775,8 @@ namespace STG
 
         private void btnStoreGrade_Click(object sender, EventArgs e)
         {
+            Form4 AddGrade = new Form4(int.Parse(labelScore.Text), int.Parse(labelTime.Text));
+            AddGrade.Show();
             btnStoreGrade.Enabled = false;
         }
 

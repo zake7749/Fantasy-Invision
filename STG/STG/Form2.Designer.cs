@@ -70,6 +70,7 @@
             this.btnCheckGrade.Size = new System.Drawing.Size(225, 70);
             this.btnCheckGrade.TabIndex = 2;
             this.btnCheckGrade.UseVisualStyleBackColor = false;
+            this.btnCheckGrade.Click += new System.EventHandler(this.btnCheckGrade_Click);
             // 
             // Form2
             // 

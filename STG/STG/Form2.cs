@@ -30,5 +30,11 @@ namespace STG
         {
             Application.Exit();
         }
+
+        private void btnCheckGrade_Click(object sender, EventArgs e)
+        {
+            Form3 checkform = new Form3();
+            checkform.Show();
+        }
     }
 }

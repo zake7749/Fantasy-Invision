@@ -67,32 +67,32 @@ namespace STG
             //SetStory();    
             
             //background code
-            /*
+            
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
-            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background1);
+            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            //this.panel1.Controls.Add(background1);
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -58);
-            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background2);
+            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            //this.panel1.Controls.Add(background2);
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
             background3 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -406);
-            background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\background.jpg");
-            this.panel1.Controls.Add(background3);
+            background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            //this.panel1.Controls.Add(background3);
             background3.Width = background1.Image.Width;
             background3.Height = background1.Image.Height;
 
             b1y = 290;
             b2y = -58;
             b3y = -406;
-            */
+            
 
             //background code
         }
@@ -116,8 +116,17 @@ namespace STG
 
         private void RePaint()
         {
+
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
-            Graphics g = Graphics.FromImage(bmpPic1); 
+
+            Graphics g = Graphics.FromImage(bmpPic1);
+            
+            //Draw background
+            g.DrawImage(background1.Image, -10, b1y);
+            g.DrawImage(background2.Image, -10, b2y);
+            g.DrawImage(background3.Image, -10, b3y);
+
+            //Bullet
             foreach(EnemyBullet eb in enemyBullet)
             {
                 g.DrawImage(eb.img.Image, new Point((int)eb.lx, (int)eb.ly)); 
@@ -126,28 +135,30 @@ namespace STG
             {
                 g.DrawImage(b.img.Image, new Point((int)b.lx, (int)b.ly)); 
             }
+            //Enemy
             foreach (Enemy e in enemies)
             {
                 g.DrawImage(e.img.Image, new Point((int)e.lx, (int)e.ly));
             }
+            //Player
             g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
             pictureBox1.Image = (Image)bmpPic1; 
         }  
         
         //background code
-        /*
+        
         private void updateBackground()
         {
-            b1y++;
-            b2y++;
-            b3y++;
+            b1y+=7;
+            b2y+=7;
+            b3y+=7;
             if (b1y >= 638) b1y = -406;
             if (b2y >= 638) b2y = -406;
             if (b3y >= 638) b3y = -406;
-            background1.Location = new Point(0, b1y);
-            background2.Location = new Point(0, b2y);
-            background3.Location = new Point(0, b3y);
-        }*/
+            background1.Location = new Point(-10, b1y);
+            background2.Location = new Point(-10, b2y);
+            background3.Location = new Point(-10, b3y);
+        }
         //background code
 
         //Update Object
@@ -288,7 +299,7 @@ namespace STG
             updateEnemyBullet();
             
             //background code
-            //updateBackground();
+            updateBackground();
 
             bulletBounderCheck();
             Collision();
@@ -374,7 +385,6 @@ namespace STG
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
                 }
-
             }
             foreach (Enemy en in enemies)
             {

@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelGameOver = new System.Windows.Forms.Label();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
@@ -45,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.labelGameOver = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
@@ -90,12 +90,25 @@
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseClick_1);
             // 
+            // labelGameOver
+            // 
+            this.labelGameOver.BackColor = System.Drawing.Color.Black;
+            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
+            this.labelGameOver.Location = new System.Drawing.Point(153, 229);
+            this.labelGameOver.Name = "labelGameOver";
+            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
+            this.labelGameOver.TabIndex = 10;
+            this.labelGameOver.Text = "Game  Over";
+            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelGameOver.Visible = false;
+            // 
             // labelContext
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelContext.Location = new System.Drawing.Point(11, 527);
+            this.labelContext.Location = new System.Drawing.Point(11, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
             this.labelContext.TabIndex = 4;
@@ -203,19 +216,6 @@
             this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
             this.PlayBulletPlayer.TabIndex = 8;
             this.PlayBulletPlayer.Visible = false;
-            // 
-            // labelGameOver
-            // 
-            this.labelGameOver.BackColor = System.Drawing.Color.Black;
-            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
-            this.labelGameOver.Location = new System.Drawing.Point(153, 229);
-            this.labelGameOver.Name = "labelGameOver";
-            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
-            this.labelGameOver.TabIndex = 10;
-            this.labelGameOver.Text = "Game  Over";
-            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelGameOver.Visible = false;
             // 
             // Form1
             // 

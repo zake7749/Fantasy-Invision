@@ -93,6 +93,16 @@ namespace STG.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap enterbackground {
             get {
                 object obj = ResourceManager.GetObject("enterbackground", resourceCulture);
@@ -136,6 +146,26 @@ namespace STG.Properties {
         internal static System.Drawing.Bitmap Leave4 {
             get {
                 object obj = ResourceManager.GetObject("Leave4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap leave5 {
+            get {
+                object obj = ResourceManager.GetObject("leave5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recordbackground {
+            get {
+                object obj = ResourceManager.GetObject("recordbackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

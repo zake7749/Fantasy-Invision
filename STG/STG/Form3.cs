@@ -20,8 +20,6 @@ namespace STG
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO:  這行程式碼會將資料載入 'gradeDatabaseDataSet.Grade' 資料表。您可以視需要進行移動或移除。
-            this.gradeTableAdapter.Fill(this.gradeDatabaseDataSet.Grade);
             SqlConnection db = new SqlConnection();
             string p = AppDomain.CurrentDomain.BaseDirectory;
             p = p.Replace("\\bin\\Debug", "");
@@ -42,28 +40,33 @@ namespace STG
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
+            if(txtDelete.Text=="")
+                MessageBox.Show("Please enter a name you want to delete!", "Message");
+            else
             {
-                SqlConnection db = new SqlConnection();
-                string p = AppDomain.CurrentDomain.BaseDirectory;
-                p = p.Replace("\\bin\\Debug", "");
-                AppDomain.CurrentDomain.SetData("DataDirectory", p);
-                db.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|GradeDataBase.mdf;" +
-                    "Integrated Security=True";
-                db.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = db;
-                cmd.CommandText = "DELETE FROM Grade WHERE Name=@Name";
-                cmd.Parameters.AddWithValue("@Name", txtDelete.Text);
-                cmd.ExecuteNonQuery();
-                db.Close();
-                Form3_Load(sender, e);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                try
+                {
+                    SqlConnection db = new SqlConnection();
+                    string p = AppDomain.CurrentDomain.BaseDirectory;
+                    p = p.Replace("\\bin\\Debug", "");
+                    AppDomain.CurrentDomain.SetData("DataDirectory", p);
+                    db.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
+                        "AttachDbFilename=|DataDirectory|GradeDataBase.mdf;" +
+                        "Integrated Security=True";
+                    db.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = db;
+                    cmd.CommandText = "DELETE FROM Grade WHERE Name=@Name";
+                    cmd.Parameters.AddWithValue("@Name", txtDelete.Text);
+                    cmd.ExecuteNonQuery();
+                    db.Close();
+                    Form3_Load(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }        
         }
     }
 }

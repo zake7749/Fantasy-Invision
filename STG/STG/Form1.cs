@@ -56,7 +56,8 @@ namespace STG
             this.panel1.Controls.Add(player.img);
             
             
-            labelTime.Text = "";
+            labelTime.Text = "0";
+            labelScore.Text = "0";
             labelContext.Text = "";
             label2.Text = "";
             //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
@@ -102,8 +103,8 @@ namespace STG
         private void Form1_Load(object sender, EventArgs e)
         {
             //Update.Stop();
-            //gameTime.Reset();
-            //gameTime.Start();
+            gameTime.Reset();
+            gameTime.Start();
             //playing music in loop
 
             //BGMPlayer.URL = @"TOS8.wav";
@@ -272,11 +273,13 @@ namespace STG
             Collision();
             //circle.circleMove(200.0, 200.0, angle);
 
-            label5.Text = player.getHP().ToString();
+            labelHP.Text = player.getHP().ToString();
+            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-                //panel3.Visible = true;
+                labelHP.Text = "0";
+                panel3.Visible = true;
                 Update.Stop();
             }
 
@@ -284,7 +287,7 @@ namespace STG
              * Please write comment for each code block added.
              * In addition, DO NOT add anything except FUNCTIONs in FixedUpdate.
              * 
-             * labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
+             * 
             if ((int)(gameTime.Elapsed.TotalSeconds) == 40)
             {
                 if ((gameTime.Elapsed.TotalSeconds) == 41.0000000)
@@ -768,6 +771,18 @@ namespace STG
                     create_CircleShootEnemy(x,0);
                     break;
             }
+        }
+
+        private void btnStoreGrade_Click(object sender, EventArgs e)
+        {
+            Form4 AddGrade = new Form4(int.Parse(labelScore.Text), int.Parse(labelTime.Text));
+            AddGrade.Show();
+            btnStoreGrade.Enabled = false;
+        }
+
+        private void btnLeave_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

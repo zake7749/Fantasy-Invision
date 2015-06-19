@@ -101,6 +101,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).EndInit();
             this.ResumeLayout(false);
 

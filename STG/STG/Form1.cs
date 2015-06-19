@@ -833,7 +833,7 @@ namespace STG
         {
             signal = true;
             this.Close();
-            
+            this.Dispose();
         }
 
         private void btnStoreGrade_MouseEnter(object sender, EventArgs e)

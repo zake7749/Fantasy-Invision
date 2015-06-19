@@ -35,8 +35,7 @@ namespace STG
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            if (NewGame == null)               
-                BGMStart.Ctlcontrols.play();
+
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -66,6 +65,16 @@ namespace STG
         {
             ClickBtn.Play();
        }
+
+        private void Form2_MouseEnter(object sender, EventArgs e)
+        {
+            BGMStart.Ctlcontrols.play();
+        }
+
+        private void Form2_MouseClick(object sender, MouseEventArgs e)
+        {
+            BGMStart.Ctlcontrols.play();
+        }
        
     }
 }

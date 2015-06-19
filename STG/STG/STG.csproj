@@ -226,6 +226,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\UI\storebackground.png" />
+    <None Include="bin\Debug\UI\Leave4.png" />
+    <None Include="bin\Debug\UI\Send.png" />
+    <None Include="bin\Debug\UI\Cancel.png" />
     <Content Include="GradeDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

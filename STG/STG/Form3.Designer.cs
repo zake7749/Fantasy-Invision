@@ -33,12 +33,12 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gradeDatabaseDataSet = new STG.GradeDatabaseDataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.gradeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gradeTableAdapter = new STG.GradeDatabaseDataSetTableAdapters.GradeTableAdapter();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gradeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gradeTableAdapter = new STG.GradeDatabaseDataSetTableAdapters.GradeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradeDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -82,15 +82,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(572, 214);
             this.dataGridView1.TabIndex = 2;
             // 
-            // gradeBindingSource
-            // 
-            this.gradeBindingSource.DataMember = "Grade";
-            this.gradeBindingSource.DataSource = this.bindingSource1;
-            // 
-            // gradeTableAdapter
-            // 
-            this.gradeTableAdapter.ClearBeforeFill = true;
-            // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
@@ -115,6 +106,15 @@
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
             // 
+            // gradeBindingSource
+            // 
+            this.gradeBindingSource.DataMember = "Grade";
+            this.gradeBindingSource.DataSource = this.bindingSource1;
+            // 
+            // gradeTableAdapter
+            // 
+            this.gradeTableAdapter.ClearBeforeFill = true;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -123,6 +123,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnLeave);
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

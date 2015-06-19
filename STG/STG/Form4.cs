@@ -31,32 +31,43 @@ namespace STG
         private void btnSend_Click(object sender, EventArgs e)
         {
             DateTime savenow = DateTime.Now;
-            try
+            if (txtName.Text == "")
             {
-                SqlConnection db = new SqlConnection();
-                string p = AppDomain.CurrentDomain.BaseDirectory;
-                p = p.Replace("\\bin\\Debug", "");
-                AppDomain.CurrentDomain.SetData("DataDirectory", p);
-                db.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|GradeDatabase.mdf;" +
-                    "Integrated Security=True";
-                db.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = db;
-                cmd.CommandText = "INSERT INTO Grade(Name,Score,Time,Date) VALUES(@Name,@Score,@Time,@Date)";
-                cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                cmd.Parameters.AddWithValue("@Score", addScore);
-                cmd.Parameters.AddWithValue("@Time", addTime);
-                cmd.Parameters.AddWithValue("@Date", savenow.ToString("yyyy-MM-dd HH:mm"));
+                MessageBox.Show("Please enter your name!", "Message");
+                btnSend.Enabled = true;
+            }
+            else
+            {
+                try
+                {
+                    SqlConnection db = new SqlConnection();
+                    string p = AppDomain.CurrentDomain.BaseDirectory;
+                    p = p.Replace("\\bin\\Debug", "");
+                    AppDomain.CurrentDomain.SetData("DataDirectory", p);
+                    db.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
+                        "AttachDbFilename=|DataDirectory|GradeDatabase.mdf;" +
+                        "Integrated Security=True";
+                    db.Open();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = db;
+                    cmd.CommandText = "INSERT INTO Grade(Name,Score,Time,Date) VALUES(@Name,@Score,@Time,@Date)";
+                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@Score", addScore);
+                    cmd.Parameters.AddWithValue("@Time", addTime);
+                    cmd.Parameters.AddWithValue("@Date", savenow.ToString("yyyy-MM-dd HH:mm"));
 
-                cmd.ExecuteNonQuery();
-                db.Close();
-                Form4_Load(sender, e);
+                    cmd.ExecuteNonQuery();
+                    db.Close();
+                    Form4_Load(sender, e);
+                    btnSend.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

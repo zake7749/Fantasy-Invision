@@ -50,6 +50,7 @@ namespace STG
         public Form1()
         {
             InitializeComponent();
+            //SFX
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
@@ -57,6 +58,11 @@ namespace STG
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
             Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
             Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
+            BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
+            BGMPlayer.settings.setMode("Loop", true);
+            BGMPlayer.Ctlcontrols.play();
+            BGMPlayer.settings.volume = 70;
+            trackBarVolume.Value = BGMPlayer.settings.volume;
 
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
@@ -70,7 +76,7 @@ namespace STG
             labelScore.Text = "0";
             labelContext.Text = "";
             //label2.Text = "";
-            //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
+           // PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
             //SetStory();    
@@ -280,6 +286,7 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
+                BGMPlayer.Ctlcontrols.stop();
                 Playerdie.Play();
                 labelHP.Text = "0";
                 panel3.Visible = true;
@@ -833,6 +840,11 @@ namespace STG
         private void btnStoreGrade_MouseClick(object sender, MouseEventArgs e)
         {
             ClickBtn.Play();
+        }
+
+        private void trackBarVolume_Scroll(object sender, EventArgs e)
+        {
+            BGMPlayer.settings.volume = trackBarVolume.Value;
         }
     }
 }

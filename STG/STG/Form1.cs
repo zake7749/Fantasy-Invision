@@ -232,7 +232,7 @@ namespace STG
             //foreach迴圈無法使用List.Remove()，所以改用for迴圈
             for (var i = 0; i < playerBullet.Count;i++ )
             {
-                if (playerBullet[i].ly < 0)
+                if (playerBullet[i].ly < -200)
                 {
                     playerBullet[i].img.Dispose();
                     playerBullet[i].Dispose();
@@ -337,14 +337,16 @@ namespace STG
         {
             foreach(Bullet b in playerBullet)
             {
-                foreach(Enemy en in enemies)
+                for (var i = 0; i < enemies.Count;i++ )
                 {
-                    if(Math.Abs(b.ly - en.ly)<en.img.Height&&Math.Abs(b.lx-en.lx)<en.img.Width)
+                    if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
-                        en.health--;
-                        if(!en.isAlive())
+                        enemies[i].health--;
+                        if (!enemies[i].isAlive())
                         {
-                            //Remove the enemy.
+                            enemies[i].img.Dispose();
+                            enemies[i].Dispose();
+                            enemies.Remove(enemies[i]);
                         }
                         b.setTimetoExplode(true);
                     }

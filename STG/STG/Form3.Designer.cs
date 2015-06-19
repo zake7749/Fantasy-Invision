@@ -39,6 +39,9 @@
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gradeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gradeTableAdapter = new STG.GradeDatabaseDataSetTableAdapters.GradeTableAdapter();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.txtDelete = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradeDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -48,7 +51,7 @@
             // btnLeave
             // 
             this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnLeave.Location = new System.Drawing.Point(724, 218);
+            this.btnLeave.Location = new System.Drawing.Point(724, 393);
             this.btnLeave.Name = "btnLeave";
             this.btnLeave.Size = new System.Drawing.Size(186, 74);
             this.btnLeave.TabIndex = 1;
@@ -76,10 +79,10 @@
             this.timeDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.gradeBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 69);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(572, 214);
+            this.dataGridView1.Size = new System.Drawing.Size(572, 455);
             this.dataGridView1.TabIndex = 2;
             // 
             // nameDataGridViewTextBoxColumn
@@ -115,22 +118,55 @@
             // 
             this.gradeTableAdapter.ClearBeforeFill = true;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnDelete.Location = new System.Drawing.Point(724, 284);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(186, 74);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // txtDelete
+            // 
+            this.txtDelete.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtDelete.Location = new System.Drawing.Point(602, 79);
+            this.txtDelete.Name = "txtDelete";
+            this.txtDelete.Size = new System.Drawing.Size(308, 29);
+            this.txtDelete.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(598, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(312, 24);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Enter a name to delete the record";
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 304);
+            this.ClientSize = new System.Drawing.Size(922, 479);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtDelete);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnLeave);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form3";
+            this.Text = "Record";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradeDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gradeBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -146,6 +182,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn scoreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtDelete;
+        private System.Windows.Forms.Label label1;
 
 
 

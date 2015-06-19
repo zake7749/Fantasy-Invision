@@ -17,7 +17,6 @@ namespace STG
         public Form2()
         {
             InitializeComponent();
-            //Label_HighScore.Text = "";
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -26,15 +25,15 @@ namespace STG
             NewGame.Show();
         }
 
-        private void btnLeave_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void btnCheckGrade_Click(object sender, EventArgs e)
         {
             Form3 checkform = new Form3();
             checkform.Show();
+        }
+
+        private void btnLeave_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

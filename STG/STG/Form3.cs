@@ -39,5 +39,31 @@ namespace STG
         {
             this.Close();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlConnection db = new SqlConnection();
+                string p = AppDomain.CurrentDomain.BaseDirectory;
+                p = p.Replace("\\bin\\Debug", "");
+                AppDomain.CurrentDomain.SetData("DataDirectory", p);
+                db.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
+                    "AttachDbFilename=|DataDirectory|GradeDataBase.mdf;" +
+                    "Integrated Security=True";
+                db.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = db;
+                cmd.CommandText = "DELETE FROM Grade WHERE Name=@Name";
+                cmd.Parameters.AddWithValue("@Name", txtDelete.Text);
+                cmd.ExecuteNonQuery();
+                db.Close();
+                Form3_Load(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

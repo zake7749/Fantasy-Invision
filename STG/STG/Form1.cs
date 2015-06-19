@@ -30,6 +30,7 @@ namespace STG
         private Double LockLy;//Used for Split-shootmode.
         private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
         private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
+        private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart.png",};
         private Random Randomizer;
         //Painter
         Graphics gp;
@@ -484,10 +485,10 @@ namespace STG
                             double rlx = 0, rly = 0;
                             while (rlx < Math.PI * 2)
                             {
-                                rlx += Math.PI / 10;
-                                rly += Math.PI / 10;
+                                rlx += Math.PI / 6;
+                                rly += Math.PI / 6;
                                 EnemyBullet ebRound = new EnemyBullet(xy.X + 6, xy.Y + 20);
-                                ebRound.setImage("BlueBigCircle");
+                                ebRound.setImage("SkyBigCircle");
                                 ebRound.SetV(Math.Sin(rlx) * 3, Math.Cos(rly) * 3);
                                 if (enemyBullet.LastIndexOf(null) != -1)
                                     enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRound);
@@ -495,11 +496,11 @@ namespace STG
                                     enemyBullet.Add(ebRound);
                             }
                             int i;
-                            for (i = 0; i < 2;i++)
+                            for (i = 0; i < 10;i++)
                             {
                                 EnemyBullet ebRLine = new EnemyBullet(Randomizer.Next(0, 500), 700);
                                 ebRLine.SetV(0, -4.5);
-                                ebRLine.setImage("PinkHeart");
+                                ebRLine.setImage(HEARTBOX[Randomizer.Next(0,3)]);
                                 if (enemyBullet.LastIndexOf(null) != -1)
                                     enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRLine);
                                 else

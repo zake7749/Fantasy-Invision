@@ -48,7 +48,7 @@ public class GameObject : IDisposable
         return p;
     }
 
-    public Boolean canMove()
+    public virtual Boolean canMove()
     {
         move++;
         if (move > moveLimit)

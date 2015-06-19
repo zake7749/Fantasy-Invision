@@ -28,7 +28,7 @@ public class GunTurret : Enemy
         loadImage();
         imgAutoSize();
         Shootmode = "Ray";
-        health = 3;
+        health = 15;
     }
 
     protected override void setClock()

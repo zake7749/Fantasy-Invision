@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Berserker.cs" />
     <Compile Include="Bomber.cs" />
+    <Compile Include="Boss.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="CircleShootEnemy.cs" />
     <Compile Include="CosWayEnemy.cs" />

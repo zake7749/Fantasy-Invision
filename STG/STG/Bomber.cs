@@ -29,7 +29,7 @@ namespace STG
             loadImage();
             imgAutoSize();
             Shootmode = "None";
-            health = 5;
+            health = 10;
         }
 
         public void OpenShiftMode()

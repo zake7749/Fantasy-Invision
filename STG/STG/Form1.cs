@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using System.Diagnostics;
+using Microsoft.DirectX;
+using Microsoft.DirectX.DirectSound;
 
 namespace STG
 {
@@ -17,11 +19,11 @@ namespace STG
         //AxWMPLib.AxWindowsMediaPlayer PlayBulletPlayer;
         List<Enemy> enemies;
         List<EnemyBullet> enemyBullet;
-        int totalEnemy = 0;
         List<Bullet> playerBullet;
         Player player;
         Stopwatch gameTime = new Stopwatch();
-
+        //Device dv = new Device();
+        //SecondaryBuffer buf;
         string[] context = new string[20];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
@@ -40,32 +42,22 @@ namespace STG
         int b1y;
         int b2y;
         int b3y;
+        int Score;
 
-        SoundPlayer EnterBtn;
-        SoundPlayer ClickBtn;
-        SoundPlayer Enemydie;
-        SoundPlayer Playerhurted;
-        SoundPlayer Playerdie;
+        SoundPlayer SFXBGM;
 
         public Form1()
         {
             InitializeComponent();
-            EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
-            btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
-            ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
-            btnLeave.MouseClick += btnStoreGrade_MouseClick;
-            Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
-            Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
-            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
-
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
-
+            Score = 0;
             player = new Player(300, 500);
             //this.panel1.Controls.Add(player.img);
-                    
+            
+            
             labelTime.Text = "0";
             labelScore.Text = "0";
             labelContext.Text = "";
@@ -73,6 +65,8 @@ namespace STG
             //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
+            //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
+            //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
             //SetStory();    
             
             //background code
@@ -80,31 +74,37 @@ namespace STG
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
             background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            //this.panel1.Controls.Add(background1);
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -58);
             background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            //this.panel1.Controls.Add(background2);
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
             background3 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -406);
             background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-            background3.Width = background1.Image.Width;
-            background3.Height = background1.Image.Height;
 
             b1y = 290;
             b2y = -58;
             b3y = -406;
+
+            this.panel1.Controls.Add(background3);
+            background3.Width = background1.Image.Width;
+            background3.Height = background1.Image.Height;
+
+            //background code
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //Update.Stop();
-            gameTime.Reset();
-            gameTime.Start();
+            //gameTime.Reset();
+            //gameTime.Start();
             //playing music in loop
 
             //BGMPlayer.URL = @"TOS8.wav";
@@ -280,7 +280,6 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-                Playerdie.Play();
                 labelHP.Text = "0";
                 panel3.Visible = true;
                 Update.Stop();
@@ -346,7 +345,6 @@ namespace STG
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
-                            Enemydie.Play();
                         }
                         b.setTimetoExplode(true);
                     }
@@ -358,19 +356,15 @@ namespace STG
                 if (Math.Abs((int)(eb.lx) - 18 - eb.range - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
-<<<<<<< HEAD
-                    //player.setHP(-1);
-=======
                     player.setHP(-1);
-                    Playerhurted.Play();
->>>>>>> origin/master
                 }
 
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
                     && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
                 {
                     //擦彈動作
-                    player.setHP(-1);
+                    Score += 30;
+                    labelScore.Text = Score.ToString();
                 }
 
             }
@@ -380,7 +374,6 @@ namespace STG
                 {
                     System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
-                    Playerhurted.Play();
                 }                  
             }
         }
@@ -486,6 +479,34 @@ namespace STG
                                 enemyBullet.Add(ebRound);
                         }
                             break;
+
+                    case "Round-Line":
+                            double rlx = 0, rly = 0;
+                            while (rlx < Math.PI * 2)
+                            {
+                                rlx += Math.PI / 10;
+                                rly += Math.PI / 10;
+                                EnemyBullet ebRound = new EnemyBullet(xy.X + 6, xy.Y + 20);
+                                ebRound.setImage("BlueBigCircle");
+                                ebRound.SetV(Math.Sin(rlx) * 3, Math.Cos(rly) * 3);
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRound);
+                                else
+                                    enemyBullet.Add(ebRound);
+                            }
+                            int i;
+                            for (i = 0; i < 2;i++)
+                            {
+                                EnemyBullet ebRLine = new EnemyBullet(Randomizer.Next(0, 500), 700);
+                                ebRLine.SetV(0, -4.5);
+                                ebRLine.setImage("PinkHeart");
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRLine);
+                                else
+                                    enemyBullet.Add(ebRLine);
+                            }
+                            break;
+
                 }
             }
         }
@@ -525,6 +546,18 @@ namespace STG
         }
 
         //Create enemy object
+
+        private Boss create_Boss(int x, int y)
+        {
+            Boss e = new Boss(x, y);
+            //this.panel1.Controls.Add(e.img);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
+            return e;
+        }
+
         private void create_Enemy()
         {
             Random robj = new Random();
@@ -654,19 +687,19 @@ namespace STG
             {
                 case Keys.Up:
                     player.setSLR(0);
-                    player.addV(0, -4);
+                    player.addV(0, -5);
                     break;
                 case Keys.Down:
                     player.setSLR(0);
-                    player.addV(0, 4);
+                    player.addV(0, 5);
                     break;
                 case Keys.Right:
                     player.setSLR(2);
-                    player.addV(4, 0);
+                    player.addV(5, 0);
                     break;
                 case Keys.Left:
                     player.setSLR(1);
-                    player.addV(-4, 0);
+                    player.addV(-5, 0);
                     break;
                 case Keys.Space:
                     player_CreateBullet();
@@ -706,6 +739,9 @@ namespace STG
                     break;
                 case Keys.G:
                     create_Lighter(10, 10);
+                    break;
+                case Keys.H:
+                    create_Boss(100, 10);
                     break;
             }
         }
@@ -828,16 +864,6 @@ namespace STG
         private void btnLeave_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
-        {
-            EnterBtn.Play();
-        }
-
-        private void btnStoreGrade_MouseClick(object sender, MouseEventArgs e)
-        {
-            ClickBtn.Play();
         }
     }
 }

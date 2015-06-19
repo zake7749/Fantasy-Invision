@@ -19,7 +19,7 @@ namespace STG
             newsetClock();
             loadImage();
             Shootmode = "Cos";
-            health = 10;
+            health = 20;
         }
 
         private void newsetClock()

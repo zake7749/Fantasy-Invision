@@ -40,7 +40,7 @@ namespace STG
             setEnemyImage();
             imgAutoSize();
             Shootmode = "Split-5";
-            health = 10;
+            health = 30;
         }
 
         protected override void setClock()

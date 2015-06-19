@@ -104,8 +104,8 @@
             this.btnStoreGrade.TabIndex = 12;
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
-            this.btnStoreGrade.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStoreGrade_MouseClick);
-            this.btnStoreGrade.MouseEnter += new System.EventHandler(this.btnStoreGrade_MouseEnter);
+            //this.btnStoreGrade.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStoreGrade_MouseClick);
+            //this.btnStoreGrade.MouseEnter += new System.EventHandler(this.btnStoreGrade_MouseEnter);
             // 
             // labelGameOver
             // 

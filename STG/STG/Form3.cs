@@ -8,14 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Media;
 
 namespace STG
 {
     public partial class Form3 : Form
     {
+        SoundPlayer EnterBtn;
+        SoundPlayer ClickBtn;
+
         public Form3()
         {
             InitializeComponent();
+            EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
+            btnLeave.MouseEnter += btnDelete_MouseEnter;
+            ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
+            btnLeave.MouseClick += btnDelete_MouseClick;
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -67,6 +75,16 @@ namespace STG
                     MessageBox.Show(ex.Message);
                 }
             }        
+        }
+
+        private void btnDelete_MouseEnter(object sender, EventArgs e)
+        {
+            EnterBtn.Play();
+        }
+
+        private void btnDelete_MouseClick(object sender, MouseEventArgs e)
+        {
+            ClickBtn.Play();
         }
     }
 }

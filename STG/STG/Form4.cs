@@ -8,15 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Media;
 
 namespace STG
 {
     public partial class Form4 : Form
     {
         int addScore, addTime;
+        SoundPlayer EnterBtn;
+        SoundPlayer ClickBtn;
+
         public Form4(int Score, int Time)
         {
             InitializeComponent();
+            EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
+            btnCancel.MouseEnter += btnSend_MouseEnter;
+            ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
+            btnCancel.MouseClick += btnSend_MouseClick;
+
             addScore = Score;
             addTime = Time;
             labelScore.Text = Score.ToString();
@@ -73,6 +82,16 @@ namespace STG
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSend_MouseEnter(object sender, EventArgs e)
+        {
+            EnterBtn.Play();
+        }
+
+        private void btnSend_MouseClick(object sender, MouseEventArgs e)
+        {
+            ClickBtn.Play();
         }
     }
 }

@@ -137,6 +137,8 @@
             this.btnDelete.TabIndex = 3;
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnDelete_MouseClick);
+            this.btnDelete.MouseEnter += new System.EventHandler(this.btnDelete_MouseEnter);
             // 
             // txtDelete
             // 

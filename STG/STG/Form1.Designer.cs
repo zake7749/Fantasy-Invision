@@ -104,6 +104,8 @@
             this.btnStoreGrade.TabIndex = 12;
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
+            this.btnStoreGrade.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStoreGrade_MouseClick);
+            this.btnStoreGrade.MouseEnter += new System.EventHandler(this.btnStoreGrade_MouseEnter);
             // 
             // labelGameOver
             // 
@@ -121,7 +123,7 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);

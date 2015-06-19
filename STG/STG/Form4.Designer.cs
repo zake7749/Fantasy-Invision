@@ -55,6 +55,8 @@
             this.btnSend.TabIndex = 0;
             this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            this.btnSend.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSend_MouseClick);
+            this.btnSend.MouseEnter += new System.EventHandler(this.btnSend_MouseEnter);
             // 
             // label1
             // 

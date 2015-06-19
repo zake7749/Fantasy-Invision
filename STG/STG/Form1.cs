@@ -29,7 +29,9 @@ namespace STG
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
-   
+        private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
+        private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
+        private Random Randomizer;
         //Painter
         Graphics gp;
         Bitmap bp;
@@ -47,7 +49,7 @@ namespace STG
         public Form1()
         {
             InitializeComponent();
-
+            Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
@@ -416,6 +418,7 @@ namespace STG
                         EnemyBullet ebRay = new EnemyBullet(xy.X, xy.Y);
                         Vector2D bulletV = e.getVelocity(player.lx, player.ly);
                         ebRay.SetV(bulletV.x,bulletV.y);
+                        ebRay.setImage(STARBOX[Randomizer.Next(0,5)]);
                         if (enemyBullet.LastIndexOf(null) != -1)
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRay);
                         else
@@ -426,6 +429,7 @@ namespace STG
                         EnemyBullet ebCircle = new EnemyBullet(xy.X, xy.Y);
                         ebCircle.setMoveMode("Circle");
                         ebCircle.setXY(e.lx, e.ly);
+                        ebCircle.setImage("BlueBigCircle");
                         if (enemyBullet.LastIndexOf(null) != -1)
                         
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCircle);
@@ -452,6 +456,7 @@ namespace STG
                     case "Berserk":
                         EnemyBullet ebBerserk = new EnemyBullet(xy.X, xy.Y);
                         Vector2D bulletBV = e.getVelocity(player.lx, player.ly);
+                        ebBerserk.setImage(BIGSIZE[Randomizer.Next(0,3)]);
                         ebBerserk.SetV(bulletBV.x, bulletBV.y);
                         if (enemyBullet.LastIndexOf(null) != -1)
                             enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebBerserk);
@@ -459,6 +464,21 @@ namespace STG
                             enemyBullet.Add(ebBerserk);
                         //this.panel1.Controls.Add(ebBerserk.img);
                         break;
+                    case "Round":
+                        double rx = 0, ry = 0;
+                        while(rx < Math.PI*2)
+                        {
+                            rx += Math.PI/10;
+                            ry += Math.PI/10;
+                            EnemyBullet ebRound = new EnemyBullet(xy.X+6,xy.Y+20);
+                            ebRound.setImage("SkySignleCircle");
+                            ebRound.SetV(Math.Sin(rx)*3,Math.Cos(ry)*3);
+                            if (enemyBullet.LastIndexOf(null) != -1)
+                                enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRound);
+                            else
+                                enemyBullet.Add(ebRound);
+                        }
+                            break;
                 }
             }
         }
@@ -608,6 +628,17 @@ namespace STG
             return e;
         }
 
+        private Lighter create_Lighter(int x, int y)
+        {
+            Lighter e = new Lighter(x, y);
+            //this.panel1.Controls.Add(e.img);
+            if (enemies.LastIndexOf(null) != -1)
+                enemies.Insert(enemies.LastIndexOf(null), e);
+            else
+                enemies.Add(e);
+            return e;
+        }
+
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -665,6 +696,9 @@ namespace STG
                     break;
                 case Keys.F:
                     EnemyCreateFactory("Bomber-Collision");
+                    break;
+                case Keys.G:
+                    create_Lighter(10, 10);
                     break;
             }
         }

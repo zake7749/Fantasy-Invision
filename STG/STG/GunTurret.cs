@@ -16,14 +16,14 @@ using Microsoft.DirectX.DirectSound;
 public class GunTurret : Enemy
 {
     bool disposed = false;
-
+    String[] ImageFile = { "sCircleS1.png", "sCircleS2.png", "sCircleS3.png", "sCircleS4.png" };
     public GunTurret(int x, int y)
         : base(x, y)
     {
         lx = x;
         ly = y;
         vx = 0;
-        vy = 3;
+        vy = 6;
         setClock();
         loadImage();
         imgAutoSize();
@@ -44,14 +44,20 @@ public class GunTurret : Enemy
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
     }
 
+    protected override void loadImage()
+    {
+        Random robj = new Random();
+        img = new System.Windows.Forms.PictureBox();
+        img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Enemy\\" + ImageFile[robj.Next(0,2)]);
+        img.BackColor = Color.Transparent;
+    }
+
     public override void Move()
     {
         lx += vx;
         ly += vy;
-        if (vy > 0.15)
-            vy -= 0.005;
-        else
-            vy = 0;
+        vy -= 0.010;
         img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.BackColor = Color.Transparent;
     }

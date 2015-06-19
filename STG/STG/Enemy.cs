@@ -25,7 +25,7 @@ public class Enemy : GameObject
     protected int bulletEachTime;
     protected int bulletRestoreLimit;
     protected int bulletRestoreClock;
-
+    protected String[] imageFile = { "eveS1.png", "eveS2.png", "eveS3.png"};
     public Enemy(int x, int y)
         : base(x, y)
     {
@@ -54,11 +54,12 @@ public class Enemy : GameObject
         moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
     }
 
-    protected void loadImage()
+    protected virtual void loadImage()
     {
+        Random robj = new Random();
         img = new System.Windows.Forms.PictureBox();
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\player.png");
+        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\Enemy\\" + imageFile[robj.Next(0,2)]);
         img.BackColor = Color.Transparent;
     }
 

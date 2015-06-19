@@ -18,6 +18,8 @@ namespace STG
     class Berserker : Enemy
     {
         bool disposed = false;
+        private int ImageClock, ImageClockLimit, So;
+        private Image[] S;
         private Boolean flip;//used in function FixY();
         private Double LockLx;
         private Double LockLy;
@@ -25,16 +27,19 @@ namespace STG
 
         public Berserker(int x,int y) : base(x,y)
         {
+            ImageClockLimit = 7;
+            So = 1;
             flip = true;
             lx = x;
             ly = y;
             vx = 0;
-            vy = 2;
+            vy = 1;
             setClock();
-            loadImage();
+            //loadImage();
+            setEnemyImage();
             imgAutoSize();
             Shootmode = "Berserk";
-            health = 5;
+            health = 30;
         }
 
         protected override void setClock()
@@ -61,12 +66,40 @@ namespace STG
             img.BackColor = Color.Transparent;
         }
 
+        public override void ChangeImage()
+        {
+            ImageClock++;
+            if (ImageClock > ImageClockLimit)
+            {
+                ImageClock = 0;
+                if (So > 5)
+                    So = 1;
+                img.Image = S[So];
+                So++;
+            }
+        }
+
+        private void setEnemyImage()
+        {
+            img = new System.Windows.Forms.PictureBox();
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            S = new Image[6];
+            String s;
+            int i;
+            for (i = 1; i < 6; i++)
+            {
+                s = "\\assest\\Enemy\\ButterflyS" + i + ".png";
+                S[i] = Image.FromFile(Application.StartupPath + s);
+            }
+            img.Image = S[1];
+        }
+
         private void FixY()
         {
             if (flip)
             {
                 vy += 0.01;
-                if (vy > 1)
+                if (vy > 1.5)
                 {
                     flip = false;
                 }
@@ -74,7 +107,7 @@ namespace STG
             else
             {
                 vy -= 0.01;
-                if (vy < -1)
+                if (vy < -1.5)
                 {
                     flip = true;
                 }
@@ -85,9 +118,9 @@ namespace STG
         private void FixX()
         {
             if (lx > 500)
-                vx = -1;
+                vx = -3;
             else if (lx < 20)
-                vx = 1;
+                vx = 3;
         }
 
        //Dispose method

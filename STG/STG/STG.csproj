@@ -104,6 +104,7 @@
       <DependentUpon>GradeDatabaseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="GunTurret.cs" />
+    <Compile Include="Lighter.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -45,6 +45,7 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -106,8 +107,6 @@
             this.btnStoreGrade.TabIndex = 12;
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
-            //this.btnStoreGrade.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStoreGrade_MouseClick);
-            //this.btnStoreGrade.MouseEnter += new System.EventHandler(this.btnStoreGrade_MouseEnter);
             // 
             // labelGameOver
             // 
@@ -149,6 +148,7 @@
             // 
             // trackBarVolume
             // 
+            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
             this.trackBarVolume.Location = new System.Drawing.Point(24, 546);
             this.trackBarVolume.Maximum = 100;
             this.trackBarVolume.Name = "trackBarVolume";
@@ -221,6 +221,12 @@
             this.PlayBulletPlayer.TabIndex = 8;
             this.PlayBulletPlayer.Visible = false;
             // 
+            // FunctionObjTimer
+            // 
+            this.FunctionObjTimer.Enabled = true;
+            this.FunctionObjTimer.Interval = 1000;
+            this.FunctionObjTimer.Tick += new System.EventHandler(this.FunctionObjTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -264,6 +270,7 @@
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.TrackBar trackBarVolume;
+        private System.Windows.Forms.Timer FunctionObjTimer;
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

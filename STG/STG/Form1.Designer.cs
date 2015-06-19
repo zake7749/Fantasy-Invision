@@ -38,6 +38,7 @@
             this.labelGameOver = new System.Windows.Forms.Label();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.trackBarVolume = new System.Windows.Forms.TrackBar();
             this.labelScore = new System.Windows.Forms.Label();
             this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.labelHP = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
@@ -135,6 +137,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.trackBarVolume);
             this.panel2.Controls.Add(this.labelScore);
             this.panel2.Controls.Add(this.BGMPlayer);
             this.panel2.Controls.Add(this.labelHP);
@@ -143,6 +146,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(201, 603);
             this.panel2.TabIndex = 2;
+            // 
+            // trackBarVolume
+            // 
+            this.trackBarVolume.Location = new System.Drawing.Point(24, 546);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
+            this.trackBarVolume.TabIndex = 13;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
             // labelScore
             // 
@@ -184,7 +196,7 @@
             this.labelTime.BackColor = System.Drawing.Color.Transparent;
             this.labelTime.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTime.ForeColor = System.Drawing.Color.Linen;
-            this.labelTime.Location = new System.Drawing.Point(22, 546);
+            this.labelTime.Location = new System.Drawing.Point(16, 496);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(60, 27);
             this.labelTime.TabIndex = 3;
@@ -215,10 +227,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(812, 601);
             this.Controls.Add(this.panel1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Game";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
@@ -226,6 +239,7 @@
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
@@ -249,6 +263,7 @@
         private System.Windows.Forms.Button btnStoreGrade;
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Label labelScore;
+        private System.Windows.Forms.TrackBar trackBarVolume;
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

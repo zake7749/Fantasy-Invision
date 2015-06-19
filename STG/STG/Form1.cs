@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,11 +45,37 @@ namespace STG
         int b3y;
         int Score;
 
+<<<<<<< HEAD
         SoundPlayer SFXBGM;
+=======
+        SoundPlayer EnterBtn;
+        SoundPlayer ClickBtn;
+        SoundPlayer Enemydie;
+        SoundPlayer Playerhurted;
+        SoundPlayer Playerdie;
+        private bool signal = false;
+>>>>>>> origin/master
 
         public Form1()
         {
             InitializeComponent();
+<<<<<<< HEAD
+=======
+            //SFX
+            EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
+            btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
+            ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
+            btnLeave.MouseClick += btnStoreGrade_MouseClick;
+            Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
+            Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
+            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
+            BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
+            BGMPlayer.settings.setMode("Loop", true);
+            BGMPlayer.settings.volume = 70;
+            trackBarVolume.Value = BGMPlayer.settings.volume;
+            BGMPlayer.Ctlcontrols.play();
+            
+>>>>>>> origin/master
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
@@ -63,7 +89,7 @@ namespace STG
             labelScore.Text = "0";
             labelContext.Text = "";
             //label2.Text = "";
-            //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
+           // PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
@@ -281,6 +307,11 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
+<<<<<<< HEAD
+=======
+                BGMPlayer.Ctlcontrols.stop();
+                Playerdie.Play();
+>>>>>>> origin/master
                 labelHP.Text = "0";
                 panel3.Visible = true;
                 Update.Stop();
@@ -354,8 +385,9 @@ namespace STG
 
             foreach (EnemyBullet eb in enemyBullet)
             {
-                if (Math.Abs((int)(eb.lx) - 18 - eb.range - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) < 25)
+                if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
+<<<<<<< HEAD
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
                 }
@@ -366,6 +398,15 @@ namespace STG
                     //擦彈動作
                     Score += 30;
                     labelScore.Text = Score.ToString();
+=======
+                    if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
+                    {
+                        //擦彈動作
+                        player.setHP(-100);
+                    }
+                    else player.setHP(-1);
+                    Playerhurted.Play();
+>>>>>>> origin/master
                 }
 
             }
@@ -864,7 +905,32 @@ namespace STG
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
+            signal = true;
             this.Close();
+            this.Dispose();
         }
+<<<<<<< HEAD
+=======
+
+        private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
+        {
+            EnterBtn.Play();
+        }
+
+        private void btnStoreGrade_MouseClick(object sender, MouseEventArgs e)
+        {
+            ClickBtn.Play();
+        }
+
+        private void trackBarVolume_Scroll(object sender, EventArgs e)
+        {
+            BGMPlayer.settings.volume = trackBarVolume.Value;
+        }
+
+        public bool ReturnCond()
+        {
+            return signal;
+        }
+>>>>>>> origin/master
     }
 }

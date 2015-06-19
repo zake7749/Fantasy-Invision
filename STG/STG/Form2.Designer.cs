@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.btnStart = new System.Windows.Forms.Button();
             this.btnLeave = new System.Windows.Forms.Button();
             this.btnCheckGrade = new System.Windows.Forms.Button();
+            this.BGMStart = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStart
@@ -74,19 +77,32 @@
             this.btnCheckGrade.UseVisualStyleBackColor = false;
             this.btnCheckGrade.Click += new System.EventHandler(this.btnCheckGrade_Click);
             // 
+            // BGMStart
+            // 
+            this.BGMStart.Enabled = true;
+            this.BGMStart.Location = new System.Drawing.Point(39, 511);
+            this.BGMStart.Name = "BGMStart";
+            this.BGMStart.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMStart.OcxState")));
+            this.BGMStart.Size = new System.Drawing.Size(214, 46);
+            this.BGMStart.TabIndex = 3;
+            this.BGMStart.Visible = false;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::STG.Properties.Resources.enterbackground;
             this.ClientSize = new System.Drawing.Size(984, 586);
+            this.Controls.Add(this.BGMStart);
             this.Controls.Add(this.btnCheckGrade);
             this.Controls.Add(this.btnLeave);
             this.Controls.Add(this.btnStart);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Form2_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseClick);
+            ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,5 +112,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnLeave;
         private System.Windows.Forms.Button btnCheckGrade;
+        private AxWMPLib.AxWindowsMediaPlayer BGMStart;
     }
 }

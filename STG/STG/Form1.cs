@@ -365,14 +365,19 @@ namespace STG
                 if (Math.Abs((int)(eb.lx) - 18 - eb.range - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
+<<<<<<< HEAD
+                    //player.setHP(-1);
+=======
                     player.setHP(-1);
                     Playerhurted.Play();
+>>>>>>> origin/master
                 }
 
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
                     && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
                 {
                     //擦彈動作
+                    player.setHP(-1);
                 }
 
             }

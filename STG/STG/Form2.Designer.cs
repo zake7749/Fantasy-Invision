@@ -45,6 +45,8 @@
             this.btnStart.TabIndex = 0;
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStart_MouseClick);
+            this.btnStart.MouseEnter += new System.EventHandler(this.btnStart_MouseEnter);
             // 
             // btnLeave
             // 

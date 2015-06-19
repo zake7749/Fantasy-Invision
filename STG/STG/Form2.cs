@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Diagnostics;
 
 namespace STG
 {
@@ -26,10 +27,21 @@ namespace STG
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
             btnCheckGrade.MouseClick += btnStart_MouseClick;
             btnLeave.MouseClick += btnStart_MouseClick;
+            BGMStart.URL = @"SFX\STB.wav";
+            BGMStart.settings.volume = 70;
+            BGMStart.settings.setMode("Loop", true);
+            BGMStart.Ctlcontrols.play();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            if (NewGame == null)               
+                BGMStart.Ctlcontrols.play();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            BGMStart.Ctlcontrols.stop();
             NewGame = new Form1();
             NewGame.Show();
         }
@@ -53,6 +65,7 @@ namespace STG
         private void btnStart_MouseClick(object sender, MouseEventArgs e)
         {
             ClickBtn.Play();
-        }
+       }
+       
     }
 }

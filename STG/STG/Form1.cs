@@ -46,6 +46,7 @@ namespace STG
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
+        private bool signal = false;
 
         public Form1()
         {
@@ -60,10 +61,10 @@ namespace STG
             Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
             BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
             BGMPlayer.settings.setMode("Loop", true);
-            BGMPlayer.Ctlcontrols.play();
             BGMPlayer.settings.volume = 70;
             trackBarVolume.Value = BGMPlayer.settings.volume;
-
+            BGMPlayer.Ctlcontrols.play();
+            
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
@@ -365,12 +366,8 @@ namespace STG
                 if (Math.Abs((int)(eb.lx) - 18 - eb.range - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) < 25)
                 {
                     //System.Threading.Thread.Sleep(100);
-<<<<<<< HEAD
-                    //player.setHP(-1);
-=======
                     player.setHP(-1);
                     Playerhurted.Play();
->>>>>>> origin/master
                 }
 
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
@@ -834,7 +831,9 @@ namespace STG
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
+            signal = true;
             this.Close();
+            
         }
 
         private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
@@ -850,6 +849,11 @@ namespace STG
         private void trackBarVolume_Scroll(object sender, EventArgs e)
         {
             BGMPlayer.settings.volume = trackBarVolume.Value;
+        }
+
+        public bool ReturnCond()
+        {
+            return signal;
         }
     }
 }

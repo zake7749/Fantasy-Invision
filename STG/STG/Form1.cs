@@ -59,7 +59,7 @@ namespace STG
             labelTime.Text = "0";
             labelScore.Text = "0";
             labelContext.Text = "";
-            label2.Text = "";
+            //label2.Text = "";
             //PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
@@ -181,7 +181,9 @@ namespace STG
                 if (e.canMove())
                 {
                     e.Move();
+                    e.ChangeImage();
                 }
+                
                 enemy_CreateBullet(e);
             }
         }
@@ -305,7 +307,7 @@ namespace STG
 
         private void DebugMessage()
         {
-            label1.Text = enemies.Count.ToString();
+            //label1.Text = enemies.Count.ToString();
         }
 
         //Set story
@@ -466,10 +468,10 @@ namespace STG
             double start = -1*(scale-1)/2*interval;
             double vX = 0, vY = 0;
             double normal = 0;
-            label7.Text = interval.ToString();
+            //label7.Text = interval.ToString();
             for(i=0;i<scale;i++)
             {
-                EnemyBullet eb = new EnemyBullet(xy.X,xy.Y);
+                EnemyBullet eb = new EnemyBullet(xy.X+20,xy.Y+10);
 
                 normal = Normalizer(start,100);
 

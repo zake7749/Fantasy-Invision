@@ -101,6 +101,11 @@ public class Enemy : GameObject
 
     }
 
+    public virtual void ChangeImage()
+    {
+
+    }
+
     //Dispose method
         protected override void Dispose(bool disposing)
        {

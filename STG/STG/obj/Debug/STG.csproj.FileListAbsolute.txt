@@ -86,3 +86,7 @@ C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase.mdf
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase_log.ldf
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form3.resources
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form4.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase.mdf
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase_log.ldf
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form3.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form4.resources

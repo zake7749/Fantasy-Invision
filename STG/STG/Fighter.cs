@@ -18,22 +18,26 @@ namespace STG
         Boolean disposed = false;//for destructor.
 
         private Boolean flip;//used in function FixY();
+        private int ImageClock, ImageClockLimit,So;
         private Boolean StallLock;//used in function Stall();
         private Boolean RestoreLock;//used in function RestoreVelocity();
         private double RestoreVx;//used in function RestoreVelocity();
         private double RestoreVy;//used in function RestoreVelocity();
-
+        private Image[] S;
         public Fighter(int x,int y):base(x,y)
         {
             RestoreLock = false;
             StallLock = true;
             flip = true;
+            ImageClockLimit = 7;
+            So = 1;
             lx = x;
             ly = y;
             vx = 0;
             vy = 1.8;
             setClock();
-            loadImage();
+            //loadImage();
+            setEnemyImage();
             imgAutoSize();
             Shootmode = "Split-5";
             health = 10;
@@ -89,6 +93,34 @@ namespace STG
                 vx = -1;
             else if (lx < 20)
                 vx = 1;
+        }
+
+        private void setEnemyImage()
+        {
+            img = new System.Windows.Forms.PictureBox();
+            img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+            S = new Image[6];
+            String s;
+            int i;
+            for (i = 1; i < 6; i++)
+            {
+                s = "\\assest\\Enemy\\ButterflyS" + i + ".png";
+                S[i] = Image.FromFile(Application.StartupPath + s);
+            }
+            img.Image = S[1];
+        }
+
+        public override void ChangeImage()
+        {
+            ImageClock++;
+            if (ImageClock > ImageClockLimit)
+            {
+                ImageClock = 0;
+                if (So > 5)
+                    So = 1;
+                    img.Image = S[So];
+                    So++;
+            }
         }
 
         public override Boolean canShoot()

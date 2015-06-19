@@ -45,22 +45,16 @@ namespace STG
         int b3y;
         int Score;
 
-<<<<<<< HEAD
-        SoundPlayer SFXBGM;
-=======
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
-        private bool signal = false;
->>>>>>> origin/master
 
         public Form1()
         {
             InitializeComponent();
-<<<<<<< HEAD
-=======
+
             //SFX
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
@@ -75,7 +69,6 @@ namespace STG
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
->>>>>>> origin/master
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
@@ -307,11 +300,10 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-<<<<<<< HEAD
-=======
+
                 BGMPlayer.Ctlcontrols.stop();
                 Playerdie.Play();
->>>>>>> origin/master
+
                 labelHP.Text = "0";
                 panel3.Visible = true;
                 Update.Stop();
@@ -377,6 +369,7 @@ namespace STG
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
+                            Enemydie.Play();
                         }
                         b.setTimetoExplode(true);
                     }
@@ -387,9 +380,10 @@ namespace STG
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
-<<<<<<< HEAD
+
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
+                    Playerhurted.Play();
                 }
 
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
@@ -398,7 +392,7 @@ namespace STG
                     //擦彈動作
                     Score += 30;
                     labelScore.Text = Score.ToString();
-=======
+
                     if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
                     {
                         //擦彈動作
@@ -406,7 +400,6 @@ namespace STG
                     }
                     else player.setHP(-1);
                     Playerhurted.Play();
->>>>>>> origin/master
                 }
 
             }
@@ -416,6 +409,7 @@ namespace STG
                 {
                     System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
+                    Playerhurted.Play();
                 }                  
             }
         }
@@ -905,12 +899,9 @@ namespace STG
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
-            signal = true;
             this.Close();
             this.Dispose();
         }
-<<<<<<< HEAD
-=======
 
         private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
         {
@@ -927,10 +918,5 @@ namespace STG
             BGMPlayer.settings.volume = trackBarVolume.Value;
         }
 
-        public bool ReturnCond()
-        {
-            return signal;
-        }
->>>>>>> origin/master
     }
 }

@@ -63,6 +63,16 @@ namespace STG.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap Cancel {
+            get {
+                object obj = ResourceManager.GetObject("Cancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap checkgrade {
             get {
                 object obj = ResourceManager.GetObject("checkgrade", resourceCulture);
@@ -76,6 +86,16 @@ namespace STG.Properties {
         internal static System.Drawing.Bitmap clock {
             get {
                 object obj = ResourceManager.GetObject("clock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +143,59 @@ namespace STG.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap Leave4 {
+            get {
+                object obj = ResourceManager.GetObject("Leave4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap leave5 {
+            get {
+                object obj = ResourceManager.GetObject("leave5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap recordbackground {
+            get {
+                object obj = ResourceManager.GetObject("recordbackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Send {
+            get {
+                object obj = ResourceManager.GetObject("Send", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap start {
             get {
                 object obj = ResourceManager.GetObject("start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap storebackground {
+            get {
+                object obj = ResourceManager.GetObject("storebackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

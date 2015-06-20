@@ -45,6 +45,7 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.AttackPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -52,6 +53,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AttackPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // Update
@@ -106,8 +108,6 @@
             this.btnStoreGrade.TabIndex = 12;
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
-            //this.btnStoreGrade.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnStoreGrade_MouseClick);
-            //this.btnStoreGrade.MouseEnter += new System.EventHandler(this.btnStoreGrade_MouseEnter);
             // 
             // labelGameOver
             // 
@@ -125,7 +125,7 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
@@ -137,6 +137,7 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.AttackPlayer);
             this.panel2.Controls.Add(this.trackBarVolume);
             this.panel2.Controls.Add(this.labelScore);
             this.panel2.Controls.Add(this.BGMPlayer);
@@ -177,6 +178,7 @@
             this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
             this.BGMPlayer.TabIndex = 9;
             this.BGMPlayer.Visible = false;
+            this.BGMPlayer.Enter += new System.EventHandler(this.AttackPlayer_Enter);
             // 
             // labelHP
             // 
@@ -221,6 +223,16 @@
             this.PlayBulletPlayer.TabIndex = 8;
             this.PlayBulletPlayer.Visible = false;
             // 
+            // AttackPlayer
+            // 
+            this.AttackPlayer.Enabled = true;
+            this.AttackPlayer.Location = new System.Drawing.Point(17, 425);
+            this.AttackPlayer.Name = "AttackPlayer";
+            this.AttackPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("AttackPlayer.OcxState")));
+            this.AttackPlayer.Size = new System.Drawing.Size(75, 23);
+            this.AttackPlayer.TabIndex = 14;
+            this.AttackPlayer.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -243,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AttackPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,6 +277,7 @@
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.TrackBar trackBarVolume;
+        private AxWMPLib.AxWindowsMediaPlayer AttackPlayer;
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

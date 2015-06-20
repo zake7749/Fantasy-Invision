@@ -124,7 +124,7 @@
   <data name="panel2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANEAAAJbCAIAAAD17OYvAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EQAACxEBf2RfkQAAABp0RVh0QXV0aG9yAFVsZWFkIFN5c3RlbXMsIEluYy7JHT52AAD/jElEQVR4Xpy9
+        DwAACw8BkvkDpQAAABp0RVh0QXV0aG9yAFVsZWFkIFN5c3RlbXMsIEluYy7JHT52AAD/jElEQVR4Xpy9
         BXxcR7bue949SUxihlZ3i5klW5JJRsmWJctiZmZmNDMz27FjJ2ZmlCxmBmPsOJzJGchkJvS+VdXdlh3P
         ffe++X2nz5YsO+rd//2ttapWVf3XhIkTx08g/T///cH/+u8P/p//9cH/+uCj//5owkcT5MdNVPpokvIE
         eY0JilpySnoTFU0mydvITXKRmzRNftJ0hUnub2s2pCg3R1FunkxK8vMVJ5EUJs6Tm+QhL+cJKcgvUFPx
@@ -3039,6 +3039,17 @@
         PPRJfJixJMBBUcRBGu/+ajrWBlgz1xkyLZvKs7Aju8f410uoLrOU1z0Xg5kL1tLr4QCHJxDjVK+yJzer
         ULO/mjTOGWSLMoioSt342EnYrilgcengDLTRIQU+hp5RpqnpE52Q3pD5TOQ7u/8fc6n9q7KZhC4AAAAA
         SUVORK5CYII=
+</value>
+  </data>
+  <data name="AttackPlayer.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAtwAAAAIB
+        AAAAAQAAAAAAAAAAAAAAAKIAAAAAAwAACAAAAAAABQAAAAAAAADwPwMAAAAAAAUAAAAAAAAAAAAIAAIA
+        AAAAAAMAAQAAAAsA//8DAAAAAAALAP//CAACAAAAAAADADIAAAALAAAACAAKAAAAZgB1AGwAbAAAAAsA
+        AAALAAAACwD//wsA//8LAAAACAACAAAAAAAIAAIAAAAAAAgAAgAAAAAACAACAAAAAAALAAAAwAcAAGEC
+        AAAL
 </value>
   </data>
   <data name="BGMPlayer.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">

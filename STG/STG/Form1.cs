@@ -30,7 +30,7 @@ namespace STG
         private Double LockLy;//Used for Split-shootmode.
         private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
         private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
-        private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart.png",};
+        private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart",};
         private Random Randomizer;
         //Painter
         Graphics gp;
@@ -45,37 +45,41 @@ namespace STG
         int b3y;
         int Score;
 
-<<<<<<< HEAD
+
         SoundPlayer SFXBGM;
-=======
+
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
+        //SoundPlayer PlayerShoot;
         private bool signal = false;
->>>>>>> origin/master
+
 
         public Form1()
         {
             InitializeComponent();
-<<<<<<< HEAD
-=======
+
             //SFX
+
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
+            //PlayerShoot = new SoundPlayer(Application.StartupPath + @"\SFX\se_plst00.wav");
             btnLeave.MouseClick += btnStoreGrade_MouseClick;
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
             Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
-            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
+            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\se_pldead00.wav");
+            AttackPlayer.URL = @"SFX\se_plst00.wav";
+            AttackPlayer.settings.volume = 20;
             BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
             BGMPlayer.settings.setMode("Loop", true);
             BGMPlayer.settings.volume = 70;
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
->>>>>>> origin/master
+
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
@@ -89,7 +93,6 @@ namespace STG
             labelScore.Text = "0";
             labelContext.Text = "";
             //label2.Text = "";
-           // PlayBulletPlayer.URL = @"SFX\DAMAGE.WAV";
             //PlayBulletPlayer.Ctlcontrols.play();
 
             //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
@@ -307,11 +310,10 @@ namespace STG
             //Game Over Condition
             if (player.getHP() <= 0)
             {
-<<<<<<< HEAD
-=======
+
                 BGMPlayer.Ctlcontrols.stop();
                 Playerdie.Play();
->>>>>>> origin/master
+
                 labelHP.Text = "0";
                 panel3.Visible = true;
                 Update.Stop();
@@ -371,6 +373,7 @@ namespace STG
                 {
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
+                        AttackPlayer.Ctlcontrols.play();
                         enemies[i].health--;
                         if (!enemies[i].isAlive())
                         {
@@ -387,7 +390,6 @@ namespace STG
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
-<<<<<<< HEAD
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
                 }
@@ -398,7 +400,7 @@ namespace STG
                     //擦彈動作
                     Score += 30;
                     labelScore.Text = Score.ToString();
-=======
+
                     if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
                     {
                         //擦彈動作
@@ -406,7 +408,7 @@ namespace STG
                     }
                     else player.setHP(-1);
                     Playerhurted.Play();
->>>>>>> origin/master
+
                 }
 
             }
@@ -429,9 +431,6 @@ namespace STG
             {
                 Bullet b1 = new Bullet((int)player.lx-5, (int)player.ly-20);
                 Bullet b2 = new Bullet((int)player.lx+22, (int)player.ly-20);
-                //PlayBulletPlayer.Ctlcontrols.play();
-                //SFXplayerShot.Play();
-                //buf.Play(1, BufferPlayFlags.Default);
                 
                 //this.panel1.Controls.Add(b.img);
                 playerBullet.Add(b1);
@@ -909,8 +908,6 @@ namespace STG
             this.Close();
             this.Dispose();
         }
-<<<<<<< HEAD
-=======
 
         private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
         {
@@ -931,6 +928,11 @@ namespace STG
         {
             return signal;
         }
->>>>>>> origin/master
+
+        private void AttackPlayer_Enter(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

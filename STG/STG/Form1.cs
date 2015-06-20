@@ -467,7 +467,7 @@ namespace STG
             //吃到FunctionObj
             for (var i = 0; i < functionObj.Count; i++)
             {
-                if ((Math.Abs((int)functionObj[i].lx) - (int)(player.lx)) < 3 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 3)
+                if (Math.Abs((int)functionObj[i].lx - (int)(player.lx)) < 20 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 36)
                 {
                     Score += 10;
                     switch (functionObj[i].getObjType())

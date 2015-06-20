@@ -26,7 +26,7 @@ namespace STG
         private double RestoreVx;//used in function RestoreVelocity();
         private double RestoreVy;//used in function RestoreVelocity();
         private String[] BulletString = {"","","","","","","",""};
-        private String[] ShootMode = { "Round-Line", "", "", "", "", "", "", "" };
+        private String[] ShootMode = { "Round-Line", "Round-Line", "", "", "", "", "", "" };
 
         private int SLR;//S for stand,L for Left,R for Right.
         private Image[] S, L, R;

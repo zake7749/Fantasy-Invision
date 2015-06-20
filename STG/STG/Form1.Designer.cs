@@ -111,7 +111,7 @@
             // labelGameOver
             // 
             this.labelGameOver.BackColor = System.Drawing.Color.Black;
-            this.labelGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
             this.labelGameOver.Location = new System.Drawing.Point(23, 39);
             this.labelGameOver.Name = "labelGameOver";
@@ -124,7 +124,7 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
@@ -149,7 +149,7 @@
             // trackBarVolume
             // 
             this.trackBarVolume.BackColor = System.Drawing.Color.Black;
-            this.trackBarVolume.Location = new System.Drawing.Point(24, 546);
+            this.trackBarVolume.Location = new System.Drawing.Point(13, 275);
             this.trackBarVolume.Maximum = 100;
             this.trackBarVolume.Name = "trackBarVolume";
             this.trackBarVolume.Size = new System.Drawing.Size(165, 45);

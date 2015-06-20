@@ -401,15 +401,24 @@ namespace STG
             {
                 if (!player.IsOP2((int) gameTime.Elapsed.TotalSeconds))
                 {
-                    if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25)
+                    if (player.img.Bounds.IntersectsWith(enemyBullet[i].img.Bounds))
                     {
-                        GameOver();
-                        //Playerdie.Play();
-                        enemyBullet[i].img.Dispose();
-                        enemyBullet[i].Dispose();
-                        enemyBullet.Remove(enemyBullet[i]);
+                        if (player.lx - enemyBullet[i].lx < enemyBullet[i].img.Width - 2*enemyBullet[i].range)
+                        {
+                            GameOver();
+                            //Playerdie.Play();
+                            enemyBullet[i].img.Dispose();
+                            enemyBullet[i].Dispose();
+                            enemyBullet.Remove(enemyBullet[i]);
+                        }
+                        else
+                        {
+                            Score += 10000;
+                            labelScore.Text = Score.ToString();
+                        }
                     }
 
+                    /* is to be modified.
                     else if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].lx) - enemyBullet[i].range - 18 - (int)(player.lx)) > 18
                         && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(enemyBullet[i].ly) - enemyBullet[i].range - 25 - (int)(player.ly)) > 25)
                     {
@@ -430,7 +439,7 @@ namespace STG
                             enemyBullet[i].Dispose();
                             enemyBullet.Remove(enemyBullet[i]);
                         }
-                    }
+                    }*/
                 }
             }
 

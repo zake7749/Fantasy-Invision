@@ -100,33 +100,31 @@ public class EnemyBullet : GameObject
     //擦彈判定 回傳為距離邊框之pixle長度 例如:16*16的圖 回傳2代表距離邊框2pixle為擦彈範圍
     public void setImage(string outstr)
     {
-        //下面這一行有問題
-        img.Image = Image.FromFile(Application.StartupPath + "\\assest\\EnemyBullet\\" + outstr + ".png");
-        if (outstr.ToCharArray(outstr.Length - 6, 6).ToString() == "Circle")
+        if (outstr.Substring(outstr.Length - 6, 6) == "Circle")
         {
-            if (outstr.ToCharArray(outstr.Length - 9, 3).ToString() == "Big")
+            if (outstr.Substring(outstr.Length - 9, 3) == "Big")
             {
                 range = 3;
             }
-            else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Round")
+            else if (outstr.Substring(outstr.Length - 11, 5) == "Round")
             {
                 range = 4;
             }
-            else if (outstr.ToCharArray(outstr.Length - 11, 5).ToString() == "Black")
+            else if (outstr.Substring(outstr.Length - 11, 5) == "Black")
             {
                 range = 9;
             }
             else range = 2;
         }
-        else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
+        else if (outstr.Substring(outstr.Length - 4, 4) == "Star")
         {
-            if (outstr.ToCharArray(outstr.Length - 7, 3).ToString() == "Big")
+            if (outstr.Substring(outstr.Length - 7, 3) == "Big")
             {
                 range = 3;
             }
             else range = 2;
         }
-        else if (outstr.ToCharArray(outstr.Length - 4, 4).ToString() == "Star")
+        else if (outstr.Substring(outstr.Length - 4, 4) == "Star")
         {
             range = 4;
         }

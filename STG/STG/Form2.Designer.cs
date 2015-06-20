@@ -39,12 +39,12 @@
             // btnStart
             // 
             this.btnStart.BackColor = System.Drawing.Color.Transparent;
-            this.btnStart.BackgroundImage = global::STG.Properties.Resources.start;
+            this.btnStart.BackgroundImage = global::STG.Properties.Resources.start1;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnStart.Location = new System.Drawing.Point(39, 106);
+            this.btnStart.Location = new System.Drawing.Point(401, 246);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(225, 70);
+            this.btnStart.Size = new System.Drawing.Size(172, 49);
             this.btnStart.TabIndex = 0;
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
@@ -54,12 +54,12 @@
             // btnLeave
             // 
             this.btnLeave.BackColor = System.Drawing.Color.Transparent;
-            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.leave;
+            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
             this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnLeave.Location = new System.Drawing.Point(39, 363);
+            this.btnLeave.Location = new System.Drawing.Point(418, 443);
             this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(225, 70);
+            this.btnLeave.Size = new System.Drawing.Size(133, 45);
             this.btnLeave.TabIndex = 1;
             this.btnLeave.UseVisualStyleBackColor = false;
             this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
@@ -67,12 +67,12 @@
             // btnCheckGrade
             // 
             this.btnCheckGrade.BackColor = System.Drawing.Color.Transparent;
-            this.btnCheckGrade.BackgroundImage = global::STG.Properties.Resources.checkgrade;
+            this.btnCheckGrade.BackgroundImage = global::STG.Properties.Resources.score;
             this.btnCheckGrade.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCheckGrade.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnCheckGrade.Location = new System.Drawing.Point(39, 236);
+            this.btnCheckGrade.Location = new System.Drawing.Point(400, 339);
             this.btnCheckGrade.Name = "btnCheckGrade";
-            this.btnCheckGrade.Size = new System.Drawing.Size(225, 70);
+            this.btnCheckGrade.Size = new System.Drawing.Size(173, 52);
             this.btnCheckGrade.TabIndex = 2;
             this.btnCheckGrade.UseVisualStyleBackColor = false;
             this.btnCheckGrade.Click += new System.EventHandler(this.btnCheckGrade_Click);
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::STG.Properties.Resources.enterbackground;
+            this.BackgroundImage = global::STG.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(984, 586);
             this.Controls.Add(this.BGMStart);
             this.Controls.Add(this.btnCheckGrade);

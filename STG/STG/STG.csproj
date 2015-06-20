@@ -98,6 +98,7 @@
     <Compile Include="Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="FunctionObject.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GradeDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

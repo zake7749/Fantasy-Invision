@@ -45,7 +45,11 @@
             this.labelTime = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+<<<<<<< HEAD
             this.AttackPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+=======
+            this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
+>>>>>>> origin/master
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -150,6 +154,7 @@
             // 
             // trackBarVolume
             // 
+            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
             this.trackBarVolume.Location = new System.Drawing.Point(24, 546);
             this.trackBarVolume.Maximum = 100;
             this.trackBarVolume.Name = "trackBarVolume";
@@ -223,6 +228,7 @@
             this.PlayBulletPlayer.TabIndex = 8;
             this.PlayBulletPlayer.Visible = false;
             // 
+<<<<<<< HEAD
             // AttackPlayer
             // 
             this.AttackPlayer.Enabled = true;
@@ -232,6 +238,13 @@
             this.AttackPlayer.Size = new System.Drawing.Size(75, 23);
             this.AttackPlayer.TabIndex = 14;
             this.AttackPlayer.Visible = false;
+=======
+            // FunctionObjTimer
+            // 
+            this.FunctionObjTimer.Enabled = true;
+            this.FunctionObjTimer.Interval = 1000;
+            this.FunctionObjTimer.Tick += new System.EventHandler(this.FunctionObjTimer_Tick);
+>>>>>>> origin/master
             // 
             // Form1
             // 
@@ -277,7 +290,11 @@
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.TrackBar trackBarVolume;
+<<<<<<< HEAD
         private AxWMPLib.AxWindowsMediaPlayer AttackPlayer;
+=======
+        private System.Windows.Forms.Timer FunctionObjTimer;
+>>>>>>> origin/master
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

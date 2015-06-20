@@ -20,6 +20,7 @@ namespace STG
         List<Enemy> enemies;
         List<EnemyBullet> enemyBullet;
         List<Bullet> playerBullet;
+        List<FunctionObject> functionObj;
         Player player;
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
@@ -45,17 +46,23 @@ namespace STG
         int b3y;
         int Score;
 
+<<<<<<< HEAD
 
         SoundPlayer SFXBGM;
 
+=======
+>>>>>>> origin/master
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
+<<<<<<< HEAD
         //SoundPlayer PlayerShoot;
         private bool signal = false;
 
+=======
+>>>>>>> origin/master
 
         public Form1()
         {
@@ -79,39 +86,39 @@ namespace STG
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
+            functionObj = new List<FunctionObject>();
             Score = 0;
-            player = new Player(300, 500);
-            //this.panel1.Controls.Add(player.img);
-            
+            player = new Player(300, 500);            
             
             labelTime.Text = "0";
             labelScore.Text = "0";
             labelContext.Text = "";
+<<<<<<< HEAD
             //label2.Text = "";
             //PlayBulletPlayer.Ctlcontrols.play();
+=======
+>>>>>>> origin/master
 
-            //dv.SetCooperativeLevel(STG.Form1.ActiveForm, CooperativeLevel.Priority);
-            //buf = new SecondaryBuffer(@"\SFX\DAMAGE.WAV", dv);
             //SetStory();    
             
-            //background code
-            
+            //background code            
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
             background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-            //this.panel1.Controls.Add(background1);
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -58);
-            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
-            //this.panel1.Controls.Add(background2);
+            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");;
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
@@ -126,15 +133,14 @@ namespace STG
             this.panel1.Controls.Add(background3);
             background3.Width = background1.Image.Width;
             background3.Height = background1.Image.Height;
-
-            //background code
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            gameTime.Reset(); //這是畫面右下角的計時器
+            gameTime.Start(); //這是畫面右下角的計時器
+
             //Update.Stop();
-            //gameTime.Reset();
-            //gameTime.Start();
             //playing music in loop
 
             //BGMPlayer.URL = @"TOS8.wav";
@@ -171,13 +177,17 @@ namespace STG
             {
                 g.DrawImage(e.img.Image, new Point((int)e.lx, (int)e.ly));
             }
+            //FunctionObject
+            foreach(FunctionObject f in functionObj)
+            {
+                g.DrawImage(f.img.Image, new Point((int)f.lx, (int)f.ly));
+            }
             //Player
             g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
             pictureBox1.Image = (Image)bmpPic1; 
         }  
         
-        //background code
-        
+        //background code      
         private void updateBackground()
         {
             b1y+=7;
@@ -190,7 +200,6 @@ namespace STG
             background2.Location = new Point(-10, b2y);
             background3.Location = new Point(-10, b3y);
         }
-        //background code
 
         //Update Object
         private void updatePlayer()
@@ -240,6 +249,15 @@ namespace STG
             }
         }
 
+        //Update FunctionObject
+        private void updateFuntionObject()
+        {
+            foreach(FunctionObject f in functionObj)
+            {
+                f.Move();
+            }
+        }
+
         //Bounder check
         private void enemyBounderCheck()
         {
@@ -279,10 +297,24 @@ namespace STG
             }
 
         }
+        private void functionObjCheck()
+        {
+            for (var i = 0; i < functionObj.Count; i++)
+            {
+
+                if (functionObj[i].ly > this.Height + 100)
+                {
+                    functionObj[i].img.Dispose();
+                    functionObj[i].Dispose();
+                    functionObj.Remove(functionObj[i]);
+                }
+            }
+        }
         private void BounderCheck()
         {
             enemyBounderCheck();
             bulletBounderCheck();
+            functionObjCheck();
         }
 
         //Update
@@ -297,6 +329,7 @@ namespace STG
             updateEnemy();
             updatePlayerBullet();
             updateEnemyBullet();
+            updateFuntionObject();
             
             //background code
             updateBackground();
@@ -380,6 +413,7 @@ namespace STG
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
+                            Enemydie.Play();
                         }
                         b.setTimetoExplode(true);
                     }
@@ -390,8 +424,13 @@ namespace STG
             {
                 if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
                 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
                     //System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
+                    Playerhurted.Play();
                 }
 
                 else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
@@ -408,7 +447,10 @@ namespace STG
                     }
                     else player.setHP(-1);
                     Playerhurted.Play();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
                 }
 
             }
@@ -418,6 +460,7 @@ namespace STG
                 {
                     System.Threading.Thread.Sleep(100);
                     player.setHP(-1);
+                    Playerhurted.Play();
                 }                  
             }
         }
@@ -720,6 +763,18 @@ namespace STG
             return e;
         }
 
+        //Create FunctionObject
+        private void create_FunctionObject()
+        {
+            Random robj = new Random();
+            int x = robj.Next(10, 585);
+            FunctionObject fo = new FunctionObject(x, -25);
+            if (functionObj.LastIndexOf(null) != -1)
+                functionObj.Insert(functionObj.LastIndexOf(null), fo);
+            else
+                functionObj.Add(fo);
+        }
+
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -822,7 +877,6 @@ namespace STG
             }         
         }
 
-
         private void EnemyCreateFactory(String way)
         {
             int i,j,k;
@@ -904,7 +958,6 @@ namespace STG
 
         private void btnLeave_Click(object sender, EventArgs e)
         {
-            signal = true;
             this.Close();
             this.Dispose();
         }
@@ -924,15 +977,18 @@ namespace STG
             BGMPlayer.settings.volume = trackBarVolume.Value;
         }
 
-        public bool ReturnCond()
+        private void FunctionObjTimer_Tick(object sender, EventArgs e) //For create FunctionObject (每秒產生1個) 
         {
-            return signal;
+            create_FunctionObject();
         }
 
+<<<<<<< HEAD
         private void AttackPlayer_Enter(object sender, EventArgs e)
         {
 
         }
 
+=======
+>>>>>>> origin/master
     }
 }

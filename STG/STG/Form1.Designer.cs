@@ -88,22 +88,22 @@
             // 
             // btnLeave
             // 
-            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.leave3;
+            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
             this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLeave.Location = new System.Drawing.Point(36, 232);
+            this.btnLeave.Location = new System.Drawing.Point(101, 245);
             this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(288, 73);
+            this.btnLeave.Size = new System.Drawing.Size(133, 44);
             this.btnLeave.TabIndex = 13;
             this.btnLeave.UseVisualStyleBackColor = true;
             this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
             // btnStoreGrade
             // 
-            this.btnStoreGrade.BackgroundImage = global::STG.Properties.Resources.storegrade;
+            this.btnStoreGrade.BackgroundImage = global::STG.Properties.Resources.score;
             this.btnStoreGrade.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStoreGrade.Location = new System.Drawing.Point(36, 153);
+            this.btnStoreGrade.Location = new System.Drawing.Point(82, 156);
             this.btnStoreGrade.Name = "btnStoreGrade";
-            this.btnStoreGrade.Size = new System.Drawing.Size(288, 73);
+            this.btnStoreGrade.Size = new System.Drawing.Size(175, 53);
             this.btnStoreGrade.TabIndex = 12;
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
@@ -111,7 +111,7 @@
             // labelGameOver
             // 
             this.labelGameOver.BackColor = System.Drawing.Color.Black;
-            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.Font = new System.Drawing.Font("Microsoft Sans Serif", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
             this.labelGameOver.Location = new System.Drawing.Point(23, 39);
             this.labelGameOver.Name = "labelGameOver";

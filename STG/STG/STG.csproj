@@ -237,6 +237,10 @@
     <None Include="bin\Debug\UI\delete.png" />
     <None Include="bin\Debug\UI\leave5.png" />
     <None Include="bin\Debug\UI\Life.png" />
+    <None Include="bin\Debug\assest\background.jpg" />
+    <None Include="bin\Debug\assest\exit.jpg" />
+    <None Include="bin\Debug\assest\score.jpg" />
+    <None Include="bin\Debug\assest\start.jpg" />
     <Content Include="GradeDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

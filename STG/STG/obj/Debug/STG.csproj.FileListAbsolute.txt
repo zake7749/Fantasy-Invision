@@ -90,3 +90,22 @@ E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\Grad
 E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase_log.ldf
 E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form3.resources
 E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form4.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.exe.config
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\Interop.WMPLib.dll
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.ResolveComReference.cache
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.exe
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.pdb
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase.mdf
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\GradeDatabase_log.ldf
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.exe
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\STG.pdb
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\Interop.WMPLib.dll
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csprojResolveAssemblyReference.cache
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form1.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form2.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form3.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form4.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
+C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache

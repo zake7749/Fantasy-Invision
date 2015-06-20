@@ -21,9 +21,13 @@ public class Player : GameObject
     private int OPclock, OPclockLimit;
     private Image[] S, L, R;
     private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
+    private int OPEndTime;
+
     public Player(int x, int y)
         : base(x, y)
     {
+        OPEndTime = -1;
+
         health = 50;
         lx = x;
         ly = y;
@@ -50,6 +54,32 @@ public class Player : GameObject
         ResetImageOrder();
     }
 
+    public void setOPEndTime(int InStartTime, int InRemainTime)
+    {
+        OPEndTime = InStartTime + InRemainTime;
+    }
+
+    public int getOPEndTime()
+    {
+        return OPEndTime;
+    }
+
+    public bool IsOP2(int NowTime)
+    {
+        if (OPEndTime == NowTime){
+            OPEndTime = -1;
+            return false;
+        }
+        else if (OPEndTime == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public void setOPClock(int clock)
     {
         OP = true;
@@ -61,12 +91,12 @@ public class Player : GameObject
         if (OP)
         {
             OPclock++;
-            if(OPclock>OPclockLimit)
+            if(OPclock > OPclockLimit)
             {
                 OP = false;
                 OPclock = 0;
             }
-            return true;
+            return OP;
         }
         return false;
     }

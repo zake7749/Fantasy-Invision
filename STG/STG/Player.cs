@@ -17,6 +17,8 @@ public class Player : GameObject
 {
     private int SLR;//S for stand,L for Left,R for Right.
     private int ImageClock, ImageClockLimit;
+    private Boolean OP;
+    private int OPclock, OPclockLimit;
     private Image[] S, L, R;
     private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
     public Player(int x, int y)
@@ -27,6 +29,7 @@ public class Player : GameObject
         ly = y;
         //f = frame = timer interval of FixUpdate 
         clock = 0;
+        OP = false;
         clockLimit = 7;//每隔 10f 有一發子彈
         ImageClock = 0;
         ImageClockLimit = 10;
@@ -45,6 +48,27 @@ public class Player : GameObject
         img.BackColor = Color.Transparent;
         imgAutoSize();
         ResetImageOrder();
+    }
+
+    public void setOPClock(int clock)
+    {
+        OP = true;
+        OPclockLimit = clock;
+    }
+
+    public Boolean isOP()
+    {
+        if (OP)
+        {
+            OPclock++;
+            if(OPclock>OPclockLimit)
+            {
+                OP = false;
+                OPclock = 0;
+            }
+            return true;
+        }
+        return false;
     }
 
     private void setPlayerImage()

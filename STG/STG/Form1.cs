@@ -36,6 +36,8 @@ namespace STG
         //Painter
         Graphics gp;
         Bitmap bp;
+        //
+        int Life = 5;
         
         //background code
         public PictureBox background1;
@@ -46,23 +48,17 @@ namespace STG
         int b3y;
         int Score;
 
-<<<<<<< HEAD
 
         SoundPlayer SFXBGM;
 
-=======
->>>>>>> origin/master
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
-<<<<<<< HEAD
         //SoundPlayer PlayerShoot;
         private bool signal = false;
 
-=======
->>>>>>> origin/master
 
         public Form1()
         {
@@ -86,10 +82,7 @@ namespace STG
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
@@ -101,11 +94,10 @@ namespace STG
             labelTime.Text = "0";
             labelScore.Text = "0";
             labelContext.Text = "";
-<<<<<<< HEAD
+
+
             //label2.Text = "";
             //PlayBulletPlayer.Ctlcontrols.play();
-=======
->>>>>>> origin/master
 
             //SetStory();    
             
@@ -338,19 +330,10 @@ namespace STG
             Collision();
             //circle.circleMove(200.0, 200.0, angle);
 
-            labelHP.Text = player.getHP().ToString();
+            //labelHP.Text = player.getHP().ToString();
             labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
             //Game Over Condition
-            if (player.getHP() <= 0)
-            {
 
-                BGMPlayer.Ctlcontrols.stop();
-                Playerdie.Play();
-
-                labelHP.Text = "0";
-                panel3.Visible = true;
-                Update.Stop();
-            }
 
             /*
              * Please write comment for each code block added.
@@ -422,48 +405,65 @@ namespace STG
 
             foreach (EnemyBullet eb in enemyBullet)
             {
-                if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                if (!player.isOP())
                 {
-<<<<<<< HEAD
-=======
+                    if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                    {
+                        GameOver();
+                        Playerdie.Play();
+                    }
 
->>>>>>> origin/master
-                    //System.Threading.Thread.Sleep(100);
-                    player.setHP(-1);
-                    Playerhurted.Play();
-                }
-
-                else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
-                    && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
-                {
-                    //擦彈動作
-                    Score += 30;
-                    labelScore.Text = Score.ToString();
-
-                    if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
+                    else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
+                        && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
                     {
                         //擦彈動作
-                        player.setHP(-100);
-                    }
-                    else player.setHP(-1);
-                    Playerhurted.Play();
-<<<<<<< HEAD
+                        Score += 30;
+                        labelScore.Text = Score.ToString();
 
-=======
->>>>>>> origin/master
+                        if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
+                        {
+                            //擦彈動作
+                            Score += 100;
+                        }
+                        else
+                        {
+                            GameOver();
+                            Playerdie.Play();
+                        }
+
+                    }
                 }
 
             }
             foreach (Enemy en in enemies)
             {
-                if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
+                if (!player.isOP())
                 {
-                    System.Threading.Thread.Sleep(100);
-                    player.setHP(-1);
-                    Playerhurted.Play();
-                }                  
+                    if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
+                    {
+                        player.setHP(-1);
+
+                    }
+                }
             }
         }
+
+        private void GameOver()
+        {
+            if(Life>=1)
+            {
+                Life--;
+                player = new Player(300, 550);
+                player.setOPClock(100);
+                BGMPlayer.Ctlcontrols.stop();
+                labelHP.Text = Life.ToString();
+            }
+            else
+            {
+                panel3.Visible = true;
+            }
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -982,13 +982,11 @@ namespace STG
             create_FunctionObject();
         }
 
-<<<<<<< HEAD
         private void AttackPlayer_Enter(object sender, EventArgs e)
         {
 
         }
 
-=======
->>>>>>> origin/master
+
     }
 }

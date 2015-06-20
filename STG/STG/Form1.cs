@@ -56,6 +56,7 @@ namespace STG
         SoundPlayer Enemydie;
         SoundPlayer Playerhurted;
         SoundPlayer Playerdie;
+        SoundPlayer AttackPlayer;
         //SoundPlayer PlayerShoot;
         private bool signal = false;
 
@@ -74,8 +75,8 @@ namespace STG
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
             Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
             Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\se_pldead00.wav");
-            AttackPlayer.URL = @"SFX\se_plst00.wav";
-            AttackPlayer.settings.volume = 20;
+            AttackPlayer = new SoundPlayer(Application.StartupPath +  @"\SFX\se_plst00.wav");
+
             BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
             BGMPlayer.settings.setMode("Loop", true);
             BGMPlayer.settings.volume = 70;
@@ -330,6 +331,8 @@ namespace STG
             Collision();
             //circle.circleMove(200.0, 200.0, angle);
 
+            labelHP.Text = Life.ToString();
+            labelScore.Text = Score.ToString();
             //labelHP.Text = player.getHP().ToString();
             labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
             //Game Over Condition
@@ -389,10 +392,10 @@ namespace STG
                 {
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
-                        AttackPlayer.Ctlcontrols.play();
                         enemies[i].health--;
                         if (!enemies[i].isAlive())
                         {
+                            Score += 30;
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
@@ -403,24 +406,27 @@ namespace STG
                 }
             }
 
-            foreach (EnemyBullet eb in enemyBullet)
+            for (var i = 0; i < enemyBullet.Count;i++ )
             {
                 if (!player.isOP())
                 {
-                    if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                    if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25)
                     {
                         GameOver();
                         Playerdie.Play();
+                        enemyBullet[i].img.Dispose();
+                        enemyBullet[i].Dispose();
+                        enemyBullet.Remove(enemyBullet[i]);
                     }
 
-                    else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
-                        && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
+                    else if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].lx) - enemyBullet[i].range - 18 - (int)(player.lx)) > 18
+                        && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(enemyBullet[i].ly) - enemyBullet[i].range - 25 - (int)(player.ly)) > 25)
                     {
                         //擦彈動作
                         Score += 30;
                         labelScore.Text = Score.ToString();
 
-                        if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
+                        if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) > 18 - enemyBullet[i].range && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) > 25 - enemyBullet[i].range)
                         {
                             //擦彈動作
                             Score += 100;
@@ -429,38 +435,53 @@ namespace STG
                         {
                             GameOver();
                             Playerdie.Play();
+                            enemyBullet[i].img.Dispose();
+                            enemyBullet[i].Dispose();
+                            enemyBullet.Remove(enemyBullet[i]);
                         }
-
                     }
                 }
 
             }
+
             foreach (Enemy en in enemies)
             {
                 if (!player.isOP())
                 {
                     if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
                     {
-                        player.setHP(-1);
-
+                        Life--;
                     }
+                }
+            }
+
+            //吃到FunctionObj
+            for (var i = 0; i < functionObj.Count; i++)
+            {
+                if ((Math.Abs((int)functionObj[i].lx) - (int)(player.lx)) < 5 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 5)
+                {
+                    Score += 10;
+                    functionObj[i].img.Dispose();
+                    functionObj[i].Dispose();
+                    functionObj.Remove(functionObj[i]);
                 }
             }
         }
 
         private void GameOver()
         {
-            if(Life>=1)
-            {
+            if(Life > 0)
+            {                
                 Life--;
-                player = new Player(300, 550);
+                //player = new Player(300, 550);
                 player.setOPClock(100);
-                BGMPlayer.Ctlcontrols.stop();
+                AttackPlayer.Play();
                 labelHP.Text = Life.ToString();
             }
-            else
+            if(Life <= 0)
             {
                 panel3.Visible = true;
+                Playerdie.Play();
             }
         }
 
@@ -981,12 +1002,6 @@ namespace STG
         {
             create_FunctionObject();
         }
-
-        private void AttackPlayer_Enter(object sender, EventArgs e)
-        {
-
-        }
-
 
     }
 }

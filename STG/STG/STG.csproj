@@ -236,6 +236,7 @@
     <None Include="bin\Debug\UI\recordbackground.png" />
     <None Include="bin\Debug\UI\delete.png" />
     <None Include="bin\Debug\UI\leave5.png" />
+    <None Include="bin\Debug\UI\Life.png" />
     <Content Include="GradeDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

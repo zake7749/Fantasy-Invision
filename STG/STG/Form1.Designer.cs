@@ -33,10 +33,12 @@
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnLeave = new System.Windows.Forms.Button();
-            this.btnStoreGrade = new System.Windows.Forms.Button();
             this.labelGameOver = new System.Windows.Forms.Label();
             this.labelContext = new System.Windows.Forms.Label();
+            this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnLeave = new System.Windows.Forms.Button();
+            this.btnStoreGrade = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.trackBarVolume = new System.Windows.Forms.TrackBar();
             this.labelScore = new System.Windows.Forms.Label();
@@ -44,20 +46,13 @@
             this.labelHP = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-
-            this.AttackPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-
-            this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
-
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AttackPlayer)).BeginInit();
             this.SuspendLayout();
             // 
             // Update
@@ -91,6 +86,46 @@
             this.panel3.TabIndex = 11;
             this.panel3.Visible = false;
             // 
+            // labelGameOver
+            // 
+            this.labelGameOver.BackColor = System.Drawing.Color.Black;
+            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
+            this.labelGameOver.Location = new System.Drawing.Point(23, 39);
+            this.labelGameOver.Name = "labelGameOver";
+            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
+            this.labelGameOver.TabIndex = 11;
+            this.labelGameOver.Text = "Game  Over";
+            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelContext
+            // 
+            this.labelContext.BackColor = System.Drawing.Color.Teal;
+            this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Location = new System.Drawing.Point(11, 518);
+            this.labelContext.Name = "labelContext";
+            this.labelContext.Size = new System.Drawing.Size(593, 103);
+            this.labelContext.TabIndex = 4;
+            this.labelContext.Text = "label4";
+            this.labelContext.Visible = false;
+            // 
+            // PlayBulletPlayer
+            // 
+            this.PlayBulletPlayer.Enabled = true;
+            this.PlayBulletPlayer.Location = new System.Drawing.Point(27, 244);
+            this.PlayBulletPlayer.Name = "PlayBulletPlayer";
+            this.PlayBulletPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("PlayBulletPlayer.OcxState")));
+            this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
+            this.PlayBulletPlayer.TabIndex = 8;
+            this.PlayBulletPlayer.Visible = false;
+            // 
+            // FunctionObjTimer
+            // 
+            this.FunctionObjTimer.Enabled = true;
+            this.FunctionObjTimer.Interval = 1000;
+            this.FunctionObjTimer.Tick += new System.EventHandler(this.FunctionObjTimer_Tick);
+            // 
             // btnLeave
             // 
             this.btnLeave.BackgroundImage = global::STG.Properties.Resources.leave3;
@@ -113,35 +148,10 @@
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
             // 
-            // labelGameOver
-            // 
-            this.labelGameOver.BackColor = System.Drawing.Color.Black;
-            this.labelGameOver.Font = new System.Drawing.Font("Mekanik LET", 57.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
-            this.labelGameOver.Location = new System.Drawing.Point(23, 39);
-            this.labelGameOver.Name = "labelGameOver";
-            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
-            this.labelGameOver.TabIndex = 11;
-            this.labelGameOver.Text = "Game  Over";
-            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelContext
-            // 
-            this.labelContext.BackColor = System.Drawing.Color.Teal;
-            this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelContext.Location = new System.Drawing.Point(11, 518);
-            this.labelContext.Name = "labelContext";
-            this.labelContext.Size = new System.Drawing.Size(593, 103);
-            this.labelContext.TabIndex = 4;
-            this.labelContext.Text = "label4";
-            this.labelContext.Visible = false;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Controls.Add(this.AttackPlayer);
             this.panel2.Controls.Add(this.trackBarVolume);
             this.panel2.Controls.Add(this.labelScore);
             this.panel2.Controls.Add(this.BGMPlayer);
@@ -183,7 +193,6 @@
             this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
             this.BGMPlayer.TabIndex = 9;
             this.BGMPlayer.Visible = false;
-            this.BGMPlayer.Enter += new System.EventHandler(this.AttackPlayer_Enter);
             // 
             // labelHP
             // 
@@ -218,34 +227,6 @@
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
-            // PlayBulletPlayer
-            // 
-            this.PlayBulletPlayer.Enabled = true;
-            this.PlayBulletPlayer.Location = new System.Drawing.Point(27, 244);
-            this.PlayBulletPlayer.Name = "PlayBulletPlayer";
-            this.PlayBulletPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("PlayBulletPlayer.OcxState")));
-            this.PlayBulletPlayer.Size = new System.Drawing.Size(75, 23);
-            this.PlayBulletPlayer.TabIndex = 8;
-            this.PlayBulletPlayer.Visible = false;
-            // 
-
-            // AttackPlayer
-            // 
-            this.AttackPlayer.Enabled = true;
-            this.AttackPlayer.Location = new System.Drawing.Point(17, 425);
-            this.AttackPlayer.Name = "AttackPlayer";
-            this.AttackPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("AttackPlayer.OcxState")));
-            this.AttackPlayer.Size = new System.Drawing.Size(75, 23);
-            this.AttackPlayer.TabIndex = 14;
-            this.AttackPlayer.Visible = false;
-
-            // FunctionObjTimer
-            // 
-            this.FunctionObjTimer.Enabled = true;
-            this.FunctionObjTimer.Interval = 1000;
-            this.FunctionObjTimer.Tick += new System.EventHandler(this.FunctionObjTimer_Tick);
-
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -262,13 +243,12 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AttackPlayer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -290,8 +270,6 @@
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Label labelScore;
         private System.Windows.Forms.TrackBar trackBarVolume;
-
-        private AxWMPLib.AxWindowsMediaPlayer AttackPlayer;
 
         private System.Windows.Forms.Timer FunctionObjTimer;
 

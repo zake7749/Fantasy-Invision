@@ -24,7 +24,7 @@ public class Player : GameObject
     public Player(int x, int y)
         : base(x, y)
     {
-        health = 100;
+        health = 50;
         lx = x;
         ly = y;
         //f = frame = timer interval of FixUpdate 
@@ -159,11 +159,11 @@ public class Player : GameObject
         }
     }
 
-    public void Move()
+    public override void Move()
     {
-        if (lx + vx > 0 && lx + vx < 500)
+        if (lx + vx > 0 && lx + vx < 590)
             lx += vx;
-        if (ly + vy > 0 && ly + vy < 600)
+        if (ly + vy > 0 && ly + vy < 570)
             ly += vy;
         img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         img.BackColor = Color.Transparent;

@@ -37,7 +37,7 @@ namespace STG
         Graphics gp;
         Bitmap bp;
         //
-        int Life = 5;
+        int Life = 10;
         
         //background code
         public PictureBox background1;
@@ -54,8 +54,9 @@ namespace STG
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
-        SoundPlayer Playerhurted;
+        SoundPlayer GMG;
         SoundPlayer Playerdie;
+        SoundPlayer AttackPlayer;
         //SoundPlayer PlayerShoot;
         private bool signal = false;
 
@@ -65,17 +66,16 @@ namespace STG
             InitializeComponent();
 
             //SFX
-
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
             //PlayerShoot = new SoundPlayer(Application.StartupPath + @"\SFX\se_plst00.wav");
             btnLeave.MouseClick += btnStoreGrade_MouseClick;
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
-            Playerhurted = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
+            GMG = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
             Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\se_pldead00.wav");
-            AttackPlayer.URL = @"SFX\se_plst00.wav";
-            AttackPlayer.settings.volume = 20;
+            AttackPlayer = new SoundPlayer(Application.StartupPath +  @"\SFX\se_plst00.wav");
+
             BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
             BGMPlayer.settings.setMode("Loop", true);
             BGMPlayer.settings.volume = 70;
@@ -94,7 +94,6 @@ namespace STG
             labelTime.Text = "0";
             labelScore.Text = "0";
             labelContext.Text = "";
-
 
             //label2.Text = "";
             //PlayBulletPlayer.Ctlcontrols.play();
@@ -312,11 +311,8 @@ namespace STG
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
-            
-            //degree++;
-            //angle = Math.PI * degree / 180.0;
+
             RePaint();
-            //X += Update.Interval;
             updatePlayer();
             updateEnemy();
             updatePlayerBullet();
@@ -328,12 +324,10 @@ namespace STG
 
             bulletBounderCheck();
             Collision();
-            //circle.circleMove(200.0, 200.0, angle);
 
-            //labelHP.Text = player.getHP().ToString();
+            labelHP.Text = Life.ToString();
+            labelScore.Text = Score.ToString();
             labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
-            //Game Over Condition
-
 
             /*
              * Please write comment for each code block added.
@@ -389,10 +383,10 @@ namespace STG
                 {
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
-                        AttackPlayer.Ctlcontrols.play();
                         enemies[i].health--;
                         if (!enemies[i].isAlive())
                         {
+                            Score += 500;
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
@@ -403,24 +397,27 @@ namespace STG
                 }
             }
 
-            foreach (EnemyBullet eb in enemyBullet)
+            for (var i = 0; i < enemyBullet.Count;i++ )
             {
-                if (!player.isOP())
+                if (!player.IsOP2((int) gameTime.Elapsed.TotalSeconds))
                 {
-                    if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25)
+                    if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25)
                     {
                         GameOver();
-                        Playerdie.Play();
+                        //Playerdie.Play();
+                        enemyBullet[i].img.Dispose();
+                        enemyBullet[i].Dispose();
+                        enemyBullet.Remove(enemyBullet[i]);
                     }
 
-                    else if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(eb.lx) - eb.range - 18 - (int)(player.lx)) > 18
-                        && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(eb.ly) - eb.range - 25 - (int)(player.ly)) > 25)
+                    else if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].lx) - enemyBullet[i].range - 18 - (int)(player.lx)) > 18
+                        && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(enemyBullet[i].ly) - enemyBullet[i].range - 25 - (int)(player.ly)) > 25)
                     {
                         //擦彈動作
                         Score += 30;
                         labelScore.Text = Score.ToString();
 
-                        if (Math.Abs((int)(eb.lx) - 18 - (int)(player.lx)) > 18 - eb.range && Math.Abs((int)(eb.ly) - 25 - (int)(player.ly)) > 25 - eb.range)
+                        if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) > 18 - enemyBullet[i].range && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) > 25 - enemyBullet[i].range)
                         {
                             //擦彈動作
                             Score += 100;
@@ -428,39 +425,98 @@ namespace STG
                         else
                         {
                             GameOver();
-                            Playerdie.Play();
+                            //Playerdie.Play();
+                            enemyBullet[i].img.Dispose();
+                            enemyBullet[i].Dispose();
+                            enemyBullet.Remove(enemyBullet[i]);
                         }
-
                     }
                 }
-
             }
+
             foreach (Enemy en in enemies)
             {
-                if (!player.isOP())
+                if (!player.IsOP2((int) gameTime.Elapsed.TotalSeconds))
                 {
                     if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
                     {
-                        player.setHP(-1);
-
+                        GameOver();
                     }
+                }
+            }
+            for (var i = 0; i < enemies.Count; i++)
+            {
+                if (player.IsOP2((int)gameTime.Elapsed.TotalSeconds))
+                {
+                    if (Math.Abs((int)(enemies[i].lx) - (int)(enemies[i].lx)) < 20 && Math.Abs((int)(enemies[i].ly) - (int)(player.ly)) < 36)
+                    {
+                        enemies[i].health--;
+                    }
+                }
+            }
+
+            //吃到FunctionObj
+            for (var i = 0; i < functionObj.Count; i++)
+            {
+                if ((Math.Abs((int)functionObj[i].lx) - (int)(player.lx)) < 3 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 3)
+                {
+                    Score += 10;
+                    switch (functionObj[i].getObjType())
+                    {
+                        case 0:
+                            Life += functionObj[i].Life;
+                            break;
+                        case 1:
+                            Life += functionObj[i].Life;
+                            break;
+                        case 2:
+                            Life += functionObj[i].Life;
+                            break;
+                        case 3:
+                            player.setOPEndTime((int)gameTime.Elapsed.TotalSeconds, 10);
+                            break;
+                        case 4:
+                            Score += functionObj[i].Score;
+                            break;
+                        case 5:
+                            Score += functionObj[i].Score;
+                            break;
+                        case 6:
+                            Score += functionObj[i].Score;
+                            break;
+                    }
+                    if (Life > 10)
+                        Life = 10;
+                    functionObj[i].img.Dispose();
+                    functionObj[i].Dispose();
+                    functionObj.Remove(functionObj[i]);
                 }
             }
         }
 
         private void GameOver()
         {
-            if(Life>=1)
-            {
+            if(Life > 0)
+            {                
                 Life--;
-                player = new Player(300, 550);
-                player.setOPClock(100);
-                BGMPlayer.Ctlcontrols.stop();
+                //player = new Player(300, 550);
+                //player.setOPClock(100);
+                player.setOPEndTime((int)gameTime.Elapsed.TotalSeconds, 2);
+                Playerdie.Play();
                 labelHP.Text = Life.ToString();
             }
-            else
+            if(Life <= 0)
             {
+                BGMPlayer.Ctlcontrols.stop();
+                AttackPlayer.Stop();
+                
+                GMG.Play();
                 panel3.Visible = true;
+                Update.Stop();
+                FunctionObjTimer.Stop();
+                gameTime.Stop();
+                //Playerdie.Play();
+                
             }
         }
 
@@ -981,12 +1037,6 @@ namespace STG
         {
             create_FunctionObject();
         }
-
-        private void AttackPlayer_Enter(object sender, EventArgs e)
-        {
-
-        }
-
 
     }
 }

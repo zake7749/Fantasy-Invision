@@ -25,7 +25,7 @@ namespace STG
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
-        string[] context = new string[20];
+        string[] context = new string[31];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
@@ -54,9 +54,7 @@ namespace STG
         int b2y;
         int b3y;
         int Score;
-
-
-        SoundPlayer SFXBGM;
+        int Time;
 
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
@@ -88,24 +86,27 @@ namespace STG
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
-
             Randomizer = new Random();
             playerBullet = new List<Bullet>();
             enemyBullet = new List<EnemyBullet>();
             enemies = new List<Enemy>();
             functionObj = new List<FunctionObject>();
             Score = 0;
-            player = new Player(300, 500);            
-            
-            labelTime.Text = "0";
+            player = new Player(300, 500);
+
+            Time = 0;
+            labelTime.Text = Time.ToString(); ;
             labelScore.Text = "0";
             labelContext.Text = "";
 
             //label2.Text = "";
             //PlayBulletPlayer.Ctlcontrols.play();
+            //Story mode
+            SetStory();
+            gameTime.Reset();
+            Update.Stop();
+            FunctionObjTimer.Stop();
 
-            //SetStory();    
-            
             //background code            
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
@@ -133,16 +134,8 @@ namespace STG
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            gameTime.Reset(); //這是畫面右下角的計時器
-            gameTime.Start(); //這是畫面右下角的計時器
-
-            //Update.Stop();
-            //playing music in loop
-
-            //BGMPlayer.URL = @"TOS8.wav";
-            //BGMPlayer.settings.setMode("loop", true);
-            //BGMPlayer.settings.autoStart = true;
+        {         
+            //gameTime.Start(); //這是畫面右下角的計時器
             //story mode
             labelContext.Text = context[countContext];
             countContext++;         
@@ -183,7 +176,6 @@ namespace STG
             g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
             pictureBox1.Image = (Image)bmpPic1; 
         }
-
 
         private void Generalizer()
         {
@@ -340,8 +332,7 @@ namespace STG
             updateEnemy();
             updatePlayerBullet();
             updateEnemyBullet();
-            updateFuntionObject();
-            
+            updateFuntionObject();            
             
             //background code
             updateBackground();
@@ -351,26 +342,13 @@ namespace STG
 
             labelHP.Text = Life.ToString();
             labelScore.Text = Score.ToString();
-            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds).ToString();
-
+            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds + Time).ToString();
+            UpdateStory();
             /*
              * Please write comment for each code block added.
-             * In addition, DO NOT add anything except FUNCTIONs in FixedUpdate.
-             * 
-             * 
-            if ((int)(gameTime.Elapsed.TotalSeconds) == 40)
-            {
-                if ((gameTime.Elapsed.TotalSeconds) == 41.0000000)
- 
-                    gameTime.Stop();
-
-                Update.Stop();
-                countContext = 6;
-                labelContext.Visible = true;
-                labelContext.Text = context[countContext];
-            }*/
+             * In addition, DO NOT add anything except FUNCTIONs in FixedUpdate.            
+             */
             DebugMessage();
-
         }
 
         private void DebugMessage()
@@ -381,23 +359,51 @@ namespace STG
         //Set story
         private void SetStory()
         {
-            context[0] = "武則天：居然有人敢擄走朕的女兒，而且還是先前一向對我們友好的巴比倫銀河帝國";
-            context[1] = "武則天：現在是仗著母星離地球很遠就可以藐視朕的權威";
-            context[2] = "武則天：王將軍聽令，朕任你為大周星際帝國神都艦艦長";
-            context[3] = "武則天：立刻前往銀河救回太平公主！";
-            context[4] = "王孝傑：末將遵旨";
+            context[0] = "聯邦皇帝馬蝗任期將至，聯邦帝國四處民不聊生，各地高舉反馬旗幟...";
+            context[1] = "各個聯邦國的王侯都有意出任聯邦皇帝，此時綠菜王國的國王空心菜得到許多聯邦國的支持...";
+            context[2] = "(綠菜王國  宮廷)";
+            context[3] = "空心菜：諸位國人，現在聯邦境內紛擾不斷，與皇上身邊的亂臣賊子脫不了干係，我將前往天龍國首都清君側！";
+            context[4] = "宮廷眾臣：陛下萬歲！臣等願跟隨陛下";
             context[5] = "";
-            context[6] = "(敵方戰艦的殘骸中有一台播放器)";
-            context[7] = "王孝傑：啟稟陛下，有一台敵軍遺留下來的撥放器";
-            context[8] = "武則天：速速撥放";
-            context[9] = "王孝傑：諾";
-            context[10] = "...：哈哈哈哈哈！武媚娘，還記得我是誰嗎？";
-            context[11] = "武則天：(究竟是誰，這聲音好耳熟...，該不會是徐慧？)";
-            context[12] = "徐慧：沒錯，武媚娘！就是我，你的女兒就在我手上，哈哈哈哈哈...";
-            context[13] = "武則天：你不是已經死了？現在怎麼還活著？你竟然擄走我的女兒，你這個賤人！王將軍，快救回公主！";
-            context[14] = "王孝傑：遵旨";
-            context[15] = "";
+            context[6] = "(綠菜王國、大肚王國與芒果公國的邊境)";
+            context[7] = "大肚王：停下，爾等如此行為等同叛亂";
+            context[8] = "空心菜：不，我這是在保護皇上";
+            context[9] = "老胡：一派胡言，等我將你拿下";
+            context[10] = "(雙方進入一陣激戰)";
+            context[11] = "芒果公爵：我救駕來遲了！";
+            context[12] = "(大肚王就這樣被打敗了)";
+            context[13] = "大肚王：我居然就這麼敗了，不甘心...(拔劍自盡)";
+            context[14] = "空心菜：公爵，感謝您及時救援";
+            context[15] = "芒果公爵：不會，我很支持您的理想，請讓我一同跟隨您";
+            context[16] = "";
+            context[17] = "(大肚王國與石油王國的邊境)";
+            context[18] = "空心菜和芒果公爵在軍隊前方領隊，兩人相談甚歡，此時突然有刺客冒出";
+            context[19] = "神秘刺客：大膽叛徒，居然公然反馬，納命來！";
+            context[20] = "小兵：保護陛下！(迅速將刺客拿下)";
+            context[21] = "空心菜：說，是誰派你來？";
+            context[22] = "此時刺客將口中毒藥包咬破，服毒自盡了...";
+            context[23] = "芒果公爵：可惜了，不知道是誰";
+            context[24] = "空心菜：(拉開刺客的頭套)唉呀！這好眼熟...是薇閣將軍啊，我想是太師小金飛刀派來的吧";
+            context[25] = "(天龍國首都)";
+            context[26] = "手下：報告太師，你派出的刺客失手，已經服毒自盡了";
+            context[27] = "小金飛刀：可惡，痛失一員大將，快找丞相，要他聯合周圍盟國抵抗叛軍";
+            context[28] = "手下：是！";
+            context[29] = "";
+            context[30] = "";
         }
+        private void UpdateStory()
+        {
+            if (int.Parse(labelTime.Text) == 30 || int.Parse(labelTime.Text) == 60)
+            {
+                Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
+                gameTime.Reset();
+                Update.Stop();
+                FunctionObjTimer.Stop();
+                labelContext.Visible = true;
+                labelContext.Text = context[countContext];
+            }
+        }
+
         //Collision
         private void Collision()
         {
@@ -420,6 +426,10 @@ namespace STG
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
                             Enemydie.Play();
+<<<<<<< HEAD
+=======
+                            
+>>>>>>> origin/master
                         }
                         b.setTimetoExplode(true);
                     }
@@ -972,22 +982,6 @@ namespace STG
             }
         }
 
-
-        private void panel1_MouseClick_1(object sender, MouseEventArgs e)
-        {
-            if (labelContext.Visible == true)
-            {
-                if (countContext == 5 || countContext == 15)
-                {
-                    labelContext.Visible = false;
-                    Update.Start();
-                    gameTime.Start();
-                }
-                labelContext.Text = context[countContext];
-                countContext++;
-            }         
-        }
-
         private void EnemyCreateFactory(String way)
         {
             int i,j,k;
@@ -1108,9 +1102,25 @@ namespace STG
             BGMPlayer.settings.volume = trackBarVolume.Value;
         }
 
-        private void FunctionObjTimer_Tick(object sender, EventArgs e) //For create FunctionObject (每秒產生1個) 
+        private void FunctionObjTimer_Tick(object sender, EventArgs e) //For create FunctionObject (每3秒產生1個) 
         {
             create_FunctionObject();
+        }
+
+        private void labelContext_MouseClick(object sender, MouseEventArgs e) //Story mode
+        {
+            if (labelContext.Visible == true)
+            {
+                if (countContext == 5 || countContext == 16 || countContext ==29)
+                {
+                    labelContext.Visible = false;
+                    Update.Start();
+                    FunctionObjTimer.Start();
+                    gameTime.Start();
+                }
+                labelContext.Text = context[countContext];
+                countContext++;
+            } 
         }
 
     }

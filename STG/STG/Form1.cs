@@ -408,17 +408,18 @@ namespace STG
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
                         enemies[i].health--;
+                        Score += Randomizer.Next(1,21);
                         if (!enemies[i].isAlive())
                         {
+                            if (enemies[i].isCritical)
+                            {
+                                StageClear = true;
+                            }
                             Score += 500;
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
                             Enemydie.Play();
-                            if(enemies[i].isCritical)
-                            {
-                                StageClear = true;
-                            }
                         }
                         b.setTimetoExplode(true);
                     }

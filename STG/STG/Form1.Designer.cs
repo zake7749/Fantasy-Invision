@@ -35,22 +35,22 @@
             this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.labelTime = new System.Windows.Forms.Label();
-            this.labelHP = new System.Windows.Forms.Label();
-            this.labelScore = new System.Windows.Forms.Label();
             this.trackBarVolume = new System.Windows.Forms.TrackBar();
+            this.labelScore = new System.Windows.Forms.Label();
+            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.labelHP = new System.Windows.Forms.Label();
+            this.labelTime = new System.Windows.Forms.Label();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.labelGameOver = new System.Windows.Forms.Label();
-            this.btnStoreGrade = new System.Windows.Forms.Button();
             this.btnLeave = new System.Windows.Forms.Button();
+            this.btnStoreGrade = new System.Windows.Forms.Button();
+            this.labelGameOver = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -100,39 +100,15 @@
             this.panel2.Size = new System.Drawing.Size(201, 603);
             this.panel2.TabIndex = 2;
             // 
-            // BGMPlayer
+            // trackBarVolume
             // 
-            this.BGMPlayer.Enabled = true;
-            this.BGMPlayer.Location = new System.Drawing.Point(6, 568);
-            this.BGMPlayer.Name = "BGMPlayer";
-            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
-            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
-            this.BGMPlayer.TabIndex = 9;
-            this.BGMPlayer.Visible = false;
-            // 
-            // labelTime
-            // 
-            this.labelTime.AutoSize = true;
-            this.labelTime.BackColor = System.Drawing.Color.Transparent;
-            this.labelTime.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTime.ForeColor = System.Drawing.Color.Linen;
-            this.labelTime.Location = new System.Drawing.Point(16, 496);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(60, 27);
-            this.labelTime.TabIndex = 3;
-            this.labelTime.Text = "XXX";
-            // 
-            // labelHP
-            // 
-            this.labelHP.AutoSize = true;
-            this.labelHP.BackColor = System.Drawing.Color.Transparent;
-            this.labelHP.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHP.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelHP.Location = new System.Drawing.Point(16, 158);
-            this.labelHP.Name = "labelHP";
-            this.labelHP.Size = new System.Drawing.Size(60, 27);
-            this.labelHP.TabIndex = 5;
-            this.labelHP.Text = "XXX";
+            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
+            this.trackBarVolume.Location = new System.Drawing.Point(13, 275);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
+            this.trackBarVolume.TabIndex = 13;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
             // labelScore
             // 
@@ -146,21 +122,45 @@
             this.labelScore.TabIndex = 12;
             this.labelScore.Text = "XXX";
             // 
-            // trackBarVolume
+            // BGMPlayer
             // 
-            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
-            this.trackBarVolume.Location = new System.Drawing.Point(13, 275);
-            this.trackBarVolume.Maximum = 100;
-            this.trackBarVolume.Name = "trackBarVolume";
-            this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
-            this.trackBarVolume.TabIndex = 13;
-            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
+            this.BGMPlayer.Enabled = true;
+            this.BGMPlayer.Location = new System.Drawing.Point(6, 568);
+            this.BGMPlayer.Name = "BGMPlayer";
+            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
+            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
+            this.BGMPlayer.TabIndex = 9;
+            this.BGMPlayer.Visible = false;
+            // 
+            // labelHP
+            // 
+            this.labelHP.AutoSize = true;
+            this.labelHP.BackColor = System.Drawing.Color.Transparent;
+            this.labelHP.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHP.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelHP.Location = new System.Drawing.Point(16, 158);
+            this.labelHP.Name = "labelHP";
+            this.labelHP.Size = new System.Drawing.Size(60, 27);
+            this.labelHP.TabIndex = 5;
+            this.labelHP.Text = "XXX";
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.BackColor = System.Drawing.Color.Transparent;
+            this.labelTime.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTime.ForeColor = System.Drawing.Color.Linen;
+            this.labelTime.Location = new System.Drawing.Point(16, 496);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(60, 27);
+            this.labelTime.TabIndex = 3;
+            this.labelTime.Text = "XXX";
             // 
             // labelContext
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelContext.Location = new System.Drawing.Point(15, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
@@ -180,17 +180,16 @@
             this.panel3.TabIndex = 11;
             this.panel3.Visible = false;
             // 
-            // labelGameOver
+            // btnLeave
             // 
-            this.labelGameOver.BackColor = System.Drawing.Color.Black;
-            this.labelGameOver.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
-            this.labelGameOver.Location = new System.Drawing.Point(23, 39);
-            this.labelGameOver.Name = "labelGameOver";
-            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
-            this.labelGameOver.TabIndex = 11;
-            this.labelGameOver.Text = "Game  Over";
-            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
+            this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLeave.Location = new System.Drawing.Point(101, 245);
+            this.btnLeave.Name = "btnLeave";
+            this.btnLeave.Size = new System.Drawing.Size(133, 44);
+            this.btnLeave.TabIndex = 13;
+            this.btnLeave.UseVisualStyleBackColor = true;
+            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
             // 
             // btnStoreGrade
             // 
@@ -203,16 +202,17 @@
             this.btnStoreGrade.UseVisualStyleBackColor = true;
             this.btnStoreGrade.Click += new System.EventHandler(this.btnStoreGrade_Click);
             // 
-            // btnLeave
+            // labelGameOver
             // 
-            this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
-            this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLeave.Location = new System.Drawing.Point(101, 245);
-            this.btnLeave.Name = "btnLeave";
-            this.btnLeave.Size = new System.Drawing.Size(133, 44);
-            this.btnLeave.TabIndex = 13;
-            this.btnLeave.UseVisualStyleBackColor = true;
-            this.btnLeave.Click += new System.EventHandler(this.btnLeave_Click);
+            this.labelGameOver.BackColor = System.Drawing.Color.Black;
+            this.labelGameOver.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGameOver.ForeColor = System.Drawing.Color.Silver;
+            this.labelGameOver.Location = new System.Drawing.Point(23, 39);
+            this.labelGameOver.Name = "labelGameOver";
+            this.labelGameOver.Size = new System.Drawing.Size(304, 74);
+            this.labelGameOver.TabIndex = 11;
+            this.labelGameOver.Text = "Game  Over";
+            this.labelGameOver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
@@ -243,8 +243,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

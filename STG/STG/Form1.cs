@@ -25,7 +25,7 @@ namespace STG
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
-        string[] context = new string[31];
+        string[] context = new string[34];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
@@ -354,37 +354,39 @@ namespace STG
         //Set story
         private void SetStory()
         {
-            context[0] = "聯邦皇帝馬蝗任期將至，聯邦帝國四處民不聊生，各地高舉反馬旗幟...";
-            context[1] = "各個聯邦國的王侯都有意出任聯邦皇帝，此時綠菜王國的國王空心菜得到許多聯邦國的支持...";
-            context[2] = "(綠菜王國  宮廷)";
-            context[3] = "空心菜：諸位國人，現在聯邦境內紛擾不斷，與皇上身邊的亂臣賊子脫不了干係，我將前往天龍國首都清君側！";
-            context[4] = "宮廷眾臣：陛下萬歲！臣等願跟隨陛下";
-            context[5] = "";
-            context[6] = "(綠菜王國、大肚王國與芒果公國的邊境)";
-            context[7] = "大肚王：停下，爾等如此行為等同叛亂";
-            context[8] = "空心菜：不，我這是在保護皇上";
-            context[9] = "老胡：一派胡言，等我將你拿下";
-            context[10] = "(雙方進入一陣激戰)";
-            context[11] = "芒果公爵：我救駕來遲了！";
-            context[12] = "(大肚王就這樣被打敗了)";
-            context[13] = "大肚王：我居然就這麼敗了，不甘心...(拔劍自盡)";
-            context[14] = "空心菜：公爵，感謝您及時救援";
-            context[15] = "芒果公爵：不會，我很支持您的理想，請讓我一同跟隨您";
+            context[0] = "闇黑皇后：小美，我就知道你會來救你爺爺，不過我是不會輕易放人，想救出爺爺，就必須要先打敗我，哈哈哈";
+            context[1] = "小美：可惡的皇后，為什麼要綁架我爺爺？我一定要救出爺爺！衝啊";
+            context[2] = "闇黑皇后：眾妖精聽令，務必擊敗小美";
+            context[3] = "妖精們：遵命";
+            context[4] = "";
+            context[5] = "(在城堡中庭)";
+            context[6] = "小美：好累，敵人好多，咦？這是什麼？(小美撿到一個晶瑩剔透水的晶球)";
+            context[7] = "(水晶球中) 爺爺：小美，不要來救爺爺，快逃啊！";
+            context[8] = "小美：為什麼？爺爺，我一定會救你出去";
+            context[9] = "爺爺：小美...不...(影像消失)";
+            context[10] = "闇黑皇后：不要叫了，沒用的";
+            context[11] = "小美：哼，你到底爺爺做了什麼？";
+            context[12] = "闇黑皇后：沒什麼，我還對你爺爺很好呢，哈哈哈";
+            context[13] = "小美：最好是，快放了我爺爺";
+            context[14] = "闇黑皇后：不可能，除非你能打敗我，不過你還得先找到我";
+            context[15] = "闇黑皇后：妖精們，上！";
             context[16] = "";
-            context[17] = "(大肚王國與石油王國的邊境)";
-            context[18] = "空心菜和芒果公爵在軍隊前方領隊，兩人相談甚歡，此時突然有刺客冒出";
-            context[19] = "神秘刺客：大膽叛徒，居然公然反馬，納命來！";
-            context[20] = "小兵：保護陛下！(迅速將刺客拿下)";
-            context[21] = "空心菜：說，是誰派你來？";
-            context[22] = "此時刺客將口中毒藥包咬破，服毒自盡了...";
-            context[23] = "芒果公爵：可惜了，不知道是誰";
-            context[24] = "空心菜：(拉開刺客的頭套)唉呀！這好眼熟...是薇閣將軍啊，我想是太師小金飛刀派來的吧";
-            context[25] = "(天龍國首都)";
-            context[26] = "手下：報告太師，你派出的刺客失手，已經服毒自盡了";
-            context[27] = "小金飛刀：可惡，痛失一員大將，快找丞相，要他聯合周圍盟國抵抗叛軍";
-            context[28] = "手下：是！";
-            context[29] = "";
-            context[30] = "";
+            context[17] = "(城堡某處走廊)";
+            context[18] = "小美：天啊，怎麼這麼多妖精...根本打不完";
+            context[19] = "...：小美，小美...";
+            context[21] = "小美：是誰？";
+            context[22] = "...：小美，我不是敵人，我在你右前方的畫室裡";
+            context[23] = "小美：我怎麼知道你不是敵人";
+            context[24] = "...：我是被皇后困在城堡裡的幽魂，我叫可可，我想脫離皇后的魔掌";
+            context[25] = "小美：好的，等我";
+            context[26] = "可可：小美，這個城堡裡有很多被闇黑皇后抓來的人，即使死了他的靈魂依舊會被困在城堡裡";
+            context[27] = "可可：我已經死了100年了，我好希望我能夠脫離苦海";
+            context[28] = "小美：那你知道我爺爺被關在哪裡嗎？";
+            context[29] = "可可：這我就不清楚了，每一層樓的房間都有可能，或者地下的牢房也有可能";
+            context[30] = "小美：那我該怎麼辦？";
+            context[31] = "可可：我有一份地圖，這是這座城堡的地圖，或許對你有用，希望你能打敗皇后";
+            context[32] = "小美：謝謝你！";
+            context[33] = "";
         }
         private void UpdateStory()
         {
@@ -1102,7 +1104,7 @@ namespace STG
         {
             if (labelContext.Visible == true)
             {
-                if (countContext == 5 || countContext == 16 || countContext ==29)
+                if (countContext == 4 || countContext == 16 || countContext ==33)
                 {
                     labelContext.Visible = false;
                     Update.Start();

@@ -32,14 +32,20 @@ namespace STG
         private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
         private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
         private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart",};
+        private String[] STATE = { "Line-Left-Side", "Line-Right-Side", "V-formation-Small", "V-formation-Normal", "V-formation-Large", "Bomber-Collision", "None", "Fighter-Two", "Berserker", "Lighter", "None", "Circle","Boss" };
         private Random Randomizer;
         private Double flag;
+        int[] EnenyGenerate = {10,10,10,10,10,2,10,10,2,2,2,10,10,4,4,10,10,2,10,7,10,10,10,7,10,10,8,7,10,8,10,10,8,10,10,10,7,7,10,5,10,10,8,10,10,10,0,10,1,10,0,0,10,1,10,1,10,1,1,10,0,10,10,3,10,2,3,10,3,2,10,10,9,10,10,10,9,10,10,9,10,10,8,10,10,9,8,10,10,7,10,10,7,10,10,9,10,10,9,10,10,12};
+        int generateOrder = 0;
         //Painter
         Graphics gp;
         Bitmap bp;
-        //
-        int Life = 10;
         
+        //State
+        int Life = 10;
+        int stateClock = 0;
+        int stateClockLimit = 68;
+        Boolean StageClear = false;
         //background code
         public PictureBox background1;
         public PictureBox background2;
@@ -60,7 +66,6 @@ namespace STG
         SoundPlayer AttackPlayer;
         //SoundPlayer PlayerShoot;
         private bool signal = false;
-
 
         public Form1()
         {
@@ -177,8 +182,24 @@ namespace STG
             //Player
             g.DrawImage(player.img.Image, new Point((int)player.lx, (int)player.ly));
             pictureBox1.Image = (Image)bmpPic1; 
-        }  
-        
+        }
+
+
+        private void Generalizer()
+        {
+            stateClock++;
+            if(stateClock > stateClockLimit)
+            {
+                if (generateOrder < EnenyGenerate.Length)
+                    EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);
+                else if (StageClear)
+                {
+                    EnemyCreateFactory(STATE[Randomizer.Next(0,12)]);
+                }
+                stateClock = 0;
+            }
+        }
+
         //background code      
         private void updateBackground()
         {
@@ -314,11 +335,13 @@ namespace STG
         {
 
             RePaint();
+            Generalizer();
             updatePlayer();
             updateEnemy();
             updatePlayerBullet();
             updateEnemyBullet();
             updateFuntionObject();
+            
             
             //background code
             updateBackground();
@@ -392,6 +415,10 @@ namespace STG
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
                             Enemydie.Play();
+                            if(enemies[i].isCritical)
+                            {
+                                StageClear = true;
+                            }
                         }
                         b.setTimetoExplode(true);
                     }
@@ -649,18 +676,18 @@ namespace STG
                             break;
                     case "Boss-Cross":
                             int iCross = 0;
-                            for (iCross = 0; iCross < 10; iCross++)
+                            for (iCross = 0; iCross < 5; iCross++)
                             {
                                 EnemyBullet ebCross;
                                 int choice = Randomizer.Next(0, 2);
                                 if (choice == 0)
                                 {
-                                    ebCross = new EnemyBullet(Randomizer.Next(0, 600), Randomizer.Next(600, 700));
+                                    ebCross = new EnemyBullet(Randomizer.Next(0, 620), Randomizer.Next(600, 700));
                                     ebCross.SetV(0, -2.5);
                                 }
                                 else
                                 {
-                                    ebCross = new EnemyBullet(Randomizer.Next(0, 600), Randomizer.Next(-100, 0));
+                                    ebCross = new EnemyBullet(Randomizer.Next(0, 620), Randomizer.Next(-100, 0));
                                     ebCross.SetV(0, 2.5);
                                 }
                                 ebCross.setImage(HEARTBOX[Randomizer.Next(0, 3)]);
@@ -972,7 +999,7 @@ namespace STG
             switch(way)
             {
                 case "Line-Left-Side" :
-                    x = robj.Next(25, 100);
+                    x = robj.Next(25, 300);
                     for (i = 0; i < 3; i++)
                     {
                         create_GunTurret(x, yDeviation[i]);
@@ -980,7 +1007,7 @@ namespace STG
                     break;
 
                 case "Line-Right-Side":
-                    x = robj.Next(400, 475);
+                    x = robj.Next(300, 650);
                     for (i = 0; i < 3; i++)
                     {
                         create_GunTurret(x,yDeviation[i]);
@@ -1028,6 +1055,26 @@ namespace STG
                 case "Simple":
                     x = robj.Next(25, 475);
                     create_CircleShootEnemy(x,0);
+                    break;
+                case "Boss":
+                    create_Boss(300, 20);
+                    break;
+                case "Fighter-Two":
+                    create_Fighter(Randomizer.Next(1,250),-10);
+                    create_Fighter(Randomizer.Next(350,600), -10);
+                    break;
+                case "Berserker":
+                    create_Berserker(Randomizer.Next(1,650),-10);
+                    break;
+                case "Lighter":
+                    create_Lighter(Randomizer.Next(150, 550), -15);
+                    break;
+                case "Circle":
+                    create_CircleShootEnemy(Randomizer.Next(0, 200),-5);
+                    create_CircleShootEnemy(Randomizer.Next(200, 400),-5);
+                    create_CircleShootEnemy(Randomizer.Next(400, 650),-5);
+                    break;
+                case "None":
                     break;
             }
         }

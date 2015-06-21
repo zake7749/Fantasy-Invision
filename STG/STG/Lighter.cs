@@ -47,7 +47,7 @@ namespace STG
             setEnemyImage();
             imgAutoSize();
             Shootmode = "Round";
-            health = 100;
+            health = 180;
         }
 
         protected override void setClock()

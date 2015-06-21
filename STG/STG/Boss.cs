@@ -52,6 +52,7 @@ namespace STG
             imgAutoSize();
             Shootmode = "Round";
             health = 4500;
+            isCritical = true;
         }
 
         public void changeMode()

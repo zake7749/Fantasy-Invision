@@ -39,7 +39,7 @@ namespace STG
             setEnemyImage();
             imgAutoSize();
             Shootmode = "Berserk";
-            health = 50;
+            health = 100;
         }
 
         protected override void setClock()

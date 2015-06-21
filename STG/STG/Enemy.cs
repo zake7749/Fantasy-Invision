@@ -20,7 +20,7 @@ public class Enemy : GameObject
 
     public String Shootmode;
     public String Movemode;
-
+    public Boolean isCritical;
     protected int bulletNum;
     protected int bulletEachTime;
     protected int bulletRestoreLimit;

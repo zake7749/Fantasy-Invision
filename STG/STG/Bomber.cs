@@ -28,8 +28,21 @@ namespace STG
             setClock();
             loadImage();
             imgAutoSize();
-            Shootmode = "None";
-            health = 10;
+            Shootmode = "Ray";
+            health = 30;
+        }
+
+        protected override void setClock()
+        {
+            //f = frame = timer interval of FixUpdate
+            clock = 0;
+            clockLimit = 300;//每隔 14f 發射一顆子彈
+            bulletNum = 0;
+            bulletEachTime = 1;//每次射擊都會有 3 發子彈
+            bulletRestoreClock = 0;
+            bulletRestoreLimit = 150;//每隔 bulletRestoreLimit f 進行一次射擊
+            move = 0;
+            moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         }
 
         public void OpenShiftMode()

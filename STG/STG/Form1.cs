@@ -25,7 +25,7 @@ namespace STG
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
-        string[] context = new string[34];
+        string[] context = new string[100];
         int countContext = 0;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
@@ -63,7 +63,7 @@ namespace STG
         SoundPlayer Playerdie;
         SoundPlayer AttackPlayer;
         //SoundPlayer PlayerShoot;
-        private bool signal = false;
+        private String signal = "";
 
         public Form1()
         {
@@ -122,6 +122,7 @@ namespace STG
 
             b1y = 0;
             b2y = b1y-640;
+            label1.Text = EnenyGenerate.Length.ToString();
 
             //this.panel1.Controls.Add(background3);
             //background3.Width = background1.Image.Width;
@@ -177,11 +178,15 @@ namespace STG
             stateClock++;
             if(stateClock > stateClockLimit)
             {
-                if (generateOrder < EnenyGenerate.Length)
-                    EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);
+                if (generateOrder < EnenyGenerate.Length){
+                    EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);                        
+                }
+                    
                 else if (StageClear)
                 {
-                    EnemyCreateFactory(STATE[Randomizer.Next(0,12)]);
+                    generateOrder = 0;
+                    StageClear = false;
+                    EnemyCreateFactory(STATE[Randomizer.Next(0,12)]);                  
                 }
                 stateClock = 0;
             }
@@ -387,10 +392,14 @@ namespace STG
             context[31] = "可可：我有一份地圖，這是這座城堡的地圖，或許對你有用，希望你能打敗皇后";
             context[32] = "小美：謝謝你！";
             context[33] = "";
+            for (var i = 34; i < context.Length; i++)
+            {
+                context[i] = "";
+            }
         }
         private void UpdateStory()
         {
-            if (int.Parse(labelTime.Text) == 30 || int.Parse(labelTime.Text) == 60)
+            if (int.Parse(labelTime.Text) == 170 || int.Parse(labelTime.Text) == 340)//出現於BOSS之前
             {
                 Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
                 gameTime.Reset();
@@ -1113,6 +1122,19 @@ namespace STG
                 }
                 labelContext.Text = context[countContext];
                 countContext++;
+                for (var i = 36; i < context.Length; i++)
+                {
+                    if (countContext == i)
+                    {
+                        labelContext.Visible = false;
+                        Update.Start();
+                        FunctionObjTimer.Start();
+                        gameTime.Start();
+                        countContext = 36;
+                    }
+                    
+                }
+                    
             } 
         }
 

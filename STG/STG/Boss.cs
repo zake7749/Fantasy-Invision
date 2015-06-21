@@ -51,7 +51,7 @@ namespace STG
             setBossImage();
             imgAutoSize();
             Shootmode = "Round";
-            health = 4500;
+            health = 500;
             isCritical = true;
         }
 

@@ -26,8 +26,8 @@ namespace STG
         private double RestoreVx;//used in function RestoreVelocity();
         private double RestoreVy;//used in function RestoreVelocity();
         private String[] BulletString = {"","","","","","","",""};
-        private String[] ShootMode = { "Round-Line", "Round-Line", "", "", "", "", "", "" };
-
+        private String[] ShootMode = { "", "", "Boss-Round", "Boss-Cross", "Round", "", "", "" };
+        private int nowMode;
         private int SLR;//S for stand,L for Left,R for Right.
         private Image[] S, L, R;
         private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
@@ -40,6 +40,7 @@ namespace STG
             StallLock = true;
             flip = true;
             ImageClockLimit = 7;
+            nowMode = 4;
             So = 1;
             lx = x;
             ly = y;
@@ -49,19 +50,53 @@ namespace STG
             //loadImage();
             setBossImage();
             imgAutoSize();
-            Shootmode = "Round-Line";
-            health = 800;
+            Shootmode = "Round";
+            health = 4500;
+        }
+
+        public void changeMode()
+        {
+            int newMode = health/1000;
+            if(newMode!=nowMode)
+            {
+                nowMode = newMode;
+                modeFix(nowMode);
+            }
+        }
+
+        private void modeFix(int m)
+        {
+            Shootmode = ShootMode[m];
+            switch(m)
+            {
+                case 4:
+                    break;
+                case 3:
+                    clock = 0;
+                    clockLimit = 20;
+                    bulletNum = 3;
+                    bulletEachTime = 3;
+                    bulletRestoreClock = 0;
+                    bulletRestoreLimit = 100;
+                    break;
+                case 2:
+                    break;
+                case 1:
+                    break;
+                case 0:
+                    break;
+            }
         }
 
         protected override void setClock()
         {
             //f = frame = timer interval of FixUpdate
             clock = 0;
-            clockLimit = 10;//每隔 20f 發射一顆子彈
-            bulletNum = 5;
-            bulletEachTime = 5;//每次射擊都會有 5 發子彈
+            clockLimit = 20;//每隔 40f 發射一顆子彈
+            bulletNum = 3;
+            bulletEachTime = 3;//每次射擊都會有 3 發子彈
             bulletRestoreClock = 0;
-            bulletRestoreLimit = 175;//每隔 bulletRestoreLimit f 進行一次射擊
+            bulletRestoreLimit = 200;//每隔 bulletRestoreLimit f 進行一次射擊
             move = 0;
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         }
@@ -70,6 +105,7 @@ namespace STG
         {
             lx += vx;
             ly += vy;
+            changeMode();
             FixY();
             FixX();
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));

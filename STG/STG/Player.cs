@@ -195,8 +195,9 @@ public class Player : GameObject
             lx += vx;
         if (ly + vy > 0 && ly + vy < 570)
             ly += vy;
-        img.Location = img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
-        img.BackColor = Color.Transparent;
+        img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
+        //img.BackColor = Color.Transparent;
+        img.SetBounds((int)lx + 4, (int)ly + 5, 20, 35);
     }
 
     public void setHP(int blood)

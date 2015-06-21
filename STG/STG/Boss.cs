@@ -26,12 +26,12 @@ namespace STG
         private double RestoreVx;//used in function RestoreVelocity();
         private double RestoreVy;//used in function RestoreVelocity();
         private String[] BulletString = {"","","","","","","",""};
-        private String[] ShootMode = { "", "", "Boss-Round", "Boss-Cross", "Round", "", "", "" };
+        private String[] ShootMode = { "Boss-Rec", "Boss-Rec", "Boss-Round", "Boss-Cross", "Round", "", "", "" };
         private int nowMode;
         private int SLR;//S for stand,L for Left,R for Right.
         private Image[] S, L, R;
         private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
-
+        private Boolean notLockFix;
 
         public Boss(int x, int y)
             : base(x, y)
@@ -49,6 +49,7 @@ namespace STG
             setClock();
             //loadImage();
             setBossImage();
+            notLockFix = true;
             imgAutoSize();
             Shootmode = "Round";
             health = 4500;
@@ -81,8 +82,15 @@ namespace STG
                     bulletRestoreLimit = 100;
                     break;
                 case 2:
+
                     break;
                 case 1:
+                    clock = 0;
+                    clockLimit = 100;
+                    bulletNum = 5000;
+                    bulletEachTime = 5000;
+                    bulletRestoreClock = 0;
+                    bulletRestoreLimit = 5000;
                     break;
                 case 0:
                     break;
@@ -102,13 +110,37 @@ namespace STG
             moveLimit = 0;//每隔 1f 可以移動 p+vx,p+vy.
         }
 
+
+
+        public override Vector2D getVelocity(double px, double py)
+        {
+            double bux = (px - lx);
+            double buy = (py - ly);
+
+            //speed normaliziation.
+            double normal = Math.Sqrt(Math.Pow(bux, 2) + Math.Pow(buy, 2));
+            bux /= normal;
+            buy /= normal;
+
+            //set Velocity as 10 pixel/fs;
+            bux *= 10;
+            buy *= 10;
+
+            Vector2D bulletVelocity = new Vector2D(bux, buy);
+            return bulletVelocity;
+        }
+
+
         public override void Move()
         {
             lx += vx;
             ly += vy;
             changeMode();
-            FixY();
-            FixX();
+            if (notLockFix)
+            {
+                FixY();
+                FixX();
+            }
             img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
             img.BackColor = Color.Transparent;
         }
@@ -136,7 +168,7 @@ namespace STG
 
         private void FixX()
         {
-            if (lx > 500)
+            if (lx > 525)
                 vx = -4.5;
             else if (lx < 20)
                 vx = 4.5;

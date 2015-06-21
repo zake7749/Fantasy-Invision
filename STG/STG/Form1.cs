@@ -322,7 +322,7 @@ namespace STG
         {
 
             RePaint();
-            Generalizer();
+            //Generalizer();
             updatePlayer();
             updateEnemy();
             updatePlayerBullet();
@@ -703,6 +703,44 @@ namespace STG
                                     enemyBullet.Add(ebCross);
                             }
                             break;
+                    case "Boss-Rec":
+                            int RecYRange = 85, RecXRange = 85;
+                            int Reci;
+                            for (Reci = 30; Reci < this.Width; Reci+=RecXRange)
+                            {
+                                EnemyBullet ebRec = new EnemyBullet(Reci,-10);
+                                ebRec.SetV(0,1);
+                                ebRec.setImage("BlueSignleCircle");
+
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
+                                else
+                                    enemyBullet.Add(ebRec);
+                            }
+
+                            for (Reci = 30; Reci < this.Height; Reci += RecYRange)
+                            {
+                                EnemyBullet ebRec = new EnemyBullet(-10, Reci);
+                                ebRec.SetV(1, 0);
+                                ebRec.setImage("PurpleSignleCircle");
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
+                                else
+                                    enemyBullet.Add(ebRec);
+                            }
+                            
+                            if(Randomizer.Next(0,31)>20)
+                            {
+                                EnemyBullet ebRec = new EnemyBullet(xy.X, xy.Y);
+                                Vector2D bulletRECV = e.getVelocity(player.lx, player.ly);
+                                ebRec.SetV(bulletRECV.x, bulletRECV.y);
+                                ebRec.setImage("SkyRoundCircle");
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
+                                else
+                                    enemyBullet.Add(ebRec);
+                            }
+                            break;
                 }
             }
         }
@@ -895,19 +933,19 @@ namespace STG
             {
                 case Keys.Up:
                     player.setSLR(0);
-                    player.addV(0, -5);
+                    player.addV(0, -4);
                     break;
                 case Keys.Down:
                     player.setSLR(0);
-                    player.addV(0, 5);
+                    player.addV(0, 4);
                     break;
                 case Keys.Right:
                     player.setSLR(2);
-                    player.addV(5, 0);
+                    player.addV(4, 0);
                     break;
                 case Keys.Left:
                     player.setSLR(1);
-                    player.addV(-5, 0);
+                    player.addV(-4, 0);
                     break;
                 case Keys.Space:
                     player_CreateBullet();

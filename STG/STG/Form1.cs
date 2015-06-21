@@ -410,15 +410,16 @@ namespace STG
                         enemies[i].health--;
                         if (!enemies[i].isAlive())
                         {
+                            if (enemies[i].isCritical)
+                            {
+                                StageClear = true;
+                            }
                             Score += 500;
                             enemies[i].img.Dispose();
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
                             Enemydie.Play();
-                            if(enemies[i].isCritical)
-                            {
-                                StageClear = true;
-                            }
+                            
                         }
                         b.setTimetoExplode(true);
                     }
@@ -1107,7 +1108,7 @@ namespace STG
             BGMPlayer.settings.volume = trackBarVolume.Value;
         }
 
-        private void FunctionObjTimer_Tick(object sender, EventArgs e) //For create FunctionObject (每秒產生1個) 
+        private void FunctionObjTimer_Tick(object sender, EventArgs e) //For create FunctionObject (每3秒產生1個) 
         {
             create_FunctionObject();
         }

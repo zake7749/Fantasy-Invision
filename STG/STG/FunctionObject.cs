@@ -37,7 +37,7 @@ namespace STG
         {
 
             Random decide = new Random(Guid.NewGuid().GetHashCode());
-            int probability = decide.Next(1, 20);
+            int probability = decide.Next(1, 21);
             switch (probability)
             {
                 case 1:

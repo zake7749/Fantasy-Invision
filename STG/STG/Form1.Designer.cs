@@ -124,7 +124,7 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelContext.Location = new System.Drawing.Point(11, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
@@ -171,7 +171,7 @@
             // BGMPlayer
             // 
             this.BGMPlayer.Enabled = true;
-            this.BGMPlayer.Location = new System.Drawing.Point(17, 470);
+            this.BGMPlayer.Location = new System.Drawing.Point(6, 568);
             this.BGMPlayer.Name = "BGMPlayer";
             this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
             this.BGMPlayer.Size = new System.Drawing.Size(75, 23);

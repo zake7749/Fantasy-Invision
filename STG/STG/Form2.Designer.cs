@@ -99,7 +99,7 @@
             this.Controls.Add(this.btnStart);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form2";
+            this.Text = "幻靈視界";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).EndInit();

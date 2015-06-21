@@ -25,8 +25,9 @@ namespace STG
         Stopwatch gameTime = new Stopwatch();
         //Device dv = new Device();
         //SecondaryBuffer buf;
-        string[] context = new string[34];
+        string[] context = new string[100];
         int countContext = 0;
+        private Boolean RecFlipX, RecFlipY;
         private Double LockLx;//Used for Split-shootmode.
         private Double LockLy;//Used for Split-shootmode.
         private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
@@ -63,7 +64,7 @@ namespace STG
         SoundPlayer Playerdie;
         SoundPlayer AttackPlayer;
         //SoundPlayer PlayerShoot;
-        private bool signal = false;
+        private String signal = "";
 
         public Form1()
         {
@@ -109,19 +110,19 @@ namespace STG
 
             //background code            
             background1 = new System.Windows.Forms.PictureBox();
-            background1.Location = new Point(0, 290);
+            background1.Location = new Point(0, 0);
             background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage04.png");
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
-            background2.Location = new Point(0, -58);
+            background2.Location = new Point(0, -580);
             background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage04.png"); ;
-            background2.Width = background1.Image.Width;
-            background2.Height = background1.Image.Height;
-
+            background2.Width = background2.Image.Width;
+            background2.Height = background2.Image.Height;
             b1y = 0;
-            b2y = b1y-640;
+            b2y = -580;
+            label1.Text = EnenyGenerate.Length.ToString();
 
             //this.panel1.Controls.Add(background3);
             //background3.Width = background1.Image.Width;
@@ -177,11 +178,15 @@ namespace STG
             stateClock++;
             if(stateClock > stateClockLimit)
             {
-                if (generateOrder < EnenyGenerate.Length)
-                    EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);
+                if (generateOrder < EnenyGenerate.Length){
+                    EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);                        
+                }
+                    
                 else if (StageClear)
                 {
-                    EnemyCreateFactory(STATE[Randomizer.Next(0,12)]);
+                    generateOrder = 0;
+                    StageClear = false;
+                    EnemyCreateFactory(STATE[Randomizer.Next(0,12)]);                  
                 }
                 stateClock = 0;
             }
@@ -193,8 +198,8 @@ namespace STG
             b1y+=5;
             b2y+=5;
             //b3y+=5;
-            if (b1y >= 640) b1y = -640;
-            if (b2y >= 640) b2y = -640;
+            if (b1y > 580) b1y = -580;
+            if (b2y > 580) b2y = -580;
             //if (b3y >= 638) b3y = -406;
             background1.Location = new Point(-10, b1y);
             background2.Location = new Point(-10, b2y);
@@ -322,7 +327,7 @@ namespace STG
         {
 
             RePaint();
-            //Generalizer();
+            Generalizer();
             updatePlayer();
             updateEnemy();
             updatePlayerBullet();
@@ -387,10 +392,14 @@ namespace STG
             context[31] = "可可：我有一份地圖，這是這座城堡的地圖，或許對你有用，希望你能打敗皇后";
             context[32] = "小美：謝謝你！";
             context[33] = "";
+            for (var i = 34; i < context.Length; i++)
+            {
+                context[i] = "";
+            }
         }
         private void UpdateStory()
         {
-            if (int.Parse(labelTime.Text) == 30 || int.Parse(labelTime.Text) == 60)
+            if (int.Parse(labelTime.Text) == 170 || int.Parse(labelTime.Text) == 340)//出現於BOSS之前
             {
                 Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
                 gameTime.Reset();
@@ -710,8 +719,19 @@ namespace STG
                             int Reci;
                             for (Reci = 30; Reci < this.Width; Reci+=RecXRange)
                             {
-                                EnemyBullet ebRec = new EnemyBullet(Reci,-10);
-                                ebRec.SetV(0,1);
+                                EnemyBullet ebRec;
+                                if(RecFlipX)
+                                {
+                                    ebRec = new EnemyBullet(Reci, -10);
+                                    ebRec.SetV(0, 1);
+                                    RecFlipX = false;
+                                }
+                                else
+                                {
+                                    ebRec = new EnemyBullet(Reci, this.Height+10);
+                                    ebRec.SetV(0, -1);
+                                    RecFlipX = true;
+                                }
                                 ebRec.setImage("BlueSignleCircle");
 
                                 if (enemyBullet.LastIndexOf(null) != -1)
@@ -723,7 +743,18 @@ namespace STG
                             for (Reci = 30; Reci < this.Height; Reci += RecYRange)
                             {
                                 EnemyBullet ebRec = new EnemyBullet(-10, Reci);
-                                ebRec.SetV(1, 0);
+                                if (RecFlipY)
+                                {
+                                    ebRec = new EnemyBullet(-10, Reci);
+                                    ebRec.SetV(1, 0);
+                                    RecFlipY = false;
+                                }
+                                else
+                                {
+                                    ebRec = new EnemyBullet(this.Width+10, Reci);
+                                    ebRec.SetV(-1, 0);
+                                    RecFlipY = true;
+                                }
                                 ebRec.setImage("PurpleSignleCircle");
                                 if (enemyBullet.LastIndexOf(null) != -1)
                                     enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
@@ -947,10 +978,10 @@ namespace STG
                     break;
                 case Keys.Left:
                     player.setSLR(1);
-<<<<<<< HEAD
+
                     player.addV(-4, 0);
                     break;
-=======
+
                     player.addV(-5, 0);
                     break;/*
 >>>>>>> origin/master
@@ -1156,6 +1187,19 @@ namespace STG
                 }
                 labelContext.Text = context[countContext];
                 countContext++;
+                for (var i = 36; i < context.Length; i++)
+                {
+                    if (countContext == i)
+                    {
+                        labelContext.Visible = false;
+                        Update.Start();
+                        FunctionObjTimer.Start();
+                        gameTime.Start();
+                        countContext = 36;
+                    }
+                    
+                }
+                    
             } 
         }
 

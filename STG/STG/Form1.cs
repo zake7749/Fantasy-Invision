@@ -429,7 +429,7 @@ namespace STG
 
             for (var i = 0; i < enemyBullet.Count;i++ )
             {
-                if (!player.IsOP2((int) gameTime.Elapsed.TotalSeconds))
+                if (!player.IsOP2(int.Parse(labelTime.Text)))
                 {
                     if (player.img.Bounds.IntersectsWith(enemyBullet[i].img.Bounds))
                     {
@@ -475,7 +475,7 @@ namespace STG
 
             foreach (Enemy en in enemies)
             {
-                if (!player.IsOP2((int) gameTime.Elapsed.TotalSeconds))
+                if (!player.IsOP2(int.Parse(labelTime.Text)))
                 {
                     if (Math.Abs((int)(en.lx) - (int)(player.lx)) < 20 && Math.Abs((int)(en.ly) - (int)(player.ly)) < 36)
                     {
@@ -485,7 +485,7 @@ namespace STG
             }
             for (var i = 0; i < enemies.Count; i++)
             {
-                if (player.IsOP2((int)gameTime.Elapsed.TotalSeconds))
+                if (player.IsOP2(int.Parse(labelTime.Text)))
                 {
                     if (Math.Abs((int)(enemies[i].lx) - (int)(enemies[i].lx)) < 20 && Math.Abs((int)(enemies[i].ly) - (int)(player.ly)) < 36)
                     {
@@ -512,7 +512,7 @@ namespace STG
                             Life += functionObj[i].Life;
                             break;
                         case 3:
-                            player.setOPEndTime((int)gameTime.Elapsed.TotalSeconds, 10);
+                            player.setOPEndTime(int.Parse(labelTime.Text), 10);
                             break;
                         case 4:
                             Score += functionObj[i].Score;
@@ -540,7 +540,7 @@ namespace STG
                 Life--;
                 //player = new Player(300, 550);
                 //player.setOPClock(100);
-                player.setOPEndTime((int)gameTime.Elapsed.TotalSeconds, 2);
+                player.setOPEndTime(int.Parse(labelTime.Text), 2);
                 Playerdie.Play();
                 labelHP.Text = Life.ToString();
             }

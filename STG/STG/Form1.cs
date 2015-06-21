@@ -33,6 +33,7 @@ namespace STG
         private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
         private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart",};
         private Random Randomizer;
+        private Double flag;
         //Painter
         Graphics gp;
         Bitmap bp;
@@ -629,12 +630,13 @@ namespace STG
                         }
                             break;
 
-                    case "Round-Line":
+                    case "Boss-Round":
+                            flag = (flag == 5) ? 7 : 5;
                             double rlx = 0, rly = 0;
                             while (rlx < Math.PI * 2)
                             {
-                                rlx += Math.PI / 6;
-                                rly += Math.PI / 6;
+                                rlx += Math.PI / flag;
+                                rly += Math.PI / flag;
                                 EnemyBullet ebRound = new EnemyBullet(xy.X + 6, xy.Y + 20);
                                 ebRound.setImage("SkyBigCircle");
                                 ebRound.SetV(Math.Sin(rlx) * 3, Math.Cos(rly) * 3);
@@ -643,19 +645,35 @@ namespace STG
                                 else
                                     enemyBullet.Add(ebRound);
                             }
-                            int i;
-                            for (i = 0; i < 10;i++)
+
+                            break;
+                    case "Boss-Cross":
+                            int iCross = 0;
+                            for (iCross = 0; iCross < 10; iCross++)
                             {
-                                EnemyBullet ebRLine = new EnemyBullet(Randomizer.Next(0, 500), 700);
-                                ebRLine.SetV(0, -4.5);
-                                ebRLine.setImage(HEARTBOX[Randomizer.Next(0,3)]);
-                                if (enemyBullet.LastIndexOf(null) != -1)
-                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRLine);
+                                EnemyBullet ebCross;
+                                int choice = Randomizer.Next(0, 2);
+                                if (choice == 0)
+                                {
+                                    ebCross = new EnemyBullet(Randomizer.Next(0, 600), Randomizer.Next(600, 700));
+                                    ebCross.SetV(0, -2.5);
+                                }
                                 else
-                                    enemyBullet.Add(ebRLine);
+                                {
+                                    ebCross = new EnemyBullet(Randomizer.Next(0, 600), Randomizer.Next(-100, 0));
+                                    ebCross.SetV(0, 2.5);
+                                }
+                                ebCross.setImage(HEARTBOX[Randomizer.Next(0, 3)]);
+
+                                if (ebCross.vy > 0)
+                                    ebCross.img.Image.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebCross);
+                                else
+                                    enemyBullet.Add(ebCross);
                             }
                             break;
-
                 }
             }
         }

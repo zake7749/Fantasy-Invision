@@ -52,7 +52,7 @@ namespace STG
         public PictureBox background3;
         int b1y;
         int b2y;
-        int b3y;
+        //int b3y;
         int Score;
         int Time;
 
@@ -110,27 +110,22 @@ namespace STG
             //background code            
             background1 = new System.Windows.Forms.PictureBox();
             background1.Location = new Point(0, 290);
-            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            background1.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage04.png");
             background1.Width = background1.Image.Width;
             background1.Height = background1.Image.Height;
 
             background2 = new System.Windows.Forms.PictureBox();
             background2.Location = new Point(0, -58);
-            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");;
+            background2.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage04.png"); ;
             background2.Width = background1.Image.Width;
             background2.Height = background1.Image.Height;
 
-            background3 = new System.Windows.Forms.PictureBox();
-            background2.Location = new Point(0, -406);
-            background3.Image = Image.FromFile(Application.StartupPath + "\\assest\\Background\\stage01.png");
+            b1y = 0;
+            b2y = b1y-640;
 
-            b1y = 290;
-            b2y = -58;
-            b3y = -406;
-
-            this.panel1.Controls.Add(background3);
-            background3.Width = background1.Image.Width;
-            background3.Height = background1.Image.Height;
+            //this.panel1.Controls.Add(background3);
+            //background3.Width = background1.Image.Width;
+            //background3.Height = background1.Image.Height;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -151,7 +146,7 @@ namespace STG
             //Draw background
             g.DrawImage(background1.Image, -10, b1y);
             g.DrawImage(background2.Image, -10, b2y);
-            g.DrawImage(background3.Image, -10, b3y);
+            //g.DrawImage(background3.Image, -10, b3y);
 
             //Bullet
             foreach(EnemyBullet eb in enemyBullet)
@@ -195,15 +190,15 @@ namespace STG
         //background code      
         private void updateBackground()
         {
-            b1y+=7;
-            b2y+=7;
-            b3y+=7;
-            if (b1y >= 638) b1y = -406;
-            if (b2y >= 638) b2y = -406;
-            if (b3y >= 638) b3y = -406;
+            b1y+=5;
+            b2y+=5;
+            //b3y+=5;
+            if (b1y >= 640) b1y = -640;
+            if (b2y >= 640) b2y = -640;
+            //if (b3y >= 638) b3y = -406;
             background1.Location = new Point(-10, b1y);
             background2.Location = new Point(-10, b2y);
-            background3.Location = new Point(-10, b3y);
+            //background3.Location = new Point(-10, b3y);
         }
 
         //Update Object
@@ -414,10 +409,10 @@ namespace STG
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
                         enemies[i].health--;
-                        Score += Randomizer.Next(1,21);
                         if (!enemies[i].isAlive())
                         {
-                            if (enemies[i].isCritical)
+                            
+                            if(enemies[i].isCritical)
                             {
                                 StageClear = true;
                             }
@@ -426,10 +421,6 @@ namespace STG
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
                             Enemydie.Play();
-<<<<<<< HEAD
-=======
-                            
->>>>>>> origin/master
                         }
                         b.setTimetoExplode(true);
                     }

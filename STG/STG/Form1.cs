@@ -908,7 +908,7 @@ namespace STG
                 case Keys.Left:
                     player.setSLR(1);
                     player.addV(-5, 0);
-                    break;
+                    break;/*
                 case Keys.Space:
                     player_CreateBullet();
                     break;
@@ -950,7 +950,7 @@ namespace STG
                     break;
                 case Keys.H:
                     create_Boss(100, 10);
-                    break;
+                    break;*/
             }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)

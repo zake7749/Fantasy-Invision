@@ -82,7 +82,12 @@ namespace STG
                     bulletRestoreLimit = 100;
                     break;
                 case 2:
-
+                    notLockFix = false;
+                    clockLimit = 25;
+                    bulletNum = 5000;
+                    bulletEachTime = 5000;
+                    vx = 0;
+                    vy = 0;
                     break;
                 case 1:
                     clock = 0;
@@ -168,9 +173,9 @@ namespace STG
 
         private void FixX()
         {
-            if (lx > 525)
+            if (lx > 450)
                 vx = -4.5;
-            else if (lx < 20)
+            else if (lx < 150)
                 vx = 4.5;
         }
 

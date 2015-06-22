@@ -197,7 +197,7 @@ public class Player : GameObject
             ly += vy;
         img.Location = new Point(Convert.ToInt32(lx), Convert.ToInt32(ly));
         //img.BackColor = Color.Transparent;
-        img.SetBounds((int)lx + 4, (int)ly + 5, 19, 35);
+        img.SetBounds((int)lx + 4, (int)ly + 5, 17, 30);
     }
 
     public void setHP(int blood)

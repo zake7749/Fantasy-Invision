@@ -293,7 +293,7 @@ namespace STG
 
             for (var i = 0; i < enemyBullet.Count; i++)
             {
-                if (enemyBullet[i].ly < -150 || enemyBullet[i].ly > this.Height+150 || enemyBullet[i].lx < -100 || enemyBullet[i].lx > 600)
+                if (enemyBullet[i].ly < -150 || enemyBullet[i].ly > this.Height+150 || enemyBullet[i].lx < -100 || enemyBullet[i].lx > 700)
                 {
                     enemyBullet[i].img.Dispose();
                     enemyBullet[i].Dispose();
@@ -671,12 +671,12 @@ namespace STG
                             break;
 
                     case "Boss-Round":
-                            flag = (flag == 5) ? 7 : 5;
-                            double rlx = 0, rly = 0;
+                            flag = (flag == 0.314) ? 0 : 0.314;
+                            double rlx = flag, rly = flag;
                             while (rlx < Math.PI * 2)
                             {
-                                rlx += Math.PI / flag;
-                                rly += Math.PI / flag;
+                                rlx += Math.PI / 15;
+                                rly += Math.PI / 15;
                                 EnemyBullet ebRound = new EnemyBullet(xy.X + 6, xy.Y + 20);
                                 ebRound.setImage("SkyBigCircle");
                                 ebRound.SetV(Math.Sin(rlx) * 3, Math.Cos(rly) * 3);
@@ -715,25 +715,38 @@ namespace STG
                             }
                             break;
                     case "Boss-Rec":
-                            int RecYRange = 85, RecXRange = 85;
+                            EnemyBullet ebRec;
+                            int RecYRange = 120, RecXRange = 120;
                             int Reci;
                             for (Reci = 30; Reci < this.Width; Reci+=RecXRange)
                             {
-                                EnemyBullet ebRec;
-                                if(RecFlipX)
-                                {
                                     ebRec = new EnemyBullet(Reci, -10);
                                     ebRec.SetV(0, 1);
-                                    RecFlipX = false;
-                                }
+                                    ebRec.setImage("SkySignleCircle");
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
                                 else
-                                {
-                                    ebRec = new EnemyBullet(Reci, this.Height+10);
-                                    ebRec.SetV(0, -1);
-                                    RecFlipX = true;
-                                }
-                                ebRec.setImage("BlueSignleCircle");
+                                    enemyBullet.Add(ebRec);
+                            }
 
+                            for (Reci = 75; Reci < this.Width; Reci += RecXRange)
+                            {
+                                ebRec = new EnemyBullet(Reci, 625);
+                                ebRec.SetV(0, -1);
+                                ebRec.setImage("BlueSignleCircle");
+                                if (enemyBullet.LastIndexOf(null) != -1)
+                                    enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
+                                else
+                                    enemyBullet.Add(ebRec);
+                            }
+
+                            for (Reci = 75; Reci < this.Height; Reci += RecYRange)
+                            {
+
+                                ebRec = new EnemyBullet(0, Reci);
+                                ebRec.SetV(1, 0);
+                                ebRec.setImage("GreenSignleCircle");
+                                RecFlipY = false;
                                 if (enemyBullet.LastIndexOf(null) != -1)
                                     enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
                                 else
@@ -742,29 +755,19 @@ namespace STG
 
                             for (Reci = 30; Reci < this.Height; Reci += RecYRange)
                             {
-                                EnemyBullet ebRec = new EnemyBullet(-10, Reci);
-                                if (RecFlipY)
-                                {
-                                    ebRec = new EnemyBullet(-10, Reci);
-                                    ebRec.SetV(1, 0);
-                                    RecFlipY = false;
-                                }
-                                else
-                                {
-                                    ebRec = new EnemyBullet(this.Width+10, Reci);
-                                    ebRec.SetV(-1, 0);
-                                    RecFlipY = true;
-                                }
+                                ebRec = new EnemyBullet(600, Reci);
+                                ebRec.SetV(-1, 0);
                                 ebRec.setImage("PurpleSignleCircle");
+                                RecFlipY = false;
                                 if (enemyBullet.LastIndexOf(null) != -1)
                                     enemyBullet.Insert(enemyBullet.LastIndexOf(null), ebRec);
                                 else
                                     enemyBullet.Add(ebRec);
                             }
                             
-                            if(Randomizer.Next(0,31)>20)
+                            if(Randomizer.Next(0,38)>20)
                             {
-                                EnemyBullet ebRec = new EnemyBullet(xy.X, xy.Y);
+                                ebRec = new EnemyBullet(xy.X, xy.Y);
                                 Vector2D bulletRECV = e.getVelocity(player.lx, player.ly);
                                 ebRec.SetV(bulletRECV.x, bulletRECV.y);
                                 ebRec.setImage("SkyRoundCircle");
@@ -984,7 +987,6 @@ namespace STG
 
                     player.addV(-5, 0);
                     break;/*
->>>>>>> origin/master
                 case Keys.Space:
                     player_CreateBullet();
                     break;
@@ -1027,6 +1029,9 @@ namespace STG
                 case Keys.H:
                     create_Boss(100, 10);
                     break;*/
+                case Keys.H:
+                    create_Boss(100, 10);
+                    break;
             }
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)

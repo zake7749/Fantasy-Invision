@@ -21,7 +21,7 @@ namespace STG
         Player player;
         Stopwatch gameTime = new Stopwatch();
 
-        string[] context = new string[100];
+        string[] context = new string[35];
         int countContext = 0;
         private Boolean RecFlipX, RecFlipY;
         private Double LockLx;//Used for Split-shootmode.
@@ -61,6 +61,7 @@ namespace STG
         SoundPlayer GMG;
         SoundPlayer Playerdie;
         SoundPlayer AttackPlayer;
+        SoundPlayer GetObj;
 
         public Form1(int inputLife)
         {
@@ -75,6 +76,7 @@ namespace STG
             GMG = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
             Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\se_pldead00.wav");
             AttackPlayer = new SoundPlayer(Application.StartupPath +  @"\SFX\se_plst00.wav");
+            GetObj = new SoundPlayer(Application.StartupPath + @"\SFX\GetThing.wav");
 
             BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
             BGMPlayer.settings.setMode("Loop", true);
@@ -95,6 +97,7 @@ namespace STG
             Time = 0;
             labelTime.Text = Time.ToString(); ;
             labelScore.Text = "0";
+            labelHP.Text = initalLife.ToString();
             labelContext.Text = "";
 
             //Story mode
@@ -202,6 +205,13 @@ namespace STG
                 player.ChangeImage();
                 player_CreateBullet();
                 player.Move();
+            }
+        }
+        private void updatePlayerAttack()
+        {
+            if (player.IsAttackEnhancing(int.Parse(labelTime.Text)) == false)
+            {
+                player.setAttack();
             }
         }
         private void updateEnemy()
@@ -315,6 +325,8 @@ namespace STG
             RePaint();
             Generalizer();
             updatePlayer();
+            updatePlayerAttack();
+            updatePlayerCondtionInLabel();
             updateEnemy();
             updatePlayerBullet();
             updateEnemyBullet();
@@ -333,6 +345,36 @@ namespace STG
 
         }
 
+        private void updatePlayerCondtionInLabel()
+        {
+            if(player.IsOP2(int.Parse(labelTime.Text)) == true){
+                labelOP.ForeColor = Color.Gold;
+                labelOP.Text = "Yes"; 
+            }
+            else if (player.IsOP2(int.Parse(labelTime.Text)) == false)
+            {
+                labelOP.ForeColor = Color.White;
+                labelOP.Text = "No";
+            }
+
+            if (player.getAttack() == 50)
+            {
+                labelAttack.ForeColor = Color.Gold;
+            }
+            else if (player.getAttack() == 20)
+            {
+                labelAttack.ForeColor = Color.Red;
+            }
+            else if (player.getAttack() == 5)
+            {
+                labelAttack.ForeColor = Color.Aqua;
+            }
+            else
+            {
+                labelAttack.ForeColor = Color.White;
+            }
+            labelAttack.Text = player.getAttack().ToString();
+        }
         private void DebugMessage()
         {
             //label1.Text = enemies.Count.ToString();
@@ -374,14 +416,11 @@ namespace STG
             context[31] = "可可：我有一份地圖，這是這座城堡的地圖，或許對你有用，希望你能打敗皇后";
             context[32] = "小美：謝謝你！";
             context[33] = "";
-            for (var i = 34; i < context.Length; i++)
-            {
-                context[i] = "";
-            }
+
         }
         private void UpdateStory()
         {
-            if (IsBossDead && countContext < context.Length)//出現於BOSS之前
+            if (IsBossDead && countContext < context.Length - 1)//出現於BOSS之前
             {
                 IsBossDead = false;
                 Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
@@ -402,7 +441,7 @@ namespace STG
                 {
                     if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
                     {
-                        enemies[i].health--;
+                        enemies[i].health -= player.getAttack();
                         if (!enemies[i].isAlive())
                         {
                             
@@ -484,7 +523,7 @@ namespace STG
             {
                 if (player.IsOP2(int.Parse(labelTime.Text)))
                 {
-                    if (Math.Abs((int)(enemies[i].lx) - (int)(enemies[i].lx)) < 20 && Math.Abs((int)(enemies[i].ly) - (int)(player.ly)) < 36)
+                    if (Math.Abs((int)(enemies[i].lx) - (int)(player.lx)) < 20 && Math.Abs((int)(enemies[i].ly) - (int)(player.ly)) < 36)
                     {
                         enemies[i].health--;
                     }
@@ -496,6 +535,7 @@ namespace STG
             {
                 if (Math.Abs((int)functionObj[i].lx - (int)(player.lx)) < 20 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 36)
                 {
+                    GetObj.Play();
                     Score += 10;
                     switch (functionObj[i].getObjType())
                     {
@@ -519,6 +559,15 @@ namespace STG
                             break;
                         case 6:
                             Score += functionObj[i].Score;
+                            break;
+                        case 7:
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
+                            break;
+                        case 8:
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
+                            break;
+                        case 9:
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
                             break;
                     }
                     if (Life >= initalLife)
@@ -1169,26 +1218,23 @@ namespace STG
         {
             if (labelContext.Visible == true)
             {
-                if (countContext == 4 || countContext == 16 || countContext ==33)
+                if (context[countContext] != "")
+                {
+                    labelContext.Text = context[countContext];
+                    countContext++;
+                }
+                if (context[countContext] == "")
                 {
                     labelContext.Visible = false;
                     Update.Start();
                     FunctionObjTimer.Start();
                     gameTime.Start();
+                    countContext++;
                 }
-                labelContext.Text = context[countContext];
-                countContext++;
-                for (var i = 36; i < context.Length; i++)
+                
+                if (countContext == context.Length)
                 {
-                    if (countContext == i)
-                    {
-                        labelContext.Visible = false;
-                        Update.Start();
-                        FunctionObjTimer.Start();
-                        gameTime.Start();
-                        countContext = 36;
-                    }
-                    
+                    countContext = context.Length;
                 }
                     
             } 

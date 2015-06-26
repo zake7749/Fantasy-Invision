@@ -40,6 +40,7 @@ namespace STG
             imgAutoSize();
             Shootmode = "Berserk";
             health = 100;
+            IsBoss = false;
         }
 
         protected override void setClock()

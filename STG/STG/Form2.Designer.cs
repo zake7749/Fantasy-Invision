@@ -33,6 +33,7 @@
             this.btnLeave = new System.Windows.Forms.Button();
             this.btnCheckGrade = new System.Windows.Forms.Button();
             this.BGMStart = new AxWMPLib.AxWindowsMediaPlayer();
+            this.btnInfinite = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,12 +88,23 @@
             this.BGMStart.TabIndex = 3;
             this.BGMStart.Visible = false;
             // 
+            // btnInfinite
+            // 
+            this.btnInfinite.Location = new System.Drawing.Point(897, 551);
+            this.btnInfinite.Name = "btnInfinite";
+            this.btnInfinite.Size = new System.Drawing.Size(75, 23);
+            this.btnInfinite.TabIndex = 4;
+            this.btnInfinite.Text = "infinite";
+            this.btnInfinite.UseVisualStyleBackColor = true;
+            this.btnInfinite.Click += new System.EventHandler(this.btnInfinite_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::STG.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(984, 586);
+            this.Controls.Add(this.btnInfinite);
             this.Controls.Add(this.BGMStart);
             this.Controls.Add(this.btnCheckGrade);
             this.Controls.Add(this.btnLeave);
@@ -113,5 +125,6 @@
         private System.Windows.Forms.Button btnLeave;
         private System.Windows.Forms.Button btnCheckGrade;
         private AxWMPLib.AxWindowsMediaPlayer BGMStart;
+        private System.Windows.Forms.Button btnInfinite;
     }
 }

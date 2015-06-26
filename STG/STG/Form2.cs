@@ -41,7 +41,7 @@ namespace STG
         private void btnStart_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Form1();
+            NewGame = new Form1(10);
             NewGame.Show();
         }
 
@@ -74,6 +74,13 @@ namespace STG
         private void Form2_MouseClick(object sender, MouseEventArgs e)
         {
             BGMStart.Ctlcontrols.play();
+        }
+
+        private void btnInfinite_Click(object sender, EventArgs e)
+        {
+            BGMStart.Ctlcontrols.stop();
+            NewGame = new Form1(1000000);
+            NewGame.Show();
         }
        
     }

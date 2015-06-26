@@ -20,6 +20,7 @@ namespace STG
             loadImage();
             Shootmode = "Cos";
             health = 20;
+            IsBoss = false;
         }
 
         private void newsetClock()

@@ -9,22 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
 using System.Diagnostics;
-using Microsoft.DirectX;
-using Microsoft.DirectX.DirectSound;
 
 namespace STG
 {
     public partial class Form1 : Form
     {
-        //AxWMPLib.AxWindowsMediaPlayer PlayBulletPlayer;
         List<Enemy> enemies;
         List<EnemyBullet> enemyBullet;
         List<Bullet> playerBullet;
         List<FunctionObject> functionObj;
         Player player;
         Stopwatch gameTime = new Stopwatch();
-        //Device dv = new Device();
-        //SecondaryBuffer buf;
+
         string[] context = new string[100];
         int countContext = 0;
         private Boolean RecFlipX, RecFlipY;
@@ -43,7 +39,8 @@ namespace STG
         Bitmap bp;
         
         //State
-        int Life = 10;
+        int initalLife;
+        int Life;
         int stateClock = 0;
         int stateClockLimit = 68;
         Boolean StageClear = false;
@@ -56,6 +53,7 @@ namespace STG
         //int b3y;
         int Score;
         int Time;
+        Boolean IsBossDead = false;
 
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
@@ -63,10 +61,8 @@ namespace STG
         SoundPlayer GMG;
         SoundPlayer Playerdie;
         SoundPlayer AttackPlayer;
-        //SoundPlayer PlayerShoot;
-        private String signal = "";
 
-        public Form1()
+        public Form1(int inputLife)
         {
             InitializeComponent();
 
@@ -74,7 +70,6 @@ namespace STG
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnLeave.MouseEnter += btnStoreGrade_MouseEnter;
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
-            //PlayerShoot = new SoundPlayer(Application.StartupPath + @"\SFX\se_plst00.wav");
             btnLeave.MouseClick += btnStoreGrade_MouseClick;
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
             GMG = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
@@ -95,13 +90,13 @@ namespace STG
             Score = 0;
             player = new Player(300, 500);
 
+            initalLife = inputLife;
+            Life = initalLife;
             Time = 0;
             labelTime.Text = Time.ToString(); ;
             labelScore.Text = "0";
             labelContext.Text = "";
 
-            //label2.Text = "";
-            //PlayBulletPlayer.Ctlcontrols.play();
             //Story mode
             SetStory();
             gameTime.Reset();
@@ -122,16 +117,11 @@ namespace STG
             background2.Height = background2.Image.Height;
             b1y = 0;
             b2y = -580;
-            label1.Text = EnenyGenerate.Length.ToString();
 
-            //this.panel1.Controls.Add(background3);
-            //background3.Width = background1.Image.Width;
-            //background3.Height = background1.Image.Height;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {         
-            //gameTime.Start(); //這是畫面右下角的計時器
             //story mode
             labelContext.Text = context[countContext];
             countContext++;         
@@ -139,9 +129,7 @@ namespace STG
 
         private void RePaint()
         {
-
             Bitmap bmpPic1 = new Bitmap(this.Width,this.Height);
-
             Graphics g = Graphics.FromImage(bmpPic1);
             
             //Draw background
@@ -180,8 +168,7 @@ namespace STG
             {
                 if (generateOrder < EnenyGenerate.Length){
                     EnemyCreateFactory(STATE[EnenyGenerate[generateOrder++]]);                        
-                }
-                    
+                }                   
                 else if (StageClear)
                 {
                     generateOrder = 0;
@@ -325,7 +312,6 @@ namespace STG
         //Update
         private void FixedUpdate(object sender, EventArgs e)
         {
-
             RePaint();
             Generalizer();
             updatePlayer();
@@ -344,11 +330,7 @@ namespace STG
             labelScore.Text = Score.ToString();
             labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds + Time).ToString();
             UpdateStory();
-            /*
-             * Please write comment for each code block added.
-             * In addition, DO NOT add anything except FUNCTIONs in FixedUpdate.            
-             */
-            DebugMessage();
+
         }
 
         private void DebugMessage()
@@ -399,8 +381,9 @@ namespace STG
         }
         private void UpdateStory()
         {
-            if (int.Parse(labelTime.Text) == 170 || int.Parse(labelTime.Text) == 340)//出現於BOSS之前
+            if (IsBossDead && countContext < context.Length)//出現於BOSS之前
             {
+                IsBossDead = false;
                 Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
                 gameTime.Reset();
                 Update.Stop();
@@ -426,12 +409,16 @@ namespace STG
                             if(enemies[i].isCritical)
                             {
                                 StageClear = true;
-                            }
+                            }                           
                             Score += 500;
                             enemies[i].img.Dispose();
+                            Enemydie.Play();
+                            if (enemies[i].IsBossEnemy())
+                            {
+                                IsBossDead = true;
+                            }
                             enemies[i].Dispose();
                             enemies.Remove(enemies[i]);
-                            Enemydie.Play();
                         }
                         b.setTimetoExplode(true);
                     }
@@ -458,7 +445,6 @@ namespace STG
                             labelScore.Text = Score.ToString();
                         }
                     }
-
                     /* is to be modified.
                     else if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].lx) - enemyBullet[i].range - 18 - (int)(player.lx)) > 18
                         && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(enemyBullet[i].ly) - enemyBullet[i].range - 25 - (int)(player.ly)) > 25)
@@ -523,7 +509,7 @@ namespace STG
                             Life += functionObj[i].Life;
                             break;
                         case 3:
-                            player.setOPEndTime(int.Parse(labelTime.Text), 10);
+                            player.setOPEndTime(int.Parse(labelTime.Text), 15);
                             break;
                         case 4:
                             Score += functionObj[i].Score;
@@ -535,8 +521,8 @@ namespace STG
                             Score += functionObj[i].Score;
                             break;
                     }
-                    if (Life > 10)
-                        Life = 10;
+                    if (Life >= initalLife)
+                        Life = initalLife;
                     functionObj[i].img.Dispose();
                     functionObj[i].Dispose();
                     functionObj.Remove(functionObj[i]);

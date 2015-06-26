@@ -28,6 +28,7 @@ public class CircleShootEnemy : Enemy
         imgAutoSize();
         Shootmode = "Circle";
         health = 20;
+        IsBoss = false;
     }
 
     private void newsetClock()

@@ -46,7 +46,6 @@
             this.btnStoreGrade = new System.Windows.Forms.Button();
             this.labelGameOver = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -91,7 +90,6 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.trackBarVolume);
             this.panel2.Controls.Add(this.labelScore);
             this.panel2.Controls.Add(this.BGMPlayer);
@@ -227,15 +225,6 @@
             this.panel1.Size = new System.Drawing.Size(819, 633);
             this.panel1.TabIndex = 0;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 375);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -281,7 +270,6 @@
         private System.Windows.Forms.Button btnStoreGrade;
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
 
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }

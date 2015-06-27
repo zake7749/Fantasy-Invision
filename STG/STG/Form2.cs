@@ -90,6 +90,8 @@ namespace STG
         private void btnGuide_Click(object sender, EventArgs e)
         {
             Form5 GuideF = new Form5();
+            GuideF.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            GuideF.Location = new System.Drawing.Point(20, 80);
             GuideF.Show();
         }
        

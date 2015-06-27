@@ -323,7 +323,7 @@ namespace STG
         private void FixedUpdate(object sender, EventArgs e)
         {
             RePaint();
-            //Generalizer();
+            Generalizer();
             updatePlayer();
             updatePlayerAttack();
             updatePlayerCondtionInLabel();

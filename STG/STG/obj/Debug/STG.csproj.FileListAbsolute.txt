@@ -110,3 +110,4 @@ C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form4.resources
 C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Properties.Resources.resources
 C:\Users\bb\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.csproj.GenerateResource.Cache
 C:\Users\AS V5-573G\Desktop\CSharp-STG2D\STG\STG\obj\Debug\STG.Form5.resources
+E:\Programming\C#\Final Project\CSharp-STG2D\CSharp-STG2D\STG\STG\obj\Debug\STG.Form5.resources

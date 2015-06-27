@@ -86,7 +86,7 @@
             // 
             this.labelContext.BackColor = System.Drawing.Color.Teal;
             this.labelContext.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelContext.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelContext.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelContext.Location = new System.Drawing.Point(15, 518);
             this.labelContext.Name = "labelContext";
             this.labelContext.Size = new System.Drawing.Size(593, 103);
@@ -175,25 +175,27 @@
             // 
             this.labelAttack.AutoSize = true;
             this.labelAttack.BackColor = System.Drawing.Color.Transparent;
-            this.labelAttack.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelAttack.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelAttack.ForeColor = System.Drawing.Color.White;
             this.labelAttack.Location = new System.Drawing.Point(147, 493);
             this.labelAttack.Name = "labelAttack";
             this.labelAttack.Size = new System.Drawing.Size(25, 26);
             this.labelAttack.TabIndex = 17;
             this.labelAttack.Text = "1";
+            this.labelAttack.Visible = false;
             // 
             // labelOP
             // 
             this.labelOP.AutoSize = true;
             this.labelOP.BackColor = System.Drawing.Color.Transparent;
-            this.labelOP.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelOP.Font = new System.Drawing.Font("Microsoft JhengHei", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.labelOP.ForeColor = System.Drawing.Color.White;
             this.labelOP.Location = new System.Drawing.Point(8, 492);
             this.labelOP.Name = "labelOP";
             this.labelOP.Size = new System.Drawing.Size(43, 26);
             this.labelOP.TabIndex = 16;
             this.labelOP.Text = "No";
+            this.labelOP.Visible = false;
             // 
             // pictureBox2
             // 
@@ -204,18 +206,20 @@
             this.pictureBox2.Size = new System.Drawing.Size(70, 70);
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("微軟正黑體", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 444);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 37);
             this.label1.TabIndex = 14;
             this.label1.Text = "OP";
+            this.label1.Visible = false;
             // 
             // trackBarVolume
             // 
@@ -225,6 +229,7 @@
             this.trackBarVolume.Name = "trackBarVolume";
             this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
             this.trackBarVolume.TabIndex = 13;
+            this.trackBarVolume.Visible = false;
             this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
             // 
             // labelScore
@@ -272,6 +277,7 @@
             this.labelTime.Size = new System.Drawing.Size(60, 27);
             this.labelTime.TabIndex = 3;
             this.labelTime.Text = "XXX";
+            this.labelTime.Visible = false;
             // 
             // pictureBox1
             // 

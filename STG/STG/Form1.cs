@@ -327,7 +327,7 @@ namespace STG
         {
 
             RePaint();
-            Generalizer();
+            //Generalizer();
             updatePlayer();
             updateEnemy();
             updatePlayerBullet();
@@ -986,7 +986,7 @@ namespace STG
                     break;
 
                     player.addV(-5, 0);
-                    break;/*
+                    break;
                 case Keys.Space:
                     player_CreateBullet();
                     break;
@@ -1026,9 +1026,6 @@ namespace STG
                 case Keys.G:
                     create_Lighter(10, 10);
                     break;
-                case Keys.H:
-                    create_Boss(100, 10);
-                    break;*/
                 case Keys.H:
                     create_Boss(100, 10);
                     break;

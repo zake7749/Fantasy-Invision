@@ -33,27 +33,31 @@
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.trackBarVolume = new System.Windows.Forms.TrackBar();
-            this.labelScore = new System.Windows.Forms.Label();
-            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
-            this.labelHP = new System.Windows.Forms.Label();
-            this.labelTime = new System.Windows.Forms.Label();
             this.labelContext = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnLeave = new System.Windows.Forms.Button();
             this.btnStoreGrade = new System.Windows.Forms.Button();
             this.labelGameOver = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.labelAttack = new System.Windows.Forms.Label();
+            this.labelOP = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.trackBarVolume = new System.Windows.Forms.TrackBar();
+            this.labelScore = new System.Windows.Forms.Label();
+            this.BGMPlayer = new AxWMPLib.AxWindowsMediaPlayer();
+            this.labelHP = new System.Windows.Forms.Label();
+            this.labelTime = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Update
@@ -77,86 +81,6 @@
             this.FunctionObjTimer.Enabled = true;
             this.FunctionObjTimer.Interval = 3000;
             this.FunctionObjTimer.Tick += new System.EventHandler(this.FunctionObjTimer_Tick);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(615, 603);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.trackBarVolume);
-            this.panel2.Controls.Add(this.labelScore);
-            this.panel2.Controls.Add(this.BGMPlayer);
-            this.panel2.Controls.Add(this.labelHP);
-            this.panel2.Controls.Add(this.labelTime);
-            this.panel2.Location = new System.Drawing.Point(617, 27);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(201, 603);
-            this.panel2.TabIndex = 2;
-            // 
-            // trackBarVolume
-            // 
-            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
-            this.trackBarVolume.Location = new System.Drawing.Point(13, 275);
-            this.trackBarVolume.Maximum = 100;
-            this.trackBarVolume.Name = "trackBarVolume";
-            this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
-            this.trackBarVolume.TabIndex = 13;
-            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
-            // 
-            // labelScore
-            // 
-            this.labelScore.AutoSize = true;
-            this.labelScore.BackColor = System.Drawing.Color.Transparent;
-            this.labelScore.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelScore.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelScore.Location = new System.Drawing.Point(16, 231);
-            this.labelScore.Name = "labelScore";
-            this.labelScore.Size = new System.Drawing.Size(60, 27);
-            this.labelScore.TabIndex = 12;
-            this.labelScore.Text = "XXX";
-            // 
-            // BGMPlayer
-            // 
-            this.BGMPlayer.Enabled = true;
-            this.BGMPlayer.Location = new System.Drawing.Point(6, 568);
-            this.BGMPlayer.Name = "BGMPlayer";
-            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
-            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
-            this.BGMPlayer.TabIndex = 9;
-            this.BGMPlayer.Visible = false;
-            // 
-            // labelHP
-            // 
-            this.labelHP.AutoSize = true;
-            this.labelHP.BackColor = System.Drawing.Color.Transparent;
-            this.labelHP.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHP.ForeColor = System.Drawing.Color.Gainsboro;
-            this.labelHP.Location = new System.Drawing.Point(16, 158);
-            this.labelHP.Name = "labelHP";
-            this.labelHP.Size = new System.Drawing.Size(60, 27);
-            this.labelHP.TabIndex = 5;
-            this.labelHP.Text = "XXX";
-            // 
-            // labelTime
-            // 
-            this.labelTime.AutoSize = true;
-            this.labelTime.BackColor = System.Drawing.Color.Transparent;
-            this.labelTime.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTime.ForeColor = System.Drawing.Color.Linen;
-            this.labelTime.Location = new System.Drawing.Point(16, 496);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.Size = new System.Drawing.Size(60, 27);
-            this.labelTime.TabIndex = 3;
-            this.labelTime.Text = "XXX";
             // 
             // labelContext
             // 
@@ -223,18 +147,140 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(-7, -29);
+            this.panel1.MaximumSize = new System.Drawing.Size(819, 633);
+            this.panel1.MinimumSize = new System.Drawing.Size(819, 633);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(819, 633);
             this.panel1.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
+            this.panel2.Controls.Add(this.labelAttack);
+            this.panel2.Controls.Add(this.labelOP);
+            this.panel2.Controls.Add(this.pictureBox2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.trackBarVolume);
+            this.panel2.Controls.Add(this.labelScore);
+            this.panel2.Controls.Add(this.BGMPlayer);
+            this.panel2.Controls.Add(this.labelHP);
+            this.panel2.Controls.Add(this.labelTime);
+            this.panel2.Location = new System.Drawing.Point(617, 27);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(201, 603);
+            this.panel2.TabIndex = 2;
+            // 
+            // labelAttack
+            // 
+            this.labelAttack.AutoSize = true;
+            this.labelAttack.BackColor = System.Drawing.Color.Transparent;
+            this.labelAttack.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelAttack.ForeColor = System.Drawing.Color.White;
+            this.labelAttack.Location = new System.Drawing.Point(147, 493);
+            this.labelAttack.Name = "labelAttack";
+            this.labelAttack.Size = new System.Drawing.Size(25, 26);
+            this.labelAttack.TabIndex = 17;
+            this.labelAttack.Text = "1";
+            // 
+            // labelOP
+            // 
+            this.labelOP.AutoSize = true;
+            this.labelOP.BackColor = System.Drawing.Color.Transparent;
+            this.labelOP.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.labelOP.ForeColor = System.Drawing.Color.White;
+            this.labelOP.Location = new System.Drawing.Point(8, 492);
+            this.labelOP.Name = "labelOP";
+            this.labelOP.Size = new System.Drawing.Size(43, 26);
+            this.labelOP.TabIndex = 16;
+            this.labelOP.Text = "No";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImage = global::STG.Properties.Resources.Attack;
+            this.pictureBox2.Location = new System.Drawing.Point(128, 411);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox2.TabIndex = 15;
+            this.pictureBox2.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 375);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("微軟正黑體", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 444);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.Size = new System.Drawing.Size(59, 37);
             this.label1.TabIndex = 14;
-            this.label1.Text = "label1";
+            this.label1.Text = "OP";
+            // 
+            // trackBarVolume
+            // 
+            this.trackBarVolume.BackColor = System.Drawing.Color.Black;
+            this.trackBarVolume.Location = new System.Drawing.Point(13, 275);
+            this.trackBarVolume.Maximum = 100;
+            this.trackBarVolume.Name = "trackBarVolume";
+            this.trackBarVolume.Size = new System.Drawing.Size(165, 45);
+            this.trackBarVolume.TabIndex = 13;
+            this.trackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
+            // 
+            // labelScore
+            // 
+            this.labelScore.AutoSize = true;
+            this.labelScore.BackColor = System.Drawing.Color.Transparent;
+            this.labelScore.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelScore.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelScore.Location = new System.Drawing.Point(16, 231);
+            this.labelScore.Name = "labelScore";
+            this.labelScore.Size = new System.Drawing.Size(60, 27);
+            this.labelScore.TabIndex = 12;
+            this.labelScore.Text = "XXX";
+            // 
+            // BGMPlayer
+            // 
+            this.BGMPlayer.Enabled = true;
+            this.BGMPlayer.Location = new System.Drawing.Point(21, 14);
+            this.BGMPlayer.Name = "BGMPlayer";
+            this.BGMPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("BGMPlayer.OcxState")));
+            this.BGMPlayer.Size = new System.Drawing.Size(75, 23);
+            this.BGMPlayer.TabIndex = 9;
+            this.BGMPlayer.Visible = false;
+            // 
+            // labelHP
+            // 
+            this.labelHP.AutoSize = true;
+            this.labelHP.BackColor = System.Drawing.Color.Transparent;
+            this.labelHP.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHP.ForeColor = System.Drawing.Color.Gainsboro;
+            this.labelHP.Location = new System.Drawing.Point(16, 158);
+            this.labelHP.Name = "labelHP";
+            this.labelHP.Size = new System.Drawing.Size(60, 27);
+            this.labelHP.TabIndex = 5;
+            this.labelHP.Text = "XXX";
+            // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.BackColor = System.Drawing.Color.Transparent;
+            this.labelTime.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTime.ForeColor = System.Drawing.Color.Linen;
+            this.labelTime.Location = new System.Drawing.Point(8, 365);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(60, 27);
+            this.labelTime.TabIndex = 3;
+            this.labelTime.Text = "XXX";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(615, 603);
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -251,13 +297,14 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.PlayBulletPlayer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BGMPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -282,6 +329,9 @@
         private System.Windows.Forms.Label labelGameOver;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label labelAttack;
+        private System.Windows.Forms.Label labelOP;
 
         //Bprivate AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }

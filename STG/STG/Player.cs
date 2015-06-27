@@ -22,11 +22,14 @@ public class Player : GameObject
     private Image[] S, L, R;
     private int So, Lo, Ro;//Image order for S,L,R;Used in Function ChangeImage();
     private int OPEndTime;
+    private int Attack;
+    private int AEEndTime;
 
     public Player(int x, int y)
         : base(x, y)
     {
         OPEndTime = -1;
+        AEEndTime = -1;
 
         health = 50;
         lx = x;
@@ -34,6 +37,7 @@ public class Player : GameObject
         //f = frame = timer interval of FixUpdate 
         clock = 0;
         OP = false;
+        Attack = 1;
         clockLimit = 7;//每隔 10f 有一發子彈
         ImageClock = 0;
         ImageClockLimit = 10;
@@ -208,5 +212,38 @@ public class Player : GameObject
     public int getHP()
     {
         return health;
+    }
+
+    public void setAttackEnhance(int StartTime, int RemainTime, int InputAttack)
+    {
+        AEEndTime = StartTime + RemainTime;
+        Attack = InputAttack;
+    }
+
+    public int getAttack()
+    {
+        return Attack;
+    }
+
+    public void setAttack()
+    {
+        Attack = 1;
+    }
+
+    public Boolean IsAttackEnhancing(int NowTime)
+    {
+        if (AEEndTime == NowTime)
+        {
+            AEEndTime = -1;
+            return false;
+        }
+        else if (AEEndTime == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

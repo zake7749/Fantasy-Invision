@@ -25,6 +25,7 @@ public class Enemy : GameObject
     protected int bulletEachTime;
     protected int bulletRestoreLimit;
     protected int bulletRestoreClock;
+    protected Boolean IsBoss;
     protected String[] imageFile = { "eveS1.png", "eveS2.png", "eveS3.png"};
     public Enemy(int x, int y)
         : base(x, y)
@@ -39,6 +40,7 @@ public class Enemy : GameObject
         Shootmode = "Line";
         Movemode = "Line";
         health = 10;
+        IsBoss = false;
     }
 
     protected virtual void setClock()
@@ -100,6 +102,11 @@ public class Enemy : GameObject
     public virtual void Stall()
     {
 
+    }
+
+    public Boolean IsBossEnemy()
+    {
+        return IsBoss;
     }
 
     public virtual void ChangeImage()

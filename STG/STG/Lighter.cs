@@ -48,6 +48,7 @@ namespace STG
             imgAutoSize();
             Shootmode = "Round";
             health = 180;
+            IsBoss = false;
         }
 
         protected override void setClock()

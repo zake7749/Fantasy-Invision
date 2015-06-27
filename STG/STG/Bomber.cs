@@ -30,6 +30,7 @@ namespace STG
             imgAutoSize();
             Shootmode = "Ray";
             health = 30;
+            IsBoss = false;
         }
 
         protected override void setClock()

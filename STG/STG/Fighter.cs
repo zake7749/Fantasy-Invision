@@ -41,6 +41,7 @@ namespace STG
             imgAutoSize();
             Shootmode = "Split-5";
             health = 85;
+            IsBoss = false;
         }
 
         protected override void setClock()

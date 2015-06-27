@@ -24,9 +24,13 @@ namespace STG
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
             btnCheckGrade.MouseEnter += btnStart_MouseEnter;
             btnLeave.MouseEnter += btnStart_MouseEnter;
+            btnInfinite.MouseEnter += btnStart_MouseEnter;
+            btnGuide.MouseEnter += btnStart_MouseEnter;
             ClickBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_click.wav");
             btnCheckGrade.MouseClick += btnStart_MouseClick;
             btnLeave.MouseClick += btnStart_MouseClick;
+            btnInfinite.MouseClick += btnStart_MouseClick;
+            btnGuide.MouseClick += btnStart_MouseClick;
             BGMStart.URL = @"SFX\STB.wav";
             BGMStart.settings.volume = 70;
             BGMStart.settings.setMode("Loop", true);
@@ -41,7 +45,7 @@ namespace STG
         private void btnStart_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Form1();
+            NewGame = new Form1(10);
             NewGame.Show();
         }
 
@@ -74,6 +78,19 @@ namespace STG
         private void Form2_MouseClick(object sender, MouseEventArgs e)
         {
             BGMStart.Ctlcontrols.play();
+        }
+
+        private void btnInfinite_Click(object sender, EventArgs e)
+        {
+            BGMStart.Ctlcontrols.stop();
+            NewGame = new Form1(1000000);
+            NewGame.Show();
+        }
+
+        private void btnGuide_Click(object sender, EventArgs e)
+        {
+            Form5 GuideF = new Form5();
+            GuideF.Show();
         }
        
     }

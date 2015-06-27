@@ -33,6 +33,8 @@
             this.btnLeave = new System.Windows.Forms.Button();
             this.btnCheckGrade = new System.Windows.Forms.Button();
             this.BGMStart = new AxWMPLib.AxWindowsMediaPlayer();
+            this.btnInfinite = new System.Windows.Forms.Button();
+            this.btnGuide = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BGMStart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,7 +44,7 @@
             this.btnStart.BackgroundImage = global::STG.Properties.Resources.start1;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnStart.Location = new System.Drawing.Point(401, 246);
+            this.btnStart.Location = new System.Drawing.Point(423, 108);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(172, 49);
             this.btnStart.TabIndex = 0;
@@ -57,7 +59,7 @@
             this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
             this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnLeave.Location = new System.Drawing.Point(418, 443);
+            this.btnLeave.Location = new System.Drawing.Point(442, 476);
             this.btnLeave.Name = "btnLeave";
             this.btnLeave.Size = new System.Drawing.Size(133, 45);
             this.btnLeave.TabIndex = 1;
@@ -70,7 +72,7 @@
             this.btnCheckGrade.BackgroundImage = global::STG.Properties.Resources.score;
             this.btnCheckGrade.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnCheckGrade.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnCheckGrade.Location = new System.Drawing.Point(400, 339);
+            this.btnCheckGrade.Location = new System.Drawing.Point(422, 276);
             this.btnCheckGrade.Name = "btnCheckGrade";
             this.btnCheckGrade.Size = new System.Drawing.Size(173, 52);
             this.btnCheckGrade.TabIndex = 2;
@@ -87,16 +89,44 @@
             this.BGMStart.TabIndex = 3;
             this.BGMStart.Visible = false;
             // 
+            // btnInfinite
+            // 
+            this.btnInfinite.BackColor = System.Drawing.Color.Transparent;
+            this.btnInfinite.BackgroundImage = global::STG.Properties.Resources.Infinite;
+            this.btnInfinite.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInfinite.Location = new System.Drawing.Point(422, 193);
+            this.btnInfinite.Name = "btnInfinite";
+            this.btnInfinite.Size = new System.Drawing.Size(173, 52);
+            this.btnInfinite.TabIndex = 4;
+            this.btnInfinite.UseVisualStyleBackColor = false;
+            this.btnInfinite.Click += new System.EventHandler(this.btnInfinite_Click);
+            // 
+            // btnGuide
+            // 
+            this.btnGuide.BackColor = System.Drawing.Color.Transparent;
+            this.btnGuide.BackgroundImage = global::STG.Properties.Resources.Guide;
+            this.btnGuide.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGuide.Location = new System.Drawing.Point(422, 361);
+            this.btnGuide.Name = "btnGuide";
+            this.btnGuide.Size = new System.Drawing.Size(173, 52);
+            this.btnGuide.TabIndex = 5;
+            this.btnGuide.UseVisualStyleBackColor = false;
+            this.btnGuide.Click += new System.EventHandler(this.btnGuide_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::STG.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(984, 586);
+            this.Controls.Add(this.btnGuide);
+            this.Controls.Add(this.btnInfinite);
             this.Controls.Add(this.BGMStart);
             this.Controls.Add(this.btnCheckGrade);
             this.Controls.Add(this.btnLeave);
             this.Controls.Add(this.btnStart);
+            this.MaximumSize = new System.Drawing.Size(1000, 625);
+            this.MinimumSize = new System.Drawing.Size(1000, 625);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "幻靈視界";
@@ -113,5 +143,7 @@
         private System.Windows.Forms.Button btnLeave;
         private System.Windows.Forms.Button btnCheckGrade;
         private AxWMPLib.AxWindowsMediaPlayer BGMStart;
+        private System.Windows.Forms.Button btnInfinite;
+        private System.Windows.Forms.Button btnGuide;
     }
 }

@@ -12,10 +12,11 @@ namespace STG
     class FunctionObject : GameObject
     {
         Boolean disposed = false;
-        private int ObjType;//0:+10~20HP, 1:+30~50HP, 2:+HP full, 3:player become invincible, 4:+100~200 Score, 5:+300~500 Score, 6:+1000 Score
-        protected string[] imageFile = { "HP20.png", "HP50.png", "HPfull.png", "shield.png", "score200.png", "score500.png", "score1000.png" };
+        private int ObjType;//0:+10~20HP, 1:+30~50HP, 2:+HP full, 3:player become invincible, 4:+100~200 Score, 5:+300~500 Score, 6:+1000 Score, 7:attack->5, 8:attack->20, 9:attack->50
+        protected string[] imageFile = { "HP20.png", "HP50.png", "HPfull.png", "shield.png", "score200.png", "score500.png", "score1000.png", "Attack_1.png", "Attack_2.png", "Attack_3.png" };
         public int Score;
         public int Life;
+        public int Attack;
 
         public FunctionObject(int x, int y)
              : base(x, y)
@@ -28,6 +29,7 @@ namespace STG
             moveLimit = 0;
             Score = 0;
             Life = 0;
+            Attack = 0;
             DecideType();
             LoadImage(ObjType);
 
@@ -37,7 +39,7 @@ namespace STG
         {
 
             Random decide = new Random(Guid.NewGuid().GetHashCode());
-            int probability = decide.Next(1, 21);
+            int probability = decide.Next(1, 28);
             switch (probability)
             {
                 case 1:
@@ -79,6 +81,22 @@ namespace STG
                 case 20:
                     ObjType = 6;
                     Score = Score = decide.Next(1000, 1100); 
+                    break;
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                    ObjType = 7;
+                    Attack = 5;
+                    break;
+                case 25:
+                case 26:
+                    ObjType = 8;
+                    Attack = 20;
+                    break;
+                case 27:
+                    ObjType = 9;
+                    Attack = 50;
                     break;
             }
         }

@@ -97,24 +97,28 @@
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // scoreDataGridViewTextBoxColumn
             // 
             this.scoreDataGridViewTextBoxColumn.DataPropertyName = "Score";
             this.scoreDataGridViewTextBoxColumn.HeaderText = "Score";
             this.scoreDataGridViewTextBoxColumn.Name = "scoreDataGridViewTextBoxColumn";
+            this.scoreDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // timeDataGridViewTextBoxColumn
             // 
             this.timeDataGridViewTextBoxColumn.DataPropertyName = "Time";
             this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
             this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dateDataGridViewTextBoxColumn
             // 
             this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
             this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
             this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // gradeBindingSource
             // 
@@ -172,6 +176,8 @@
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnLeave);
+            this.MaximumSize = new System.Drawing.Size(1100, 550);
+            this.MinimumSize = new System.Drawing.Size(1100, 550);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Record";

@@ -165,6 +165,8 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSend);
+            this.MaximumSize = new System.Drawing.Size(505, 370);
+            this.MinimumSize = new System.Drawing.Size(505, 370);
             this.Name = "Form4";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Store Grade";

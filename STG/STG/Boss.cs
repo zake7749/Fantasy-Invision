@@ -54,6 +54,7 @@ namespace STG
             Shootmode = "Round";
             health = 4500;
             isCritical = true;
+            IsBoss = true;
         }
 
         public void changeMode()

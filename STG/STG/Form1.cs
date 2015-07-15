@@ -30,11 +30,9 @@ namespace STG
         private String[] BIGSIZE = { "BlueBlackCircle", "GreenBlackCircle", "RedBlackCircle", "YellowBlackCircle" };
         private String[] STARBOX = { "BlackBigStar", "BlueBigStar", "GreenBigStar", "SkyBigStar", "RedBigStar", "YellowBigStar" };
         private String[] HEARTBOX = { "PinkHeart", "SkyHeart", "GreenHeart",};
-        private String[] STATE = { "Line-Left-Side", "Line-Right-Side", "V-formation-Small", "V-formation-Normal", "V-formation-Large", "Bomber-Collision", "None", "Fighter-Two", "Berserker", "Lighter", "None", "Circle","Boss" };
         private Random Randomizer;
         private Double flag;
-        int[] EnenyGenerate = {10,10,10,10,10,2,10,10,2,2,2,10,10,4,4,10,10,2,10,7,10,10,10,7,10,10,8,7,10,8,10,10,8,10,10,10,7,7,10,5,10,10,8,10,10,10,0,10,1,10,0,0,10,1,10,1,10,1,1,10,0,10,10,3,10,2,3,10,3,2,10,10,9,10,10,10,9,10,10,9,10,10,8,10,10,9,8,10,10,7,10,10,7,10,10,9,10,10,9,10,10,12};
-        int generateOrder = 0;
+        
         //Painter
         Graphics gp;
         Bitmap bp;
@@ -45,17 +43,19 @@ namespace STG
         int stateClock = 0;
         int stateClockLimit = 68;
         Boolean StageClear = false;
+
         //background code
         public PictureBox background1;
         public PictureBox background2;
         public PictureBox background3;
         int b1y;
         int b2y;
-        //int b3y;
+
         int Score;
         int Time;
         Boolean IsBossDead = false;
 
+        //SoundPlayer
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
         SoundPlayer Enemydie;
@@ -171,34 +171,37 @@ namespace STG
             stateClock++;
             if(stateClock > stateClockLimit)
             {
-                if (generateOrder < EnenyGenerate.Length){
-                    enemyFactory.createEnemy(STATE[EnenyGenerate[generateOrder++]]);                        
-                }                   
-                else if (StageClear)
-                {
-                    generateOrder = 0;
-                    StageClear = false;
-                    enemyFactory.createEnemy(STATE[Randomizer.Next(0, 12)]);                  
-                }
+                enemyFactory.generate_Enemy();
                 stateClock = 0;
             }
         }
 
-        //background code      
-        private void updateBackground()
+        //Update frames
+        private void FixedUpdate(object sender, EventArgs e)
         {
-            b1y+=5;
-            b2y+=5;
-            //b3y+=5;
-            if (b1y > 580) b1y = -580;
-            if (b2y > 580) b2y = -580;
-            //if (b3y >= 638) b3y = -406;
-            background1.Location = new Point(-10, b1y);
-            background2.Location = new Point(-10, b2y);
-            //background3.Location = new Point(-10, b3y);
-        }
+            RePaint();
+            Generalizer();
+            updatePlayer();
+            updatePlayerAttack();
+            updatePlayerCondtionInLabel();
+            updateEnemy();
+            updatePlayerBullet();
+            updateEnemyBullet();
+            updateFuntionObject();
 
-        //Update Object
+            //background code
+            updateBackground();
+
+            bulletBounderCheck();
+            Collision();
+
+            labelHP.Text = Life.ToString();
+            labelScore.Text = Score.ToString();
+            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds + Time).ToString();
+            UpdateStory();
+
+        }
+        //Update Objects
         private void updatePlayer()
         {
             //insert any change by time on player
@@ -252,8 +255,20 @@ namespace STG
                 eb.Move();
             }
         }
-
-        //Update FunctionObject
+        //Update background      
+        private void updateBackground()
+        {
+            b1y += 5;
+            b2y += 5;
+            //b3y+=5;
+            if (b1y > 580) b1y = -580;
+            if (b2y > 580) b2y = -580;
+            //if (b3y >= 638) b3y = -406;
+            background1.Location = new Point(-10, b1y);
+            background2.Location = new Point(-10, b2y);
+            //background3.Location = new Point(-10, b3y);
+        }
+        //Update FunctionObjects
         private void updateFuntionObject()
         {
             foreach(FunctionObject f in functionObj)
@@ -265,7 +280,6 @@ namespace STG
         //Bounder check
         private void enemyBounderCheck()
         {
-            //foreach迴圈無法使用List.Remove()，所以改用for迴圈
             for (var i = 0; i < enemies.Count;i++ )
             {
                
@@ -279,7 +293,6 @@ namespace STG
         }
         private void bulletBounderCheck()
         {
-            //foreach迴圈無法使用List.Remove()，所以改用for迴圈
             for (var i = 0; i < playerBullet.Count;i++ )
             {
                 if (playerBullet[i].ly < -200)
@@ -319,32 +332,6 @@ namespace STG
             enemyBounderCheck();
             bulletBounderCheck();
             functionObjCheck();
-        }
-
-        //Update
-        private void FixedUpdate(object sender, EventArgs e)
-        {
-            RePaint();
-            Generalizer();
-            updatePlayer();
-            updatePlayerAttack();
-            updatePlayerCondtionInLabel();
-            updateEnemy();
-            updatePlayerBullet();
-            updateEnemyBullet();
-            updateFuntionObject();            
-            
-            //background code
-            updateBackground();
-
-            bulletBounderCheck();
-            Collision();
-
-            labelHP.Text = Life.ToString();
-            labelScore.Text = Score.ToString();
-            labelTime.Text = ((int)gameTime.Elapsed.TotalSeconds + Time).ToString();
-            UpdateStory();
-
         }
 
         private void updatePlayerCondtionInLabel()
@@ -544,6 +531,7 @@ namespace STG
                             if(enemies[i].isCritical)
                             {
                                 StageClear = true;
+                                enemyFactory.setStageClear(true);
                             }                           
                             Score += 500;
                             enemies[i].img.Dispose();
@@ -946,11 +934,6 @@ namespace STG
             return Math.Sqrt(Math.Pow(x,2) + Math.Pow(y,2));
         }
 
-        //Create enemy object
-
-        
-
-        //Create FunctionObject
         private void create_FunctionObject()
         {
             Random robj = new Random();
@@ -961,7 +944,6 @@ namespace STG
             else
                 functionObj.Add(fo);
         }
-
         //Player key detect
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1031,6 +1013,7 @@ namespace STG
                  */
             }
         }
+
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             player.setSLR(0);

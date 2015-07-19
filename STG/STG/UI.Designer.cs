@@ -1,6 +1,6 @@
 ﻿namespace STG
 {
-    partial class Form2
+    partial class UI
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI));
             this.btnStart = new System.Windows.Forms.Button();
             this.btnLeave = new System.Windows.Forms.Button();
             this.btnCheckGrade = new System.Windows.Forms.Button();
@@ -43,7 +43,7 @@
             this.btnStart.BackColor = System.Drawing.Color.Transparent;
             this.btnStart.BackgroundImage = global::STG.Properties.Resources.start1;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStart.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnStart.Font = new System.Drawing.Font("Microsoft JhengHei", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnStart.Location = new System.Drawing.Point(423, 108);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(172, 49);
@@ -58,7 +58,7 @@
             this.btnLeave.BackColor = System.Drawing.Color.Transparent;
             this.btnLeave.BackgroundImage = global::STG.Properties.Resources.exit;
             this.btnLeave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLeave.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnLeave.Font = new System.Drawing.Font("Microsoft JhengHei", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnLeave.Location = new System.Drawing.Point(442, 476);
             this.btnLeave.Name = "btnLeave";
             this.btnLeave.Size = new System.Drawing.Size(133, 45);
@@ -71,7 +71,7 @@
             this.btnCheckGrade.BackColor = System.Drawing.Color.Transparent;
             this.btnCheckGrade.BackgroundImage = global::STG.Properties.Resources.score;
             this.btnCheckGrade.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCheckGrade.Font = new System.Drawing.Font("微軟正黑體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnCheckGrade.Font = new System.Drawing.Font("Microsoft JhengHei", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnCheckGrade.Location = new System.Drawing.Point(422, 276);
             this.btnCheckGrade.Name = "btnCheckGrade";
             this.btnCheckGrade.Size = new System.Drawing.Size(173, 52);
@@ -113,12 +113,12 @@
             this.btnGuide.UseVisualStyleBackColor = false;
             this.btnGuide.Click += new System.EventHandler(this.btnGuide_Click);
             // 
-            // Form2
+            // UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::STG.Properties.Resources.background;
-            this.ClientSize = new System.Drawing.Size(984, 586);
+            this.ClientSize = new System.Drawing.Size(984, 587);
             this.Controls.Add(this.btnGuide);
             this.Controls.Add(this.btnInfinite);
             this.Controls.Add(this.BGMStart);
@@ -127,7 +127,7 @@
             this.Controls.Add(this.btnStart);
             this.MaximumSize = new System.Drawing.Size(1000, 625);
             this.MinimumSize = new System.Drawing.Size(1000, 625);
-            this.Name = "Form2";
+            this.Name = "UI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "幻靈視界";
             this.Load += new System.EventHandler(this.Form2_Load);

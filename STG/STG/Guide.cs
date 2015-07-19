@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace STG
 {
-    public partial class Form5 : Form
+    public partial class Guide : Form
     {
-        public Form5()
+        public Guide()
         {
             InitializeComponent();
         }

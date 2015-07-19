@@ -1,6 +1,6 @@
 ﻿namespace STG
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
             this.Update = new System.Windows.Forms.Timer(this.components);
             this.PlayBulletPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.FunctionObjTimer = new System.Windows.Forms.Timer(this.components);

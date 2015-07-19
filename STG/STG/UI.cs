@@ -12,13 +12,13 @@ using System.Diagnostics;
 
 namespace STG
 {
-    public partial class Form2 : Form
+    public partial class UI : Form
     {
-        Form1 NewGame;
+        Game NewGame;
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
 
-        public Form2()
+        public UI()
         {
             InitializeComponent();
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
@@ -45,7 +45,7 @@ namespace STG
         private void btnStart_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Form1(10);
+            NewGame = new Game(10);
             NewGame.Show();
         }
 
@@ -83,13 +83,13 @@ namespace STG
         private void btnInfinite_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Form1(1000000);
+            NewGame = new Game(1000000);
             NewGame.Show();
         }
 
         private void btnGuide_Click(object sender, EventArgs e)
         {
-            Form5 GuideF = new Form5();
+            Guide GuideF = new Guide();
             GuideF.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             GuideF.Location = new System.Drawing.Point(20, 80);
             GuideF.Show();

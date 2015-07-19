@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace STG
 {
-    public partial class Form1 : Form
+    public partial class Game : Form
     {
         List<Enemy> enemies;
         List<EnemyBullet> enemyBullet;
@@ -22,7 +22,7 @@ namespace STG
         EnemyFactory enemyFactory;
         Stopwatch gameTime = new Stopwatch();
 
-        String [] context = new String[128];
+        
         int countContext = 0;
         private Boolean RecFlipX, RecFlipY;
         private Double LockLx;//Used for Split-shootmode.
@@ -55,6 +55,8 @@ namespace STG
         int Time;
         Boolean IsBossDead = false;
 
+        StoryBox storyBox;
+
         //SoundPlayer
         SoundPlayer EnterBtn;
         SoundPlayer ClickBtn;
@@ -64,7 +66,7 @@ namespace STG
         SoundPlayer AttackPlayer;
         SoundPlayer GetObj;
 
-        public Form1(int inputLife)
+        public Game(int inputLife)
         {
             InitializeComponent();
 
@@ -103,7 +105,7 @@ namespace STG
             labelContext.Text = "";
 
             //Story mode
-            SetStory();
+            storyBox = new StoryBox();
             gameTime.Reset();
             Update.Stop();
             FunctionObjTimer.Stop();
@@ -128,7 +130,7 @@ namespace STG
         private void Form1_Load(object sender, EventArgs e)
         {         
             //story mode
-            labelContext.Text = context[countContext];
+            labelContext.Text = storyBox.getStoryContent();
             countContext++;         
         }
 
@@ -370,140 +372,9 @@ namespace STG
         }
 
         //Set story
-        private void SetStory()
-        {
-            context[0] = "闇黑皇后：小美，我就知道你會來救你爺爺，不過我是不會輕易放人，想救出爺爺，就必須要先打敗我，哈哈哈";
-            context[1] = "小美：可惡的皇后，為什麼要綁架我爺爺？我一定要救出爺爺！衝啊";
-            context[2] = "闇黑皇后：眾妖精聽令，務必擊敗小美";
-            context[3] = "妖精們：遵命";
-            context[4] = "";
-            context[5] = "(在宮殿中庭)";
-            context[6] = "小美：好累，敵人好多，咦？這是什麼？(小美撿到一個晶瑩剔透水的晶球)";
-            context[7] = "(水晶球中) 爺爺：小美，不要來救爺爺，快逃啊！";
-            context[8] = "小美：為什麼？爺爺，我一定會救你出去";
-            context[9] = "爺爺：小美...不...(影像消失)";
-            context[10] = "闇黑皇后：不要叫了，沒用的";
-            context[11] = "小美：哼，你到底爺爺做了什麼？";
-            context[12] = "闇黑皇后：沒什麼，我還對你爺爺很好呢，哈哈哈";
-            context[13] = "小美：最好是，快放了我爺爺";
-            context[14] = "闇黑皇后：不可能，除非你能打敗我，不過你還得先找到我";
-            context[15] = "闇黑皇后：妖精們，上！";
-            context[16] = "";
-            context[17] = "(宮殿某處走廊)";
-            context[18] = "小美：天啊，怎麼這麼多妖精...根本打不完";
-            context[19] = "...：小美，小美...";
-            context[20] = "小美：是誰？";
-            context[21] = "...：小美，我不是敵人，我在你右前方的畫室裡";
-            context[22] = "小美：我怎麼知道你不是敵人";
-            context[23] = "...：我是被皇后困在城堡裡的幽魂，我叫可可，我想脫離皇后的魔掌";
-            context[24] = "小美：好的，等我";
-            context[25] = "幽魂 可可：小美，這個城堡裡有很多被闇黑皇后抓來的人，即使死了他的靈魂依舊會被困在城堡裡";
-            context[26] = "幽魂 可可：我已經死了100年了，我好希望我能夠脫離苦海";
-            context[27] = "小美：那你知道我爺爺被關在哪裡嗎？";
-            context[28] = "幽魂 可可：這我就不清楚了，每一層樓的房間都有可能，或者地下的牢房也有可能";
-            context[29] = "小美：那我該怎麼辦？";
-            context[30] = "幽魂 可可：我有一份地圖，這是這座城堡的地圖，或許對你有用，希望你能打敗皇后";
-            context[31] = "小美：謝謝你！";
-            context[32] = "";
-            context[33] = "(在小餐廳)";
-            context[34] = "...：小美...小美...";
-            context[35] = "小美：是誰？";
-            context[36] = "大賢者 空：桌上的一個大茶壺，就是我。我是被皇后抓來囚禁在這裡的，因為不遵從皇后的要求，而被它變成茶壺";
-            context[37] = "小美：皇后要求你做什麼事？";
-            context[38] = "大賢者 空：有些人被抓來是因為有特殊技能，但多數人都不服從皇后，因此都受到懲罰";
-            context[39] = "大賢者 空：我除了擁有廣博的智慧，還可以看透人心，人心裡所想的事我都能知道";
-            context[40] = "大賢者 空：皇后命令我去察看那些反抗他的人的心思，我不從，於是就把我變成茶壺...，不知道我有生之年是否還能出去...";
-            context[41] = "小美：原來如此，該不會皇后意圖突然染指我光明家族的秘技？！天啊！";
-            context[42] = "大賢者 空：小妹妹，原來你是光明家族的後人啊，曾有預言中說一位光明氏的少女將突破闇黑皇后的詛咒，我相信你是我們唯一的希望";
-            context[43] = "小美：這位賢者妳言重了，我應該沒有這個實力啦";
-            context[44] = "大賢者 空：不，我相信預言不會錯。來，我旁邊這塊茶餅送給你，當你身陷危機時，吃下茶餅，能使身體激發出無限潛能";
-            context[45] = "小美：謝謝你！";
-            context[46] = "";
-            context[47] = "(在樓梯間)";
-            context[48] = "小美：剛剛好多妖怪啊...";
-            context[49] = "小美：(抬頭看到一幅畫)這幅畫中的女子好美麗啊";
-            context[50] = "畫中女子：你是在說我嗎？謝謝你的讚美，我是掌管青春泉的祭司─里拉";
-            context[51] = "小美：你居然會說話？！";
-            context[52] = "祭司 里拉：是的，我原本負責看管讓人青春永駐的青春泉，但是需要我施法泉水才會有效果";
-            context[53] = "祭司 里拉：皇后把我抓來，希望我奉上泉水，我不從，就把我關在這裡了...";
-            context[54] = "小美：那你能告訴我爺爺在哪裡嗎？";
-            context[55] = "祭司 里拉：以最近皇后跟皇后的對話中，似乎似在他閣樓的房間中，皇后似乎想利用他達到最終目的";
-            context[56] = "小美：什麼最終目的？";
-            context[57] = "祭司 里拉：這我也不太清楚，但似乎很可怕，我沒有什麼能幫你，(從畫中伸出一隻手)這瓶水給你，這能使內心醜陋之人無法接近你";
-            context[58] = "小美：謝謝你！我一定會救你出去的";
-            context[59] = "";
-            context[60] = "(在後花園水池的小橋邊，闇黑皇后的幻影突然現身)";
-            context[61] = "闇黑皇后：小美，你還不死心啊";
-            context[62] = "小美：你抓我爺爺到底想做什麼？";
-            context[63] = "闇黑皇后：我就實話實說了，你爺爺光明實從掌握可以控制別人心思的魔法，如果再搭配我的魔力，我一定能掌控天下，哈哈哈";
-            context[64] = "小美：你別做夢了，我爺爺一定不會幫你的";
-            context[65] = "闇黑皇后：對，你爺爺屈死都不肯幫我，不過再過不久，就會有人貢獻我奪取別人能力的方法，到時候你爺爺幫不幫我都不重要了";
-            context[66] = "小美：不！！！(幻影消失了)";
-            context[67] = "...：小美...小美...";
-            context[68] = "小美：是誰...";
-            context[69] = "小橋上的燈：在你右邊，小橋上的一盞燈，我叫小洛";
-            context[70] = "管家 小洛：我原本是這座宮殿的管家，原本皇后不是這個樣子，他會變成今天這樣是有原因的";
-            context[71] = "小美：怎麼說？";
-            context[72] = "管家 小洛：皇后原本是月之國的公主，在繼承皇位之前就有很多磨難，後來還是排除萬難成為登上皇位，成為月之國的皇后";
-            context[73] = "管家 小洛：在他任內國家清平，並與鄰近的太陽公國公爵結婚。可是登基5年後，他的弟弟叛亂，殺了她的丈夫，並把他遷到這裡來";
-            context[74] = "官家 小洛：起初皇后還很善良，可是他的內心逐漸沾染黑暗，原本光明純潔的月之后變成闇黑皇后";
-            context[75] = "管家 小洛：而宮殿附近一帶逐漸引來許多黑暗世界的東西，所以附近的居民早已遷走，他的弟弟也不敢派人到這裡來";
-            context[76] = "管家 小洛：皇后原本想報仇，可是他的弟弟在10年前死了，皇后頓時失去了報復的對象，後來他決定把矛頭轉向他的家族";
-            context[77] = "官家 小洛：由於皇后一直認為自身實力不足，因此到處抓來許多能人異士，希望藉此獲得更加強大的法力";
-            context[78] = "管家 小洛：可是皇后的事早已在這世界傳開，當然不會有人答應，怕會禍及蒼生";
-            context[79] = "管家 小洛：所以皇后的意圖一直都還沒得逞";
-            context[80] = "小美：原來如此，你有打敗皇后的方法嗎？";
-            context[81] = "管家  小洛：我倒是可以推薦你一人，前方不遠處是這宮殿的倉庫，這宮殿是早期月之國儲放奇珍異寶的地方，那邊的倉管小寶是我朋友";
-            context[82] = "管家  小洛：他或許可以給你一些方法，至於你想找的皇后，他的長住居所在那邊山丘上的樓閣，你爺爺應該也在那個地方";
-            context[83] = "小美：謝謝你！";
-            context[84] = "";
-            context[85] = "(在倉庫)";
-            context[86] = "小美：請問小寶先生在嗎？請問小寶先生在嗎？";
-            context[87] = "(此時有一台小推車自行移動靠近)";
-            context[88] = "倉管 小寶：在下便是小寶，你就是小美吧";
-            context[89] = "小美：是，管家說你或許能提供我打敗皇后的方法";
-            context[90] = "倉管 小寶：你跟我來吧(走向倉庫深處)";
-            context[91] = "(前方有一個小洞穴，裡面散發著閃耀光芒)";
-            context[92] = "小美：這是...？";
-            context[93] = "倉管 小寶：這是明月神杖，由金瑩剔透的水晶製成，長年吸收月光的精華，具有光明的力量";
-            context[94] = "小美：哇！";
-            context[95] = "倉管 小寶：相對充滿黑暗力量的皇后，光明的力量一定會戰勝他";
-            context[96] = "小美：我也是這麼相信的";
-            context[97] = "";
-            context[98] = "(在山丘閣樓的門前)";
-            context[99] = "小美：終於到了，爺爺，我一定會救你出去的(打開門)";
-            context[100] = "小美：爺爺，我好想你，爺爺趕快幫你把束縛你的鎖鏈解開";
-            context[101] = "爺爺：小美，危險，別過來";
-            context[102] = "小美：爺爺別擔心，我來救你了(手一碰到鎖鏈)阿...";
-            context[103] = "爺爺：皇后在鎖鏈上面下咒，隨便觸碰會有感受到強大電流的";
-            context[104] = "闇黑皇后：哈哈，小美你終於來了";
-            context[105] = "小美：皇后，決鬥吧！";
-            context[106] = "";
-            context[107] = "(一番激戰後)";
-            context[108] = "闇黑皇后：你居然...有這麼多...法寶";
-            context[109] = "小美：若不是有這麼多人反抗你，我也得不到這麼多幫助";
-            context[110] = "闇黑皇后：可惡...在差一點點...我的夢想...就要實現了...";
-            context[111] = "小美：你知道你為什麼不會成功嗎？";
-            context[112] = "闇黑皇后：為什麼...";
-            context[113] = "小美：因為你擁抱了黑暗力量，也使得你的內心愈來愈黑暗";
-            context[114] = "闇黑皇后：不！！！都是你們這些人對不起我，不然我也不會擁抱黑暗力量";
-            context[115] = "小美：沒有人對不起你，一切都是你咎由自取，你最初不該對你的弟弟完全不設防，後來也不應該用你的力量壓迫別人"; 
-            context[116] = "小美：是時候，該放下仇恨了";
-            context[117] = "爺爺：是時候，該放下仇恨，擁抱愛了";
-            context[118] = "闇黑皇后：實從，我凌遲你很一段時間了，難道你不恨我嗎？";
-            context[119] = "爺爺：起初會吧，可是當我知道這麼內幕，我心生憐憫，我願意原諒你";
-            context[120] = "闇黑皇后：啊！(身體散發許多黑氣，身體逐漸變得晶亮純白)對啊，是時候該放下仇恨，擁抱愛了...(接著就死了)";
-            context[121] = "小美：爺爺，皇后死了";
-            context[122] = "爺爺：對啊，我們終於可以回家了";
-            context[123] = "小美：不過外面似乎有很多妖怪吼嘯的聲音，他們似乎還沒散去";
-            context[124] = "爺爺：對啊，我們一起並肩作戰，把這座宮殿里的妖魔鬼怪通通除去";
-            context[125] = "小美：嗯！走吧！";
-            context[126] = "";
-            context[127] = "";
-        }
         private void UpdateStory()
         {
-            if (IsBossDead && countContext < context.Length - 1)//出現於BOSS之前
+            if (IsBossDead)//出現於BOSS之前
             {
                 IsBossDead = false;
                 Time += ((int)gameTime.Elapsed.TotalSeconds) + 1;
@@ -511,7 +382,7 @@ namespace STG
                 Update.Stop();
                 FunctionObjTimer.Stop();
                 labelContext.Visible = true;
-                labelContext.Text = context[countContext];
+                labelContext.Text = storyBox.getStoryContent();
             }
         }
 
@@ -693,6 +564,8 @@ namespace STG
         {
 
         }
+       
+        //Create Bullet
         private void player_CreateBullet()
         {
             if (player.canShoot())
@@ -705,8 +578,6 @@ namespace STG
                 playerBullet.Add(b2);
             }
         }
-
-        //Enemy
         private void enemy_CreateBullet(Enemy e)
         {
             if (e.canShoot()&&e.Shootmode!="None")
@@ -757,10 +628,10 @@ namespace STG
                         //this.panel1.Controls.Add(ebCosine.img);
                         break;
                     case "Split-3":
-                        createBulletCurtain(e, 5);
+                        enemy_CreateBulletCurtain(e, 5);
                         break;
                     case "Split-5":
-                        createBulletCurtain(e, 5);
+                        enemy_CreateBulletCurtain(e, 5);
                         break;
                     case "Berserk":
                         EnemyBullet ebBerserk = new EnemyBullet(xy.X, xy.Y);
@@ -899,7 +770,7 @@ namespace STG
                 }
             }
         }
-        private void createBulletCurtain(Enemy e,int scale)
+        private void enemy_CreateBulletCurtain(Enemy e, int scale)
         {
             Point xy = e.getShootPlace();
             int velocity = 5,i = 0;
@@ -1013,7 +884,6 @@ namespace STG
                  */
             }
         }
-
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             player.setSLR(0);
@@ -1034,29 +904,26 @@ namespace STG
             }
         }
 
+        //UI
         private void btnStoreGrade_Click(object sender, EventArgs e)
         {
             Form4 AddGrade = new Form4(int.Parse(labelScore.Text), int.Parse(labelTime.Text));
             AddGrade.Show();
             btnStoreGrade.Enabled = false;
         }
-
         private void btnLeave_Click(object sender, EventArgs e)
         {
             this.Close();
             this.Dispose();
         }
-
         private void btnStoreGrade_MouseEnter(object sender, EventArgs e)
         {
             EnterBtn.Play();
         }
-
         private void btnStoreGrade_MouseClick(object sender, MouseEventArgs e)
         {
             ClickBtn.Play();
         }
-
         private void trackBarVolume_Scroll(object sender, EventArgs e)
         {
             BGMPlayer.settings.volume = trackBarVolume.Value;
@@ -1066,30 +933,23 @@ namespace STG
         {
             create_FunctionObject();
         }
-
         private void labelContext_MouseClick(object sender, MouseEventArgs e) //Story mode
         {
             if (labelContext.Visible == true)
             {
-                if (context[countContext] != "")
+                String context = storyBox.getStoryContent();
+
+                if (context != "")
                 {
-                    labelContext.Text = context[countContext];
-                    countContext++;
+                    labelContext.Text = context;
                 }
-                if (context[countContext] == "")
+                else
                 {
                     labelContext.Visible = false;
                     Update.Start();
                     FunctionObjTimer.Start();
                     gameTime.Start();
-                    countContext++;
                 }
-                
-                if (countContext == context.Length)
-                {
-                    countContext = context.Length;
-                }
-                    
             } 
         }
 

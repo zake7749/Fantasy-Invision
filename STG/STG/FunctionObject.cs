@@ -13,10 +13,11 @@ namespace STG
     {
         Boolean disposed = false;
         private int ObjType;//0:+10~20HP, 1:+30~50HP, 2:+HP full, 3:player become invincible, 4:+100~200 Score, 5:+300~500 Score, 6:+1000 Score, 7:attack->5, 8:attack->20, 9:attack->50
-        protected string[] imageFile = { "HP20.png", "HP50.png", "HPfull.png", "shield.png", "score200.png", "score500.png", "score1000.png", "Attack_1.png", "Attack_2.png", "Attack_3.png" };
-        public int Score;
-        public int Life;
-        public int Attack;
+        private string[] imageFile = { "HP20.png", "HP50.png", "HPfull.png", "shield.png", "score200.png", "score500.png", "score1000.png", "Attack_1.png", "Attack_2.png", "Attack_3.png" };
+        private int Score;
+        private int Life;
+        private int Attack;
+
 
         public FunctionObject(int x, int y)
              : base(x, y)
@@ -32,12 +33,25 @@ namespace STG
             Attack = 0;
             DecideType();
             LoadImage(ObjType);
+        }
 
+        public int getScore()
+        {
+            return Score;
+        }
+
+        public int getLife()
+        {
+            return Life;
+        }
+
+        public int getAttack()
+        {
+            return Attack;
         }
 
         private void DecideType()
         {
-
             Random decide = new Random(Guid.NewGuid().GetHashCode());
             int probability = decide.Next(1, 28);
             switch (probability)

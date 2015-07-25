@@ -66,9 +66,12 @@ namespace STG
         SoundPlayer AttackPlayer;
         SoundPlayer GetObj;
 
-        public Game(int inputLife)
+        public Game(int inputLife,int flx,int fly)
         {
             InitializeComponent();
+
+            //Form location
+            this.Location = new Point(flx, fly);
 
             //SFX
             EnterBtn = new SoundPlayer(Application.StartupPath + @"\SFX\click_touch.wav");
@@ -428,7 +431,6 @@ namespace STG
                         if (player.lx - enemyBullet[i].lx < enemyBullet[i].img.Width - 2*enemyBullet[i].range)
                         {
                             GameOver();
-                            //Playerdie.Play();
                             enemyBullet[i].img.Dispose();
                             enemyBullet[i].Dispose();
                             enemyBullet.Remove(enemyBullet[i]);
@@ -439,28 +441,6 @@ namespace STG
                             labelScore.Text = Score.ToString();
                         }
                     }
-                    /* is to be modified.
-                    else if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) < 18 && Math.Abs((int)(enemyBullet[i].lx) - enemyBullet[i].range - 18 - (int)(player.lx)) > 18
-                        && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) < 25 && Math.Abs((int)(enemyBullet[i].ly) - enemyBullet[i].range - 25 - (int)(player.ly)) > 25)
-                    {
-                        //擦彈動作
-                        Score += 30;
-                        labelScore.Text = Score.ToString();
-
-                        if (Math.Abs((int)(enemyBullet[i].lx) - 18 - (int)(player.lx)) > 18 - enemyBullet[i].range && Math.Abs((int)(enemyBullet[i].ly) - 25 - (int)(player.ly)) > 25 - enemyBullet[i].range)
-                        {
-                            //擦彈動作
-                            Score += 100;
-                        }
-                        else
-                        {
-                            GameOver();
-                            //Playerdie.Play();
-                            enemyBullet[i].img.Dispose();
-                            enemyBullet[i].Dispose();
-                            enemyBullet.Remove(enemyBullet[i]);
-                        }
-                    }*/
                 }
             }
 
@@ -495,34 +475,34 @@ namespace STG
                     switch (functionObj[i].getObjType())
                     {
                         case 0:
-                            Life += functionObj[i].Life;
+                            Life += functionObj[i].getLife();
                             break;
                         case 1:
-                            Life += functionObj[i].Life;
+                            Life += functionObj[i].getLife();
                             break;
                         case 2:
-                            Life += functionObj[i].Life;
+                            Life += functionObj[i].getLife();
                             break;
                         case 3:
                             player.setOPEndTime(int.Parse(labelTime.Text), 15);
                             break;
                         case 4:
-                            Score += functionObj[i].Score;
+                            Score += functionObj[i].getScore();
                             break;
                         case 5:
-                            Score += functionObj[i].Score;
+                            Score += functionObj[i].getScore();
                             break;
                         case 6:
-                            Score += functionObj[i].Score;
+                            Score += functionObj[i].getScore();
                             break;
                         case 7:
-                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].getAttack());
                             break;
                         case 8:
-                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].getAttack());
                             break;
                         case 9:
-                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].Attack);
+                            player.setAttackEnhance(int.Parse(labelTime.Text), 10, functionObj[i].getAttack());
                             break;
                     }
                     if (Life >= initalLife)
@@ -539,8 +519,6 @@ namespace STG
             if(Life > 0)
             {                
                 Life--;
-                //player = new Player(300, 550);
-                //player.setOPClock(100);
                 player.setOPEndTime(int.Parse(labelTime.Text), 2);
                 Playerdie.Play();
                 labelHP.Text = Life.ToString();
@@ -549,14 +527,12 @@ namespace STG
             {
                 BGMPlayer.Ctlcontrols.stop();
                 AttackPlayer.Stop();
-                
+
                 GMG.Play();
                 panel3.Visible = true;
                 Update.Stop();
                 FunctionObjTimer.Stop();
                 gameTime.Stop();
-                //Playerdie.Play();
-                
             }
         }
 

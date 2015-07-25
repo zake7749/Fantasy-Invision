@@ -45,8 +45,9 @@ namespace STG
         private void btnStart_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Game(10);
+            NewGame = new Game(10,50,50);
             NewGame.Show();
+            this.Hide();
         }
 
         private void btnCheckGrade_Click(object sender, EventArgs e)
@@ -83,7 +84,7 @@ namespace STG
         private void btnInfinite_Click(object sender, EventArgs e)
         {
             BGMStart.Ctlcontrols.stop();
-            NewGame = new Game(1000000);
+            NewGame = new Game(1000000,50,50);
             NewGame.Show();
         }
 

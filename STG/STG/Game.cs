@@ -198,7 +198,7 @@ namespace STG
             updateBackground();
 
             bulletBounderCheck();
-            Collision();
+            collisionDetect();
 
             labelHP.Text = Life.ToString();
             labelScore.Text = Score.ToString();
@@ -224,6 +224,7 @@ namespace STG
                 player.setAttack();
             }
         }
+        //Update Enemy
         private void updateEnemy()
         {
             //insert any change by time on enemy
@@ -238,6 +239,7 @@ namespace STG
                 enemy_CreateBullet(e);
             }
         }
+        //Update Bullet
         private void updatePlayerBullet()
         {
             //insert any change by time on bullet
@@ -283,6 +285,12 @@ namespace STG
         }
 
         //Bounder check
+        private void BounderCheck()
+        {
+            enemyBounderCheck();
+            bulletBounderCheck();
+            functionObjCheck();
+        }
         private void enemyBounderCheck()
         {
             for (var i = 0; i < enemies.Count;i++ )
@@ -332,12 +340,6 @@ namespace STG
                 }
             }
         }
-        private void BounderCheck()
-        {
-            enemyBounderCheck();
-            bulletBounderCheck();
-            functionObjCheck();
-        }
 
         private void updatePlayerCondtionInLabel()
         {
@@ -350,22 +352,21 @@ namespace STG
                 labelOP.ForeColor = Color.White;
                 labelOP.Text = "No";
             }
-
-            if (player.getAttack() == 50)
+            
+            switch(player.getAttack())
             {
-                labelAttack.ForeColor = Color.Gold;
-            }
-            else if (player.getAttack() == 20)
-            {
-                labelAttack.ForeColor = Color.Red;
-            }
-            else if (player.getAttack() == 5)
-            {
-                labelAttack.ForeColor = Color.Aqua;
-            }
-            else
-            {
-                labelAttack.ForeColor = Color.White;
+                case 50:
+                    labelAttack.ForeColor = Color.Gold;
+                    break;
+                case 20:
+                    labelAttack.ForeColor = Color.Red;
+                    break;
+                case 5:
+                    labelAttack.ForeColor = Color.Aqua;
+                    break;
+                default:
+                    labelAttack.ForeColor = Color.White;
+                    break;
             }
             labelAttack.Text = player.getAttack().ToString();
         }
@@ -390,45 +391,23 @@ namespace STG
         }
 
         //Collision
-        private void Collision()
+        private void collisionDetect()
         {
-            foreach(Bullet b in playerBullet)
-            {
-                for (var i = 0; i < enemies.Count;i++ )
-                {
-                    if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
-                    {
-                        enemies[i].health -= player.getAttack();
-                        if (!enemies[i].isAlive())
-                        {
-                            
-                            if(enemies[i].isCritical)
-                            {
-                                StageClear = true;
-                                enemyFactory.setStageClear(true);
-                            }                           
-                            Score += 500;
-                            enemies[i].img.Dispose();
-                            Enemydie.Play();
-                            if (enemies[i].IsBossEnemy())
-                            {
-                                IsBossDead = true;
-                            }
-                            enemies[i].Dispose();
-                            enemies.Remove(enemies[i]);
-                        }
-                        b.setTimetoExplode(true);
-                    }
-                }
-            }
-
-            for (var i = 0; i < enemyBullet.Count;i++ )
+            enemyBulletCollision();
+            enemyCollision();
+            playerBulletCollision();
+            playerCollision();
+            funObjectCollision();
+        }
+        private void enemyBulletCollision()
+        {
+            for (var i = 0; i < enemyBullet.Count; i++)
             {
                 if (!player.IsOP2(int.Parse(labelTime.Text)))
                 {
                     if (player.img.Bounds.IntersectsWith(enemyBullet[i].img.Bounds))
                     {
-                        if (player.lx - enemyBullet[i].lx < enemyBullet[i].img.Width - 2*enemyBullet[i].range)
+                        if (player.lx - enemyBullet[i].lx < enemyBullet[i].img.Width - 2 * enemyBullet[i].range)
                         {
                             GameOver();
                             enemyBullet[i].img.Dispose();
@@ -443,6 +422,9 @@ namespace STG
                     }
                 }
             }
+        }
+        private void enemyCollision()
+        {
 
             foreach (Enemy en in enemies)
             {
@@ -454,6 +436,41 @@ namespace STG
                     }
                 }
             }
+        }
+        private void playerBulletCollision()
+        {
+            foreach (Bullet b in playerBullet)
+            {
+                for (var i = 0; i < enemies.Count; i++)
+                {
+                    if (Math.Abs(b.ly - enemies[i].ly) < enemies[i].img.Height && Math.Abs(b.lx - enemies[i].lx) < enemies[i].img.Width)
+                    {
+                        enemies[i].health -= player.getAttack();
+                        if (!enemies[i].isAlive())
+                        {
+
+                            if (enemies[i].isCritical)
+                            {
+                                StageClear = true;
+                                enemyFactory.setStageClear(true);
+                            }
+                            Score += 500;
+                            enemies[i].img.Dispose();
+                            Enemydie.Play();
+                            if (enemies[i].IsBossEnemy())
+                            {
+                                IsBossDead = true;
+                            }
+                            enemies[i].Dispose();
+                            enemies.Remove(enemies[i]);
+                        }
+                        b.setTimetoExplode(true);
+                    }
+                }
+            }
+        }
+        private void playerCollision()
+        {
             for (var i = 0; i < enemies.Count; i++)
             {
                 if (player.IsOP2(int.Parse(labelTime.Text)))
@@ -465,7 +482,9 @@ namespace STG
                 }
             }
 
-            //吃到FunctionObj
+        }
+        private void funObjectCollision()
+        {
             for (var i = 0; i < functionObj.Count; i++)
             {
                 if (Math.Abs((int)functionObj[i].lx - (int)(player.lx)) < 20 && Math.Abs((int)(functionObj[i].ly) - (int)(player.ly)) < 36)

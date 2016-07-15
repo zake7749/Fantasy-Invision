@@ -80,13 +80,13 @@ namespace STG
             btnLeave.MouseClick += btnStoreGrade_MouseClick;
             Enemydie = new SoundPlayer(Application.StartupPath + @"\SFX\enemydie.wav");
             GMG = new SoundPlayer(Application.StartupPath + @"\SFX\playerdie.wav");
-            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\se_pldead00.wav");
+            Playerdie = new SoundPlayer(Application.StartupPath + @"\SFX\playerhurted.wav");
             AttackPlayer = new SoundPlayer(Application.StartupPath +  @"\SFX\se_plst00.wav");
             GetObj = new SoundPlayer(Application.StartupPath + @"\SFX\GetThing.wav");
 
-            BGMPlayer.URL = @"SFX\GameBackgoundMusic.wav";
+            BGMPlayer.URL = @"SFX\bg.mp3";
             BGMPlayer.settings.setMode("Loop", true);
-            BGMPlayer.settings.volume = 70;
+            BGMPlayer.settings.volume = 8;
             trackBarVolume.Value = BGMPlayer.settings.volume;
             BGMPlayer.Ctlcontrols.play();
             
